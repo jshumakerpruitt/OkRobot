@@ -47,6 +47,26 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
+      path: '/zen',
+      name: 'zenPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/ZenPage/reducer'),
+          System.import('containers/ZenPage/sagas'),
+          System.import('containers/ZenPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('zenPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
