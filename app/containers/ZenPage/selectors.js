@@ -19,7 +19,14 @@ const selectZenPage = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const selectKoan = () => createSelector(
+  selectZenPageDomain(),
+  (substate) => substate.get('koan')
+);
+
+
 export default selectZenPage;
 export {
   selectZenPageDomain,
+  selectKoan
 };

@@ -6,15 +6,21 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+    FETCH_KOAN,
+    REQUEST_KOAN,
+    RECEIVE_KOAN,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({koan: 'Not Zen is Zen'});
 
 function zenPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    case FETCH_KOAN:
       return state;
+    case REQUEST_KOAN:
+      return state;
+    case RECEIVE_KOAN:
+      return state.set('koan', action.koan)
     default:
       return state;
   }
