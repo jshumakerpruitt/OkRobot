@@ -11,20 +11,20 @@ import {
 } from './constants';
 
 export function receiveKoan(koan) {
-    return {
-        type: RECEIVE_KOAN,
-        koan: koan
-    };
+  return {
+    type: RECEIVE_KOAN,
+    koan,
+  };
 }
 
 export function requestKoan() {
-    return {
-        type: REQUEST_KOAN,
-    };
+  return {
+    type: REQUEST_KOAN,
+  };
 }
 
 export function fetchKoan() {
-    return {
-        type: FETCH_KOAN,
-    };
+  return {
+    type: FETCH_KOAN,
+  };
 }

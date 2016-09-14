@@ -28,5 +28,5 @@ const selectKoan = () => createSelector(
 export default selectZenPage;
 export {
   selectZenPageDomain,
-  selectKoan
+  selectKoan,
 };

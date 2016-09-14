@@ -11,7 +11,7 @@ import {
     RECEIVE_KOAN,
 } from './constants';
 
-const initialState = fromJS({koan: 'Not Zen is Zen'});
+const initialState = fromJS({ koan: 'Not Zen is Zen' });
 
 function zenPageReducer(state = initialState, action) {
   switch (action.type) {
@@ -20,7 +20,7 @@ function zenPageReducer(state = initialState, action) {
     case REQUEST_KOAN:
       return state;
     case RECEIVE_KOAN:
-      return state.set('koan', action.koan)
+      return state.set('koan', action.koan);
     default:
       return state;
   }
