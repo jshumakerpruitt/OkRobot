@@ -19,7 +19,14 @@ const selectBrowsePage = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const selectUsers = () => createSelector(
+  selectBrowsePageDomain(),
+  (substate) => substate.get('users').toJS()
+);
+
+
 export default selectBrowsePage;
 export {
   selectBrowsePageDomain,
+  selectUsers,
 };

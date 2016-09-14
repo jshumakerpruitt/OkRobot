@@ -7,11 +7,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { GridTile } from 'material-ui/GridList';
-import selectBrowsePage from './selectors';
+import { createStructuredSelector } from 'reselect';
+import { fetchUsers } from './actions';
+
+import { selectUsers } from './selectors';
 import styles from './styles.css';
 
 export class BrowsePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    this.props.dispatch(fetchUsers());
+  }
   render() {
     return (
       <div className={styles.browsePage}>
@@ -21,13 +26,21 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
             { name: 'description', content: 'Description of BrowsePage' },
           ]}
         />
-        <GridTile />
+        users: {this.props.users.map(user => user.username)}
       </div>
     );
   }
 }
 
-const mapStateToProps = selectBrowsePage();
+
+BrowsePage.propTypes = {
+  users: React.PropTypes.array,
+  dispatch: React.PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({
+  users: selectUsers(),
+});
 
 function mapDispatchToProps(dispatch) {
   return {

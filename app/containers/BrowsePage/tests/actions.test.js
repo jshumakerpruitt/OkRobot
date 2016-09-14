@@ -1,18 +1,42 @@
 import expect from 'expect';
 import {
-  defaultAction,
+  fetchUsers,
+  requestUsers,
+  receiveUsers,
 } from '../actions';
 import {
-  DEFAULT_ACTION,
+  REQUEST_USERS,
+  RECEIVE_USERS,
+  FETCH_USERS,
 } from '../constants';
 
 describe('BrowsePage actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
-      const expected = {
-        type: DEFAULT_ACTION,
-      };
-      expect(defaultAction()).toEqual(expected);
+  describe('requestUsers', () => {
+    it('has a type of REQUEST_USERS', () => {
+      expect(requestUsers().type).toEqual(REQUEST_USERS);
+    });
+  });
+
+  describe('fetchUsers', () => {
+    it('has a type of FETCH_USERS', () => {
+      expect(fetchUsers().type).toEqual(FETCH_USERS);
+    });
+  });
+
+  describe('receiveUsers', () => {
+    it('has a type of RECEIVE_USERS', () => {
+      expect(receiveUsers().type).toEqual(RECEIVE_USERS);
+    });
+
+    it('has a List of users', () => {
+      const users = [{
+        id: 1,
+        username: 'foo',
+      }, {
+        id: 2,
+        username: 'bar',
+      }];
+      expect(receiveUsers(users).users).toEqual(users);
     });
   });
 });

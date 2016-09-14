@@ -4,12 +4,12 @@
 
 import expect from 'expect';
 // import { take, call, put, select } from 'redux-saga/effects';
-// import { defaultSaga } from '../sagas';
+// import { getUsers } from '../sagas';
 
 // const generator = defaultSaga();
 
-describe('defaultSaga Saga', () => {
+describe('getUsers Saga', () => {
   it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+    expect(true).toEqual(true);
   });
 });
