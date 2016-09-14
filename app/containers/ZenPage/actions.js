@@ -5,17 +5,10 @@
  */
 
 import {
-  DEFAULT_ACTION,
   REQUEST_KOAN,
   FETCH_KOAN,
   RECEIVE_KOAN,
 } from './constants';
-
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
 
 export function receiveKoan(koan) {
     return {
