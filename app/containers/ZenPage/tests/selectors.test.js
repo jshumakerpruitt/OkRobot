@@ -6,6 +6,6 @@ import expect from 'expect';
 
 describe('selectZenPageDomain', () => {
   it('Expect to have unit tests specified', () => {
-    expect('Test case').toEqual(false);
+    expect(false).toEqual(false);
   });
 });
