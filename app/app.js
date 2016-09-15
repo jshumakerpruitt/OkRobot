@@ -25,6 +25,10 @@ import FontFaceObserver from 'fontfaceobserver';
 import useScroll from 'react-router-scroll';
 import configureStore from './store';
 
+// Import material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
@@ -42,6 +46,12 @@ openSansObserver.load().then(() => {
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+
+// Import for  material-ui
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -79,15 +89,17 @@ const render = (translatedMessages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={translatedMessages}>
-        <Router
-          history={history}
-          routes={rootRoute}
-          render={
-            // Scroll to top when going to a new page, imitating default browser
-            // behaviour
-            applyRouterMiddleware(useScroll())
-          }
-        />
+        <MuiThemeProvider>
+          <Router
+            history={history}
+            routes={rootRoute}
+            render={
+              // Scroll to top when going to a new page, imitating default browser
+              // behaviour
+              applyRouterMiddleware(useScroll())
+                   }
+          />
+        </MuiThemeProvider>
       </LanguageProvider>
     </Provider>,
     document.getElementById('app')
