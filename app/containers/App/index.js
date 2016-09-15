@@ -12,10 +12,12 @@ import Helmet from 'react-helmet';
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
 
+import Header from 'components/Header';
 import Footer from 'components/Footer';
 
 import styles from './styles.css';
 
+//    <AppBar title={}
 function App(props) {
   return (
     <div className={styles.wrapper}>
@@ -26,6 +28,7 @@ function App(props) {
           { name: 'description', content: 'Social App for Robots' },
         ]}
       />
+      <Header />
       {React.Children.toArray(props.children)}
       <Footer />
     </div>

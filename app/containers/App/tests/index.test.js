@@ -6,11 +6,11 @@ import App from '../index';
 import Footer from 'components/Footer';
 
 describe('<App />', () => {
-  it('should render the logo', () => {
+  it('should render the header', () => {
     const renderedComponent = shallow(
       <App />
     );
-    expect(renderedComponent.find('Img').length).toEqual(1);
+    expect(renderedComponent.find('Header').length).toEqual(1);
   });
 
   it('should render its children', () => {
