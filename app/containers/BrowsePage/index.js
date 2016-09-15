@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { fetchUsers } from './actions';
+import ProfileGrid from '../../components/ProfileGrid';
 
 import { selectUsers } from './selectors';
 import styles from './styles.css';
@@ -26,7 +27,7 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
             { name: 'description', content: 'Description of BrowsePage' },
           ]}
         />
-        users: {this.props.users.map(user => user.username)}
+        <ProfileGrid users={this.props.users} />
       </div>
     );
   }

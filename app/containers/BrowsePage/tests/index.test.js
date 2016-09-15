@@ -1,14 +1,15 @@
-// import { BrowsePage } from '../index';
+import { BrowsePage } from '../index';
 
 import expect from 'expect';
-// import { shallow } from 'enzyme';
-// import React from 'react';
-
-// import { GridTile } from 'material-ui/GridList' // eslint-disable-line
+import { shallow } from 'enzyme';
+import React from 'react';
 
 describe('<BrowsePage />', () => {
   it('It should render a ProfileGrid', () => {
-//  const profiles = [{ id: 1, username: 'fakeuser' }];
-    expect(true).toEqual(true);
+    const users = [{ id: 1, username: 'foo' }];
+    const renderedComponent = shallow(
+      <BrowsePage users={users} />
+    );
+    expect(renderedComponent.find('ProfileGrid').length).toEqual(1);
   });
 });
