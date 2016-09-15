@@ -20,7 +20,7 @@ import styles from './styles.css';
 //    <AppBar title={}
 function App(props) {
   return (
-    <div className={styles.wrapper}>
+    <div>
       <Helmet
         titleTemplate="%s - HelloRobot"
         defaultTitle="HelloRobot - Social App for Robots"
@@ -29,7 +29,9 @@ function App(props) {
         ]}
       />
       <Header />
-      {React.Children.toArray(props.children)}
+      <div className={styles.wrapper}>
+        {React.Children.toArray(props.children)}
+      </div>
       <Footer />
     </div>
   );

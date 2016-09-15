@@ -9,17 +9,18 @@ import {
 
 describe('browsePageReducer', () => {
   describe('initial state', () => {
+    // users
     it('sets users to empty array', () => {
       const nextState = browsePageReducer(undefined, {});
       expect(nextState.get('users')).toEqual(fromJS([]));
     });
 
+    // isFetchingUsers
     it('sets isFetchingUsers to false', () => {
       const nextState = browsePageReducer(undefined, {});
       expect(nextState.get('isFetchingUsers')).toEqual(false);
     });
   });
-
 
   describe('REQUEST_USERS', () => {
     const action = { type: REQUEST_USERS };
@@ -32,6 +33,10 @@ describe('browsePageReducer', () => {
   });
 
   describe('RECEIVE_USERS', () => {
+    const initialUsers = [{
+      id: 0, username: 'foo',
+    }];
+
     const receivedUsers = [{
       id: 1,
       username: 'bar',
@@ -40,22 +45,21 @@ describe('browsePageReducer', () => {
       username: 'baz',
     }];
 
-    const initialUsers = [{
-      id: 0, username: 'foo',
-    }];
-
     const initialState = fromJS({
       users: initialUsers,
       isFetchingUsers: true,
     });
+
     const action = { type: RECEIVE_USERS, users: receivedUsers };
     const nextState = browsePageReducer(initialState, action);
 
+    // isFetchingUsers
     it('sets isFetchingUsers to false', () => {
       expect(nextState.get('isFetchingUsers'))
         .toEqual(false);
     });
 
+    // users
     it('adds new users to end of array', () => {
       expect(nextState.get('users')).toEqual(fromJS([
         ...initialUsers,

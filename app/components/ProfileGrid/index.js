@@ -6,22 +6,32 @@
 
 import React from 'react';
 import { GridTile } from 'material-ui/GridList';
-
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import IconButton from 'material-ui/IconButton';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 import styles from './styles.css';
 
-const ProfileGrid = ({ users }) => (
-  <div className={styles.profileGrid}>
-    <FormattedMessage {...messages.header} />
-    {users.map((user, i) => (
-      <GridTile key={i} title={user.title}>
-        <img src={user.avatar} alt="profile" />
-      </GridTile>
-    ))}
-  </div>
-);
+const ProfileGrid = ({ users }) => {
+  const actionIcon = (
+    <IconButton>
+      <StarBorder color="white" />
+    </IconButton>
+  );
+  return (
+    <div className={styles.profileGrid}>
+      {users.map((user, i) => (
+        <div key={i} className={styles.gridTile}>
+          <GridTile
+            title={user.username}
+            actionIcon={actionIcon}
+          >
+            <img style={{ width: '100%', height: 'auto' }} src={user.avatar} alt="profile" />
+          </GridTile>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 ProfileGrid.propTypes = {
   users: React.PropTypes.array,
