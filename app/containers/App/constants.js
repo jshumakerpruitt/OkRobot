@@ -9,7 +9,9 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
-export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
-export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
 export const API_ENDPOINT = 'http://localhost:4000/';
+export const LOAD_REPOS = 'hellorobot/App/LOAD_REPOS';
+export const LOAD_REPOS_SUCCESS = 'hellorobot/App/LOAD_REPOS_SUCCESS';
+export const LOAD_REPOS_ERROR = 'hellorobot/App/LOAD_REPOS_ERROR';
+export const RECEIVE_TOKEN = 'hellorobot/App/RECEIVE_TOKEN';
+export const REVOKE_TOKEN = 'hellorobot/App/REVOKE_TOKEN';

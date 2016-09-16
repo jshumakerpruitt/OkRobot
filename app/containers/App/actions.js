@@ -16,6 +16,8 @@
  */
 
 import {
+  RECEIVE_TOKEN,
+  REVOKE_TOKEN,
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
@@ -29,6 +31,31 @@ import {
 export function loadRepos() {
   return {
     type: LOAD_REPOS,
+  };
+}
+
+/**
+ * store the received  token
+ *
+ * @return {object} An action object with a type of
+   RECEIVE_TOKEN and a token
+ */
+export function receiveToken(token) {
+  return {
+    type: RECEIVE_TOKEN,
+    token,
+  };
+}
+
+/**
+ * set the existing token to empty string
+ *
+ * @return {object} An action object with a type of
+   REVOKE_TOKEN
+ */
+export function revokeToken() {
+  return {
+    type: REVOKE_TOKEN,
   };
 }
 

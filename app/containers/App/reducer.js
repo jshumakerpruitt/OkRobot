@@ -14,11 +14,14 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
+  RECEIVE_TOKEN,
+  REVOKE_TOKEN,
 } from './constants';
 import { fromJS } from 'immutable';
 
 // The initial state of the App
 const initialState = fromJS({
+  token: '',
   loading: false,
   error: false,
   currentUser: false,
@@ -29,6 +32,12 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    case RECEIVE_TOKEN:
+      return state
+        .set('token', action.token);
+    case REVOKE_TOKEN:
+      return state
+        .set('token', '');
     case LOAD_REPOS:
       return state
         .set('loading', true)

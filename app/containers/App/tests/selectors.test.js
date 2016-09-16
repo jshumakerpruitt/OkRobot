@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 import expect from 'expect';
 
 import {
+  selectToken,
   selectGlobal,
   selectCurrentUser,
   selectLoading,
@@ -18,6 +19,19 @@ describe('selectGlobal', () => {
       global: globalState,
     });
     expect(globalSelector(mockedState)).toEqual(globalState);
+  });
+});
+
+describe('selectToken', () => {
+  const tokenSelector = selectToken();
+  it('should select the token', () => {
+    const token = 'mytoken';
+    const mockedState = fromJS({
+      global: {
+        token,
+      },
+    });
+    expect(tokenSelector(mockedState)).toEqual(token);
   });
 });
 

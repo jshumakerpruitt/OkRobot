@@ -4,15 +4,40 @@ import {
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
+  RECEIVE_TOKEN,
+  REVOKE_TOKEN,
 } from '../constants';
 
 import {
   loadRepos,
   reposLoaded,
   repoLoadingError,
+  receiveToken,
+  revokeToken,
 } from '../actions';
 
 describe('App Actions', () => {
+  describe('receiveToken', () => {
+    it('should return the correct type', () => {
+      const expectedResult = {
+        type: RECEIVE_TOKEN,
+        token: 'mytoken',
+      };
+
+      expect(receiveToken('mytoken')).toEqual(expectedResult);
+    });
+  });
+
+  describe('revokeToken', () => {
+    it('should return the correct type', () => {
+      const expectedResult = {
+        type: REVOKE_TOKEN,
+      };
+
+      expect(revokeToken()).toEqual(expectedResult);
+    });
+  });
+
   describe('loadRepos', () => {
     it('should return the correct type', () => {
       const expectedResult = {
