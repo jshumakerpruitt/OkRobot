@@ -3,10 +3,12 @@ import {
   fetchUsers,
   requestUsers,
   receiveUsers,
+  receiveError,
 } from '../actions';
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
+  RECEIVE_ERROR,
   FETCH_USERS,
 } from '../constants';
 
@@ -37,6 +39,12 @@ describe('BrowsePage actions', () => {
         username: 'bar',
       }];
       expect(receiveUsers(users).users).toEqual(users);
+    });
+  });
+
+  describe('receiveError', () => {
+    it('has a type of RECEIVE_ERROR', () => {
+      expect(receiveError().type).toEqual(RECEIVE_ERROR);
     });
   });
 });

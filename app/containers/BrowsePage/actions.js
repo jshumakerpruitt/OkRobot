@@ -7,6 +7,7 @@
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
+  RECEIVE_ERROR,
   FETCH_USERS,
 } from './constants';
 
@@ -27,3 +28,11 @@ export function receiveUsers(users) {
     users,
   };
 }
+
+export function receiveError(error) {
+  return {
+    type: RECEIVE_ERROR,
+    error,
+  };
+}
+
