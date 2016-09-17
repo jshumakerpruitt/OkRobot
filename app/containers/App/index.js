@@ -8,10 +8,14 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import { selectToken } from './selectors';
+import {
+  selectToken,
+  selectRedirectPath,
+} from './selectors';
+import * as actions from './actions';
+import { PUBLIC_ROUTES } from './constants';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
@@ -28,12 +32,20 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     const token = this.props.token;
 
     if (token.length === 0 && !this.isPublic(path)) {
-      this.props.dispatch(push('/login'));
+      this.props.goToNow('/login');
+      this.props.setRedirect(path);
+    }
+  }
+
+  componentWillReceiveProps() {
+    if (this.props.token.length > 0 && this.props.redirectPath.length > 0) {
+      this.props.goToNow(this.props.redirectPath);
+      this.props.setRedirect('');
     }
   }
 
   isPublic(path) {
-    return ['/', '/login'].find((p) => p === path);
+    return PUBLIC_ROUTES.find((p) => p === path);
   }
 
   render() {
@@ -60,15 +72,14 @@ App.propTypes = {
   children: React.PropTypes.node,
   location: React.PropTypes.object.isRequired,
   token: React.PropTypes.string.isRequired,
-  dispatch: React.PropTypes.func.isRequired,
+  goToNow: React.PropTypes.func.isRequired,
+  setRedirect: React.PropTypes.func.isRequired,
+  redirectPath: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken(),
+  redirectPath: selectRedirectPath(),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, actions)(App);

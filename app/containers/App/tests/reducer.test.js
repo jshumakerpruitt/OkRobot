@@ -6,6 +6,7 @@ import {
   repoLoadingError,
   receiveToken,
   revokeToken,
+  setRedirect,
 } from '../actions';
 import { fromJS } from 'immutable';
 
@@ -17,6 +18,7 @@ describe('appReducer', () => {
       loading: false,
       error: false,
       currentUser: false,
+      redirectPath: '',
       userData: fromJS({
         repositories: false,
       }),
@@ -41,6 +43,14 @@ describe('appReducer', () => {
     const expectedState = state.set('token', token);
 
     expect(appReducer(state, receiveToken(token)))
+    .toEqual(expectedState);
+  });
+
+  it('should set the redirectPath on setRedirect', () => {
+    const redirectPath = '/mycoolpath';
+    const expectedState = state.set('redirectPath', redirectPath);
+
+    expect(appReducer(state, setRedirect(redirectPath)))
     .toEqual(expectedState);
   });
 

@@ -15,3 +15,5 @@ export const LOAD_REPOS_SUCCESS = 'hellorobot/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'hellorobot/App/LOAD_REPOS_ERROR';
 export const RECEIVE_TOKEN = 'hellorobot/App/RECEIVE_TOKEN';
 export const REVOKE_TOKEN = 'hellorobot/App/REVOKE_TOKEN';
+export const SET_REDIRECT = 'hellorobot/App/SET_REDIRECT';
+export const PUBLIC_ROUTES = ['/', '/login'];

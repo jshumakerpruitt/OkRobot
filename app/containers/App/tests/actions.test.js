@@ -6,7 +6,10 @@ import {
   LOAD_REPOS_ERROR,
   RECEIVE_TOKEN,
   REVOKE_TOKEN,
+  SET_REDIRECT,
 } from '../constants';
+
+import { CALL_HISTORY_METHOD } from 'react-router-redux';
 
 import {
   loadRepos,
@@ -14,6 +17,8 @@ import {
   repoLoadingError,
   receiveToken,
   revokeToken,
+  setRedirect,
+  goToNow,
 } from '../actions';
 
 describe('App Actions', () => {
@@ -35,6 +40,29 @@ describe('App Actions', () => {
       };
 
       expect(revokeToken()).toEqual(expectedResult);
+    });
+  });
+
+  describe('goToNow', () => {
+    it('should return the correct type', () => {
+      expect(goToNow().type).toEqual(CALL_HISTORY_METHOD);
+    });
+
+    it('should return the correct args', () => {
+      const path = '/login';
+      const args = goToNow(path).payload.args;
+      expect(args).toEqual(['/login']);
+    });
+  });
+
+  describe('setRedirect', () => {
+    it('should return the correct type', () => {
+      const expectedResult = {
+        type: SET_REDIRECT,
+        path: '/browse',
+      };
+
+      expect(setRedirect('/browse')).toEqual(expectedResult);
     });
   });
 
