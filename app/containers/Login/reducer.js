@@ -8,10 +8,10 @@ import { fromJS } from 'immutable';
 import {
   SUBMIT_LOGIN,
   RECEIVE_ERROR,
+  RECEIVE_SUCCESS,
   UPDATE_EMAIL,
   UPDATE_PASSWORD,
 } from './constants';
-import { RECEIVE_TOKEN } from '../App/constants';
 
 const initialState = fromJS({
   auth: fromJS({
@@ -32,7 +32,7 @@ function loginReducer(state = initialState, action) {
       return state
         .set('error', true)
         .set('isSubmitting', false);
-    case RECEIVE_TOKEN:
+    case RECEIVE_SUCCESS:
       return state
         .set('error', false)
         .set('isSubmitting', false);

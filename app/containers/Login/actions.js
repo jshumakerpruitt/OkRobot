@@ -9,9 +9,8 @@ import {
   RECEIVE_ERROR,
   UPDATE_EMAIL,
   UPDATE_PASSWORD,
+  RECEIVE_SUCCESS,
 } from './constants';
-
-import { RECEIVE_TOKEN } from '../App/constants';
 
 export function submitLogin(authHash) {
   return {
@@ -20,10 +19,9 @@ export function submitLogin(authHash) {
   };
 }
 
-export function receiveSuccess(token) {
+export function receiveSuccess() {
   return {
-    type: RECEIVE_TOKEN,
-    token,
+    type: RECEIVE_SUCCESS,
   };
 }
 

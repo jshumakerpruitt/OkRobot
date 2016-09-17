@@ -9,11 +9,11 @@ import {
 import {
   SUBMIT_LOGIN,
   RECEIVE_ERROR,
+  RECEIVE_SUCCESS,
   UPDATE_EMAIL,
   UPDATE_PASSWORD,
 } from '../constants';
 
-import { RECEIVE_TOKEN } from '../../App/constants';
 
 describe('Login actions', () => {
   describe('Submit Login Request', () => {
@@ -40,8 +40,8 @@ describe('Login actions', () => {
   });
 
   describe('receive login success', () => {
-    it('has a type of RECEIVE_TOKEN', () => {
-      const type = RECEIVE_TOKEN;
+    it('has a type of RECEIVE_SUCCESS', () => {
+      const type = RECEIVE_SUCCESS;
       expect(receiveSuccess().type).toEqual(type);
     });
   });
