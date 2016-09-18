@@ -11,9 +11,10 @@ import {
   FETCH_USERS,
 } from './constants';
 
-export function fetchUsers() {
+export function fetchUsers(token) {
   return {
     type: FETCH_USERS,
+    token,
   };
 }
 

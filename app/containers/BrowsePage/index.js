@@ -8,15 +8,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import { fetchUsers } from './actions';
 import ProfileGrid from '../../components/ProfileGrid';
-
+import * as actions from './actions';
 import { selectUsers } from './selectors';
+import { selectToken } from '../App/selectors';
 import styles from './styles.css';
 
 export class BrowsePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.dispatch(fetchUsers());
+    this.props.fetchUsers(this.props.token);
   }
   render() {
     return (
@@ -36,17 +36,13 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
 
 BrowsePage.propTypes = {
   users: React.PropTypes.array,
-  dispatch: React.PropTypes.func,
+  token: React.PropTypes.string,
+  fetchUsers: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   users: selectUsers(),
+  token: selectToken(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(BrowsePage);
+export default connect(mapStateToProps, actions)(BrowsePage);

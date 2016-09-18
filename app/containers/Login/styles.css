@@ -1,13 +1,6 @@
 .login { /* stylelint-disable */
-  height: 100%;
-  padding-top: 64px;
-  padding-top: 200px;
-  display: flex;
-  flex-direction: column;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
 }
 

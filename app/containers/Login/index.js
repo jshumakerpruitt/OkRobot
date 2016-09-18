@@ -16,7 +16,6 @@ import {
   selectPassword,
 } from './selectors';
 import { selectRedirectPath } from '../App/selectors';
-import { setRedirect } from '../App/actions';
 
 import styles from './styles.css';
 
@@ -27,11 +26,6 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 export class Login extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentWillMount() {
-    if (this.props.redirectPath.length === 0) {
-      this.props.setRedirect('/');
-    }
-  }
   render() {
     return (
       <div className={styles.login} style={{ border: '1px solid black' }}>
@@ -59,7 +53,7 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
             type="password"
           />
           <RaisedButton
-            onClick={() => { this.props.submitLogin(this.props.auth); }}
+            onClick={() => { this.props.submitLogin(this.props.auth, this.props.redirectPath); }}
             className={styles.submitButton}
             label="Sign In"
             primary
@@ -79,7 +73,6 @@ Login.propTypes = {
   updatePassword: React.PropTypes.func.isRequired,
   submitLogin: React.PropTypes.func.isRequired,
   redirectPath: React.PropTypes.string.isRequired,
-  setRedirect: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -88,9 +81,5 @@ const mapStateToProps = createStructuredSelector({
   password: selectPassword(),
   redirectPath: selectRedirectPath(),
 });
-const actionCreatorMapping = {
-  ...actions,
-  setRedirect,
-};
 
-export default connect(mapStateToProps, actionCreatorMapping)(Login);
+export default connect(mapStateToProps, actions)(Login);

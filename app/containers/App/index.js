@@ -10,22 +10,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import {
-  selectToken,
-  selectRedirectPath,
-} from './selectors';
+import { selectToken } from './selectors';
 import * as actions from './actions';
 import { PUBLIC_ROUTES } from './constants';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
-import 'sanitize.css/sanitize.css';
+// import 'sanitize.css/sanitize.css';
 
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 
 import styles from './styles.css';
 
-//    <AppBar title={}
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     const path = this.props.location.pathname;
@@ -37,20 +32,13 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     }
   }
 
-  componentWillReceiveProps() {
-    if (this.props.token.length > 0 && this.props.redirectPath.length > 0) {
-      this.props.goToNow(this.props.redirectPath);
-      this.props.setRedirect('');
-    }
-  }
-
   isPublic(path) {
     return PUBLIC_ROUTES.find((p) => p === path);
   }
 
   render() {
     return (
-      <div>
+      <div className={styles.dataRoot}>
         <Helmet
           titleTemplate="%s - HelloRobot"
           defaultTitle="HelloRobot - Social App for Robots"
@@ -58,11 +46,15 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             { name: 'description', content: 'Social App for Robots' },
           ]}
         />
-        <Header />
+        <div className={styles.header} >
+          <Header
+            title="HelloRobot"
+          />
+        </div>
         <div className={styles.wrapper}>
           {React.Children.toArray(this.props.children)}
         </div>
-        <Footer />
+        <div className={styles.footer} >footer</div>
       </div>
     );
   }
@@ -74,12 +66,10 @@ App.propTypes = {
   token: React.PropTypes.string.isRequired,
   goToNow: React.PropTypes.func.isRequired,
   setRedirect: React.PropTypes.func.isRequired,
-  redirectPath: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken(),
-  redirectPath: selectRedirectPath(),
 });
 
 export default connect(mapStateToProps, actions)(App);

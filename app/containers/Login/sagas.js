@@ -1,5 +1,6 @@
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { push } from 'react-router-redux';
 import request from '../../utils/request';
 import { receiveError, receiveSuccess } from './actions';
 import { receiveToken } from '../App/actions';
@@ -29,6 +30,7 @@ export function* postAuth(action) {
   } else {
     yield put(receiveSuccess());
     yield put(receiveToken(response.data.jwt));
+    yield put(push(action.redirectPath || '/'));
   }
 }
 

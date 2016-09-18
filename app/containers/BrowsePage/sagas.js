@@ -6,22 +6,28 @@ import request from '../../utils/request';
 import {
   requestUsers,
   receiveUsers,
-  receiveUsersError,
+  receiveError,
 } from './actions';
 
 // Individual exports for testing
-export function* fetchUsersSaga() {
+export function* fetchUsersSaga(action) {
   yield put(requestUsers());
 
   const users = yield request(
-    API_ENDPOINT,
-    {}
+    `${API_ENDPOINT}/users`,
+    {
+      headers: {
+        Authorization: `Bearer ${action.token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
   );
 
   if (users.err) {
-    yield put(receiveUsersError(users.error));
+    yield put(receiveError(users.error));
   } else {
-    yield put(receiveUsers(users.data));
+    yield put(receiveUsers(users.data.users));
   }
 }
 

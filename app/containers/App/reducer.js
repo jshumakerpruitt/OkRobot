@@ -36,7 +36,8 @@ function appReducer(state = initialState, action) {
   switch (action.type) {
     case RECEIVE_TOKEN:
       return state
-        .set('token', action.token);
+        .set('token', action.token)
+        .set('redirectPath', '');
     case REVOKE_TOKEN:
       return state
         .set('token', '');
