@@ -16,11 +16,6 @@ const selectCurrentUser = () => createSelector(
   (globalState) => globalState.get('currentUser')
 );
 
-const selectRedirectPath = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('redirectPath')
-);
-
 const selectLoading = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('loading')
@@ -60,5 +55,4 @@ export {
   selectError,
   selectRepos,
   selectLocationState,
-  selectRedirectPath,
 };

@@ -1,4 +1,4 @@
-import { put } from 'redux-saga/effects';
+import { select, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { push } from 'react-router-redux';
 import request from '../../utils/request';
@@ -6,6 +6,7 @@ import { receiveError, receiveSuccess } from './actions';
 import { receiveToken } from '../App/actions';
 import { API_ENDPOINT } from '../App/constants';
 import { SUBMIT_LOGIN } from './constants';
+import { selectRedirectPath } from './selectors';
 
 // Individual exports for testing
 export function* postAuth(action) {
@@ -28,9 +29,10 @@ export function* postAuth(action) {
   if (response.err) {
     yield put(receiveError(response.err));
   } else {
+    const path = yield select(selectRedirectPath());
     yield put(receiveSuccess());
     yield put(receiveToken(response.data.jwt));
-    yield put(push(action.redirectPath || '/'));
+    yield put(push(path || '/'));
   }
 }
 

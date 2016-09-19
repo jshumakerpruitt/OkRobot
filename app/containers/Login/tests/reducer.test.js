@@ -10,6 +10,8 @@ import {
   updatePassword,
 } from '../actions';
 
+import { setRedirect } from '../../App/actions';
+
 describe('loginReducer', () => {
   let state = null;
 
@@ -19,6 +21,7 @@ describe('loginReducer', () => {
         email: '',
         password: '',
       }),
+      redirectPath: '',
       error: false,
       isSubmitting: false,
     });
@@ -31,6 +34,14 @@ describe('loginReducer', () => {
   it('sets error to true on receiveError', () => {
     expect(loginReducer(state, receiveError()).get('error'))
     .toEqual(true);
+  });
+
+  it('should set the redirectPath on setRedirect', () => {
+    const redirectPath = '/mycoolpath';
+    const expectedState = state.set('redirectPath', redirectPath);
+
+    expect(loginReducer(state, setRedirect(redirectPath)))
+    .toEqual(expectedState);
   });
 
   it('sets isSubmitting to true on submitLogin', () => {

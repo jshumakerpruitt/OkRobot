@@ -13,17 +13,23 @@ import {
   UPDATE_PASSWORD,
 } from './constants';
 
+import { SET_REDIRECT } from '../App/constants';
+
 const initialState = fromJS({
   auth: fromJS({
     email: '',
     password: '',
   }),
+  redirectPath: '',
   error: false,
   isSubmitting: false,
 });
 
 function loginReducer(state = initialState, action) {
   switch (action.type) {
+    case SET_REDIRECT:
+      return state
+        .set('redirectPath', action.path);
     case SUBMIT_LOGIN:
       return state
         .set('isSubmitting', true)

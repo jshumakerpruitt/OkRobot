@@ -9,6 +9,7 @@ import {
   selectLoginDomain,
   selectEmail,
   selectPassword,
+  selectRedirectPath,
 } from '../selectors';
 
 describe('selectLoginPage', () => {
@@ -24,6 +25,19 @@ describe('selectLoginPage1', () => {
       login: fromJS(expectedState),
     });
     expect(loginPageSelector(mockedState)).toEqual(expectedState);
+  });
+});
+
+describe('selectRedirectPath', () => {
+  const redirectPathSelector = selectRedirectPath();
+  it('should select the redirectPath', () => {
+    const redirectPath = '/browse';
+    const mockedState = fromJS({
+      login: {
+        redirectPath,
+      },
+    });
+    expect(redirectPathSelector(mockedState)).toEqual(redirectPath);
   });
 });
 

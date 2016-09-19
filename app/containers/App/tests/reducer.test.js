@@ -18,7 +18,6 @@ describe('appReducer', () => {
       loading: false,
       error: false,
       currentUser: false,
-      redirectPath: '',
       userData: fromJS({
         repositories: false,
       }),
@@ -46,12 +45,9 @@ describe('appReducer', () => {
     .toEqual(expectedState);
   });
 
-  it('should set the redirectPath on setRedirect', () => {
-    const redirectPath = '/mycoolpath';
-    const expectedState = state.set('redirectPath', redirectPath);
-
-    expect(appReducer(state, setRedirect(redirectPath)))
-    .toEqual(expectedState);
+  it('should NOT respond to setRedirect', () => {
+    expect(appReducer(state, setRedirect('newpath')))
+    .toEqual(state);
   });
 
   it('should handle the loadRepos action correctly', () => {

@@ -16,7 +16,6 @@ import {
   LOAD_REPOS_ERROR,
   RECEIVE_TOKEN,
   REVOKE_TOKEN,
-  SET_REDIRECT,
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -26,7 +25,6 @@ const initialState = fromJS({
   loading: false,
   error: false,
   currentUser: false,
-  redirectPath: '',
   userData: fromJS({
     repositories: false,
   }),
@@ -36,14 +34,10 @@ function appReducer(state = initialState, action) {
   switch (action.type) {
     case RECEIVE_TOKEN:
       return state
-        .set('token', action.token)
-        .set('redirectPath', '');
+        .set('token', action.token);
     case REVOKE_TOKEN:
       return state
         .set('token', '');
-    case SET_REDIRECT:
-      return state
-        .set('redirectPath', action.path);
     case LOAD_REPOS:
       return state
         .set('loading', true)

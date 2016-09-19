@@ -44,6 +44,11 @@ const selectPassword = () => createSelector(
   (substate) => substate.password
 );
 
+const selectRedirectPath = () => createSelector(
+  selectLoginDomain(),
+  (substate) => substate.get('redirectPath')
+);
+
 export default selectLogin;
 export {
   selectLoginDomain,
@@ -53,4 +58,5 @@ export {
   selectLogin,
   selectEmail,
   selectPassword,
+  selectRedirectPath,
 };

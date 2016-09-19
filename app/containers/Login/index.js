@@ -15,7 +15,6 @@ import {
   selectEmail,
   selectPassword,
 } from './selectors';
-import { selectRedirectPath } from '../App/selectors';
 
 import styles from './styles.css';
 
@@ -53,7 +52,9 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
             type="password"
           />
           <RaisedButton
-            onClick={() => { this.props.submitLogin(this.props.auth, this.props.redirectPath); }}
+            onClick={() => {
+              this.props.submitLogin(this.props.auth);
+            }}
             className={styles.submitButton}
             label="Sign In"
             primary
@@ -72,14 +73,12 @@ Login.propTypes = {
   updateEmail: React.PropTypes.func.isRequired,
   updatePassword: React.PropTypes.func.isRequired,
   submitLogin: React.PropTypes.func.isRequired,
-  redirectPath: React.PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   auth: selectAuth(),
   email: selectEmail(),
   password: selectPassword(),
-  redirectPath: selectRedirectPath(),
 });
 
 export default connect(mapStateToProps, actions)(Login);

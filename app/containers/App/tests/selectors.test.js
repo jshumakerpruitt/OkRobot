@@ -3,7 +3,6 @@ import expect from 'expect';
 
 import {
   selectToken,
-  selectRedirectPath,
   selectGlobal,
   selectCurrentUser,
   selectLoading,
@@ -33,19 +32,6 @@ describe('selectToken', () => {
       },
     });
     expect(tokenSelector(mockedState)).toEqual(token);
-  });
-});
-
-describe('selectRedirectPath', () => {
-  const redirectPathSelector = selectRedirectPath();
-  it('should select the redirectPath', () => {
-    const redirectPath = '/browse';
-    const mockedState = fromJS({
-      global: {
-        redirectPath,
-      },
-    });
-    expect(redirectPathSelector(mockedState)).toEqual(redirectPath);
   });
 });
 
