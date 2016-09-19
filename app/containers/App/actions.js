@@ -16,6 +16,8 @@
  */
 
 import {
+  OPEN_NAV,
+  CLOSE_NAV,
   RECEIVE_TOKEN,
   REVOKE_TOKEN,
   LOAD_REPOS,
@@ -98,4 +100,12 @@ export const goToNow = (path) =>
 export const setRedirect = (path) => ({
   type: SET_REDIRECT,
   path,
+});
+
+export const openNav = () => ({
+  type: OPEN_NAV,
+});
+
+export const closeNav = () => ({
+  type: CLOSE_NAV,
 });

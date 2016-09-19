@@ -7,6 +7,8 @@ import {
   receiveToken,
   revokeToken,
   setRedirect,
+  openNav,
+  closeNav,
 } from '../actions';
 import { fromJS } from 'immutable';
 
@@ -14,6 +16,7 @@ describe('appReducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
+      isNavOpen: false,
       token: '',
       loading: false,
       error: false,
@@ -34,6 +37,20 @@ describe('appReducer', () => {
     const expectedState = state;
 
     expect(appReducer(initialState, revokeToken()))
+      .toEqual(expectedState);
+  });
+
+  it('it should open the NavDrawer', () => {
+    const expectedState = state.set('isNavOpen', true);
+
+    expect(appReducer(state, openNav()))
+      .toEqual(expectedState);
+  });
+
+  it('it should close the NavDrawer', () => {
+    const expectedState = state.set('isNavOpen', false);
+
+    expect(appReducer(state, closeNav()))
       .toEqual(expectedState);
   });
 

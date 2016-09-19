@@ -12,12 +12,19 @@ import messages from './messages';
 
 import styles from './styles.css';
 
-function Header() {
-  return (
-    <div className={styles.header}>
-      <AppBar title={messages.title} />
-    </div>
-  );
-}
+const Header = ({
+  onOpenClick,
+}) =>
+  <div className={styles.header}>
+    <AppBar
+      title={messages.title}
+      iconClassNameRight="muidocs-icon-navigation-expand-more"
+      onLeftIconButtonTouchTap={onOpenClick}
+    />
+  </div>;
+
+Header.propTypes = {
+  onOpenClick: React.PropTypes.func.isRequired,
+};
 
 export default Header;

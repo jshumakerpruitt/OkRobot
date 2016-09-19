@@ -16,11 +16,14 @@ import {
   LOAD_REPOS_ERROR,
   RECEIVE_TOKEN,
   REVOKE_TOKEN,
+  OPEN_NAV,
+  CLOSE_NAV,
 } from './constants';
 import { fromJS } from 'immutable';
 
 // The initial state of the App
 const initialState = fromJS({
+  isNavOpen: false,
   token: '',
   loading: false,
   error: false,
@@ -38,6 +41,12 @@ function appReducer(state = initialState, action) {
     case REVOKE_TOKEN:
       return state
         .set('token', '');
+    case OPEN_NAV:
+      return state
+        .set('isNavOpen', true);
+    case CLOSE_NAV:
+      return state
+        .set('isNavOpen', false);
     case LOAD_REPOS:
       return state
         .set('loading', true)

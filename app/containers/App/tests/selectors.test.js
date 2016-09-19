@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 import expect from 'expect';
 
 import {
+  selectIsNavOpen,
   selectToken,
   selectGlobal,
   selectCurrentUser,
@@ -32,6 +33,19 @@ describe('selectToken', () => {
       },
     });
     expect(tokenSelector(mockedState)).toEqual(token);
+  });
+});
+
+describe('selectIsNavOpen', () => {
+  const navSelector = selectIsNavOpen();
+  it('should select the nav state', () => {
+    const isNavOpen = true;
+    const mockedState = fromJS({
+      global: {
+        isNavOpen,
+      },
+    });
+    expect(navSelector(mockedState)).toEqual(isNavOpen);
   });
 });
 

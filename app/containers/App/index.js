@@ -10,7 +10,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import { selectToken } from './selectors';
+import {
+  selectToken,
+  selectIsNavOpen,
+} from './selectors';
 import * as actions from './actions';
 import { PUBLIC_ROUTES } from './constants';
 
@@ -19,6 +22,7 @@ import { PUBLIC_ROUTES } from './constants';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import NavDrawer from '../NavDrawer';
 
 import styles from './styles.css';
 
@@ -50,10 +54,18 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
         <div className={styles.header} >
           <Header
             title="HelloRobot"
+            onOpenClick={this.props.openNav}
           />
         </div>
         <div className={styles.wrapper}>
           {React.Children.toArray(this.props.children)}
+          <NavDrawer
+            isOpen={this.props.isNavOpen}
+            currentPage="home"
+            onCloseClick={this.props.closeNav}
+            links={['/home', '/zen', '/browse', '/login']}
+          >
+          </NavDrawer>
         </div>
         <div className={styles.footer} >
           <Footer />
@@ -69,10 +81,14 @@ App.propTypes = {
   token: React.PropTypes.string.isRequired,
   goToNow: React.PropTypes.func.isRequired,
   setRedirect: React.PropTypes.func.isRequired,
+  isNavOpen: React.PropTypes.bool.isRequired,
+  openNav: React.PropTypes.func.isRequired,
+  closeNav: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken(),
+  isNavOpen: selectIsNavOpen(),
 });
 
 export default connect(mapStateToProps, actions)(App);

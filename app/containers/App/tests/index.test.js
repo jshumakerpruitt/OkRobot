@@ -31,6 +31,14 @@ describe('<App />', () => {
     expect(renderedComponent.find(Footer).length).toEqual(1);
   });
 
+  it('should render the NavDrawer', () => {
+    const renderedComponent = shallow(
+      <App {...props} />
+    );
+    expect(renderedComponent.find('NavDrawer').length).toEqual(1);
+  });
+
+
   it('should render its children', () => {
     const children = (<h1>Test</h1>);
     const renderedComponent = shallow(

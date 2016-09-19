@@ -11,6 +11,11 @@ const selectToken = () => createSelector(
   (globalState) => globalState.get('token')
 );
 
+const selectIsNavOpen = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('isNavOpen')
+);
+
 const selectCurrentUser = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('currentUser')
@@ -55,4 +60,5 @@ export {
   selectError,
   selectRepos,
   selectLocationState,
+  selectIsNavOpen,
 };

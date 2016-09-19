@@ -1,6 +1,8 @@
 import expect from 'expect';
 
 import {
+  OPEN_NAV,
+  CLOSE_NAV,
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
@@ -12,6 +14,8 @@ import {
 import { CALL_HISTORY_METHOD } from 'react-router-redux';
 
 import {
+  openNav,
+  closeNav,
   loadRepos,
   reposLoaded,
   repoLoadingError,
@@ -30,6 +34,24 @@ describe('App Actions', () => {
       };
 
       expect(receiveToken('mytoken')).toEqual(expectedResult);
+    });
+  });
+
+  describe('Open Nav', () => {
+    it('it has type OPEN_NAV', () => {
+      const expected = {
+        type: OPEN_NAV,
+      };
+      expect(openNav()).toEqual(expected);
+    });
+  });
+
+  describe('Close Nav', () => {
+    it('it has type CLOSE_NAV', () => {
+      const expected = {
+        type: CLOSE_NAV,
+      };
+      expect(closeNav()).toEqual(expected);
     });
   });
 
