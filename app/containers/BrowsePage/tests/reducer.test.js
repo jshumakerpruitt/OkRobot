@@ -1,31 +1,36 @@
 import expect from 'expect';
-import browsePageReducer from '../reducer';
+import browsePageReducer, { user } from '../reducer';
 import { fromJS } from 'immutable';
+
+import {
+  receiveLike,
+} from '../actions';
 
 import {
   RECEIVE_USERS,
   RECEIVE_ERROR,
   REQUEST_USERS,
+//  SUBMIT_LIKE,
+//  REQUEST_LIKE,
+//  RECEIVE_LIKE_ERROR,
 } from '../constants';
 
 describe('browsePageReducer', () => {
+  let state = null;
+
+  beforeEach(() => {
+    state = fromJS({
+      users: [],
+      isFetching: false,
+      error: false,
+    });
+  });
+
+  // initial state
   describe('initial state', () => {
-    // users
     it('sets users to empty array', () => {
       const nextState = browsePageReducer(undefined, {});
-      expect(nextState.get('users')).toEqual(fromJS([]));
-    });
-
-    // isFetching
-    it('sets isFetching to false', () => {
-      const nextState = browsePageReducer(undefined, {});
-      expect(nextState.get('isFetching')).toEqual(false);
-    });
-
-    // error
-    it('sets error to false', () => {
-      const nextState = browsePageReducer(undefined, {});
-      expect(nextState.get('error')).toEqual(false);
+      expect(nextState).toEqual(state);
     });
   });
 
@@ -125,5 +130,94 @@ describe('browsePageReducer', () => {
       expect(nextState.get('error'))
       .toEqual(true);
     });
+  });
+});
+
+describe('RECEIVE_LIKE', () => {
+  let state = null;
+  let like1 = null;
+  let unlike2 = null;
+
+  beforeEach(() => {
+    state = fromJS({
+      users: [
+        { id: 1, liked: false, username: 'foo' },
+        { id: 2, liked: true, username: 'bar' },
+      ],
+      isFetching: false,
+      error: false,
+    });
+
+    like1 = { id: 1, liked: true };
+    unlike2 = { id: 2, liked: false };
+  });
+
+  it('likes a user', () => {
+    const nextState = browsePageReducer(state, receiveLike(like1));
+    const expectedState = fromJS({
+      users: [
+        { id: 1, liked: true, username: 'foo' },
+        { id: 2, liked: true, username: 'bar' },
+      ],
+      isFetching: false,
+      error: false,
+    });
+    expect(expectedState).toEqual(nextState);
+  });
+
+  it('unlikes a user', () => {
+    const expectedState = fromJS({
+      users: [
+        { id: 1, liked: false, username: 'foo' },
+        { id: 2, liked: false, username: 'bar' },
+      ],
+      isFetching: false,
+      error: false,
+    });
+
+    const nextState = browsePageReducer(state, receiveLike(unlike2));
+    expect(expectedState).toEqual(nextState);
+  });
+});
+
+describe('user', () => {
+  let likedUser;
+  let unlikedUser;
+  let unaffectedUser;
+  let like;
+  let unlike;
+
+  beforeEach(() => {
+    likedUser = fromJS({ id: 1, username: 'foo', liked: true });
+    unlikedUser = fromJS({ id: 1, username: 'foo', liked: false });
+    unaffectedUser = fromJS({ id: 2, username: 'notfoo', liked: 'notbool' });
+    unlike = {
+      id: likedUser.get('id'),
+      liked: false,
+    };
+    like = {
+      id: unlikedUser.get('id'),
+      liked: true,
+    };
+  });
+
+  it('likes an unliked  user', () => {
+    expect(user(unlikedUser, receiveLike(like)))
+    .toEqual(likedUser);
+  });
+
+  it('unlikes an liked  user', () => {
+    expect(user(likedUser, receiveLike(unlike)))
+    .toEqual(unlikedUser);
+  });
+
+  it('ignores an unaffectedUser (like)', () => {
+    expect(user(unaffectedUser, receiveLike(like)))
+    .toEqual(unaffectedUser);
+  });
+
+  it('ignores an unaffectedUser (unlike)', () => {
+    expect(user(unaffectedUser, receiveLike(unlike)))
+    .toEqual(unaffectedUser);
   });
 });

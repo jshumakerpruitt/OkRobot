@@ -4,12 +4,16 @@ import {
   requestUsers,
   receiveUsers,
   receiveError,
+  submitLike,
+  receiveLike,
 } from '../actions';
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
   RECEIVE_ERROR,
   FETCH_USERS,
+  SUBMIT_LIKE,
+  RECEIVE_LIKE,
 } from '../constants';
 
 describe('BrowsePage actions', () => {
@@ -47,4 +51,23 @@ describe('BrowsePage actions', () => {
       expect(receiveError().type).toEqual(RECEIVE_ERROR);
     });
   });
+
+  describe('submitLike', () => {
+    it('has a type of SUBMIT_LIKE', () => {
+      expect(submitLike().type).toEqual(SUBMIT_LIKE);
+    });
+  });
+
+  describe('receiveLike', () => {
+    it('has a type of RECEIVE_LIKE', () => {
+      expect(receiveLike().type).toEqual(RECEIVE_LIKE);
+    });
+  });
+/*
+  describe('receiveLikeError', () => {
+    it('has a type of RECEIVE_LIKE_ERROR', () => {
+      expect(receiveLikeError().type).toEqual(RECEIVE_LIKE_ERROR);
+    });
+  });
+*/
 });

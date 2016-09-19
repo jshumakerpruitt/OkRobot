@@ -9,6 +9,9 @@ import {
   RECEIVE_USERS,
   RECEIVE_ERROR,
   FETCH_USERS,
+  SUBMIT_LIKE,
+  RECEIVE_LIKE,
+  RECEIVE_LIKE_ERROR,
 } from './constants';
 
 export function fetchUsers(token) {
@@ -33,6 +36,27 @@ export function receiveUsers(users) {
 export function receiveError(error) {
   return {
     type: RECEIVE_ERROR,
+    error,
+  };
+}
+
+
+export function submitLike(id, liked) {
+  return {
+    type: SUBMIT_LIKE,
+    like: { id, liked },
+  };
+}
+export function receiveLike(like) {
+  return {
+    type: RECEIVE_LIKE,
+    like,
+  };
+}
+
+export function receiveLikeError(error) {
+  return {
+    type: RECEIVE_LIKE_ERROR,
     error,
   };
 }

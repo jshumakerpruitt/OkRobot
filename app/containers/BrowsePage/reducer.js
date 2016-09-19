@@ -9,6 +9,7 @@ import {
   RECEIVE_USERS,
   RECEIVE_ERROR,
   REQUEST_USERS,
+  RECEIVE_LIKE,
 } from './constants';
 
 export const defaultState = fromJS({
@@ -17,10 +18,26 @@ export const defaultState = fromJS({
   error: false,
 });
 
+export const user = (
+  state = {},
+  action,
+) => {
+  switch (action.type) {
+    case RECEIVE_LIKE:
+      return action.like.id === state.get('id') ?
+             state.set('liked', action.like.liked) :
+             state;
+    default:
+      return state;
+  }
+};
+
 export const users = (state = fromJS([]), action) => {
   switch (action.type) {
     case RECEIVE_USERS:
       return state.concat(fromJS(action.users));
+    case RECEIVE_LIKE:
+      return state.map(u => user(u, action));
     default:
       return state;
   }
@@ -43,6 +60,11 @@ function browsePageReducer(state = defaultState, action) {
       return (
         state.set('isFetching', true)
              .set('error', false)
+      );
+    case RECEIVE_LIKE:
+      return (
+        state.set('users',
+                  users(state.get('users'), action))
       );
     default:
       return state;

@@ -18,6 +18,7 @@ import { PUBLIC_ROUTES } from './constants';
 // import 'sanitize.css/sanitize.css';
 
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 import styles from './styles.css';
 
@@ -54,7 +55,9 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
         <div className={styles.wrapper}>
           {React.Children.toArray(this.props.children)}
         </div>
-        <div className={styles.footer} >footer</div>
+        <div className={styles.footer} >
+          <Footer />
+        </div>
       </div>
     );
   }
