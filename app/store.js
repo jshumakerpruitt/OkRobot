@@ -3,7 +3,8 @@
  */
 
 import { createStore, applyMiddleware, compose } from 'redux';
-import { fromJS } from 'immutable';
+import { persistStore, autoRehydrate } from 'redux-persist-immutable';
+// import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
@@ -23,13 +24,16 @@ export default function configureStore(initialState = {}, history) {
   const enhancers = [
     applyMiddleware(...middlewares),
     devtools(),
+    autoRehydrate(),
   ];
 
   const store = createStore(
     createReducer(),
-    fromJS(initialState),
+    undefined,
     compose(...enhancers)
   );
+
+  persistStore(store, { whitelist: 'global' });
 
   // Extensions
   store.runSaga = sagaMiddleware.run;

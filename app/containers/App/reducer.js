@@ -20,6 +20,7 @@ import {
   CLOSE_NAV,
 } from './constants';
 import { fromJS } from 'immutable';
+import { REHYDRATE } from 'redux-persist/constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -35,6 +36,8 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    case REHYDRATE:
+      return action.payload.global || state;
     case RECEIVE_TOKEN:
       return state
         .set('token', action.token);
