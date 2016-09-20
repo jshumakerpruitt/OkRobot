@@ -41,7 +41,17 @@ export function* fetchUsersSaga() {
 
 
 export function* watchFetchUsers() {
-  yield* takeEvery(FETCH_USERS, fetchUsersSaga);
+  yield takeEvery(FETCH_USERS, fetchUsersSaga);
+}
+
+
+export function* userData() {
+  // Fork watcher so we can continue execution
+  const watcher = yield fork(watchFetchUsers);
+
+  // Suspend execution until location changes
+  yield take(LOCATION_CHANGE);
+  yield cancel(watcher);
 }
 
 export function* submitLikeSaga(action) {
@@ -79,12 +89,7 @@ export function* submitLikeSaga(action) {
 }
 
 export function* watchSubmitLike() {
-  /* eslint-disable no-constant-condition */
-  while (true) {
-    const action = yield take(SUBMIT_LIKE);
-    yield call(submitLikeSaga, action);
-  }
-  /* eslint-enable no-constant-condition */
+  yield takeEvery(SUBMIT_LIKE, submitLikeSaga);
 }
 
 export function* likeData() {
@@ -99,6 +104,6 @@ export function* likeData() {
 
 // All sagas to be loaded
 export default [
-  watchFetchUsers,
+  userData,
   likeData,
 ];
