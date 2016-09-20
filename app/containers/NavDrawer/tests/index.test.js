@@ -25,23 +25,17 @@ describe('NavDrawer', () => {
   });
 
   it('should render <Link>s', () => {
-    /*
     const renderedComponent = shallow(
-      <IntlProvider locale="en">
-        <MuiThemeProvider>
-          <NavDrawer
-            isOpen={false}
-            currentPage="Home"
-            onCloseClick={() => {}}
-            links={'foo', 'bar', 'baz'}
-          >
-          </NavDrawer>
-        </MuiThemeProvider>
-      </IntlProvider>
+      <NavDrawer
+        isOpen
+        currentPage="Home"
+        onCloseClick={() => {}}
+        links={['/foo', '/bar', '/baz']}
+      />
     );
 
-    expect(renderedComponent.find('Link').length).toBeGreaterThan(0);
-    */
+    expect(renderedComponent.find('Link').length)
+    .toEqual(3);
   });
 
   it('should render children', () => {

@@ -28,7 +28,6 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
         />
         <ProfileGrid
           users={this.props.users}
-          receiveLike={this.props.receiveLike}
           submitLike={this.props.submitLike}
         />
       </div>
@@ -41,7 +40,6 @@ BrowsePage.propTypes = {
   users: React.PropTypes.array,
   fetchUsers: React.PropTypes.func.isRequired,
   submitLike: React.PropTypes.func,
-  receiveLike: React.PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

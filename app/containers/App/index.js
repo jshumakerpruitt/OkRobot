@@ -42,6 +42,12 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   render() {
+    const links = [
+      { to: '/', text: 'home' },
+      { to: '/zen', text: 'zen' },
+      { to: '/browse', text: 'browse' },
+      { to: '/login', text: 'login' },
+    ];
     return (
       <div className={styles.dataRoot}>
         <Helmet
@@ -61,9 +67,9 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           {React.Children.toArray(this.props.children)}
           <NavDrawer
             isOpen={this.props.isNavOpen}
-            currentPage="home"
+            currentPage={this.props.location.pathname}
             onCloseClick={this.props.closeNav}
-            links={['/home', '/zen', '/browse', '/login']}
+            links={links}
           >
           </NavDrawer>
         </div>

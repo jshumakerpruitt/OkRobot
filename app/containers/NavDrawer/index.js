@@ -12,7 +12,7 @@ import { Link } from 'react-router';
 const NavDrawer = ({
   isOpen,
   onCloseClick,
-//  currentPage,
+  currentPage,
   links,
 }) =>
   <div className={styles.navDrawer} >
@@ -20,7 +20,8 @@ const NavDrawer = ({
       open={isOpen}
     >
       <button onClick={onCloseClick}>close me</button>
-      {links.map(l => <div><Link to={l}>{l}</Link><br /></div>)}
+      {links.filter(l => l.to !== currentPage)
+            .map(l => <div onClick={onCloseClick} key={l.text}><Link to={l.to}>{l.text}</Link><br /></div>)}
     </Drawer>
   </div>;
 

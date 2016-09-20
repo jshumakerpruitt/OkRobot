@@ -9,9 +9,19 @@ describe('<ProfileGrid />', () => {
       { id: 1, username: 'foo' },
       { id: 2, username: 'bar' },
   ];
-  const renderedComponent = shallow(
-    <ProfileGrid users={users} />
-  );
+
+  const submitLike = expect.createSpy();
+
+  let renderedComponent;
+  beforeEach(() => {
+    renderedComponent = shallow(
+      <ProfileGrid
+        users={users}
+        submitLike={submitLike}
+      />
+    );
+  });
+
   it('it should render a GridTile for each user', () => {
     expect(renderedComponent.find('GridTile').length).toEqual(2);
   });

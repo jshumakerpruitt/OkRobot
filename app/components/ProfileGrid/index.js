@@ -21,13 +21,16 @@ const ProfileGrid = ({
           title={user.username}
           actionIcon={<ActionIcon
             onIconClick={() => { submitLike(user.id, !user.liked); }}
-
             isActive={user.liked}
             activeColor="yellow"
             defaultColor="white"
           />}
         >
-          <img style={{ width: '100%', height: 'auto' }} src={user.avatar} alt="profile" />
+          <img
+            style={{ width: '100%', height: 'auto' }}
+            src={user.avatar}
+            alt="profile"
+          />
         </GridTile>
       </div>
     ))}
