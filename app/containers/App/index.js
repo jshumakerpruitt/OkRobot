@@ -70,6 +70,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             isOpen={this.props.isNavOpen}
             currentPage={this.props.location.pathname}
             onCloseClick={this.props.closeNav}
+            revokeToken={this.props.revokeToken}
             links={links}
           >
           </NavDrawer>
@@ -91,6 +92,7 @@ App.propTypes = {
   isNavOpen: React.PropTypes.bool.isRequired,
   openNav: React.PropTypes.func.isRequired,
   closeNav: React.PropTypes.func.isRequired,
+  revokeToken: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

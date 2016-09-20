@@ -12,11 +12,14 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
+import classNames from 'classnames';
+
 import styles from './styles.css';
 
 const NavDrawer = ({
   isOpen,
   onCloseClick,
+  revokeToken,
   links,
 }) =>
   <div>
@@ -42,6 +45,17 @@ const NavDrawer = ({
             {l.text}
             <br />
           </Link>)}
+        <Link
+          className={classNames(styles.navItem, 'logout')}
+          to="/login"
+          onClick={() => {
+            onCloseClick();
+            revokeToken();
+          }}
+        >
+          Logout
+          <br />
+        </Link>
       </div>
     </Drawer>
   </div>;
@@ -49,6 +63,7 @@ const NavDrawer = ({
 NavDrawer.propTypes = {
   isOpen: React.PropTypes.bool.isRequired,
   onCloseClick: React.PropTypes.func.isRequired,
+  revokeToken: React.PropTypes.func.isRequired,
   links: React.PropTypes.array,
 };
 

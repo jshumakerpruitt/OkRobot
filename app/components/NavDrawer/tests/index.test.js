@@ -24,6 +24,22 @@ describe('NavDrawer', () => {
       .toEqual('Home');
   });
 
+  it('should logout the user', () => {
+    const revokeToken = expect.createSpy();
+    const renderedComponent = shallow(
+      <NavDrawer
+        isOpen
+        revokeToken={revokeToken}
+        onCloseClick={revokeToken}
+        links={['/foo', '/bar']}
+      />
+    );
+    const button = renderedComponent.find('.logout');
+    button.simulate('click');
+
+    expect(revokeToken).toHaveBeenCalled();
+  });
+
   it('should render <Link>s', () => {
     const renderedComponent = shallow(
       <NavDrawer
