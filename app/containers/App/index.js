@@ -22,7 +22,7 @@ import { PUBLIC_ROUTES } from './constants';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import NavDrawer from '../NavDrawer';
+import NavDrawer from 'components/NavDrawer';
 
 import styles from './styles.css';
 
@@ -46,7 +46,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
       { to: '/', text: 'home' },
       { to: '/zen', text: 'zen' },
       { to: '/browse', text: 'browse' },
-      { to: '/login', text: 'login' },
+      { to: '/logout', text: 'logout' },
     ];
     return (
       <div className={styles.dataRoot}>
@@ -61,6 +61,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           <Header
             title="HelloRobot"
             onOpenClick={this.props.openNav}
+            showOpen={this.props.token.length > 0}
           />
         </div>
         <div className={styles.wrapper}>

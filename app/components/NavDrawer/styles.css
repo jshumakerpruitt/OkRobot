@@ -1,0 +1,21 @@
+.navDrawer { /* stylelint-disable */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  background: lightgreen;
+}
+
+.navItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #00bcd4;
+  color: #ffffff;
+  height: 64px;
+  justify-content: center;
+  border-top: 1px solid;
+  text-decoration: none;
+}
+

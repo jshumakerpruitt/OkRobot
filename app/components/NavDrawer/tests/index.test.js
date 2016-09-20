@@ -35,7 +35,7 @@ describe('NavDrawer', () => {
     );
 
     expect(renderedComponent.find('Link').length)
-    .toEqual(3);
+    .toBeGreaterThan(3);
   });
 
   it('should render children', () => {
