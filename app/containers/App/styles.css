@@ -7,9 +7,13 @@ body,
 }
 
 .dataRoot {
-  background: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   z-index: 1;
   height: 100%;
+  background: #0CEBC7;
 }
 
 .header {
@@ -22,13 +26,19 @@ body,
 }
 
 .wrapper {
-  background: lightgreen;
+  max-width: calc(768px + 16px * 2);
+  min-width: 50%;
+  background: #0CEBC7;
   min-height: calc(100% - 128px);
-  width: 100%;
-  padding-top: 64px;
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .footer {
   height: 64px;
   background-color: lightblue;
+  width: 100%;
 }

@@ -27,7 +27,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 export class Login extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.login} style={{ border: '1px solid black' }}>
+      <div className={styles.login}>
         <Helmet
           title="Login"
           meta={[
@@ -36,7 +36,6 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
         />
         <div
           className={styles.form}
-          style={{ border: '1px solid blue' }}
         >
           <TextField
             onChange={(event) => this.props.updateEmail(event.target.value)}
