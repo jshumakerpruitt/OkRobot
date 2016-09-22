@@ -27,8 +27,8 @@ const ProfileGrid = ({
           />}
         >
           <img
-            style={{ width: '100%', height: 'auto' }}
-            src={user.avatar}
+            style={{ width: '100%', height: 'auto', zIndex: -1 }}
+            src="http://placehold.it/300x300"
             alt="profile"
           />
         </GridTile>

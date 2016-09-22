@@ -40,13 +40,13 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
           <TextField
             onChange={(event) => this.props.updateEmail(event.target.value)}
             value={this.props.email}
-            style={{ width: '100%' }}
+            className={styles.formItem}
             floatingLabelText="Email"
           />
           <TextField
             onChange={(event) => this.props.updatePassword(event.target.value)}
             value={this.props.password}
-            style={{ width: '100%' }}
+            className={styles.formItem}
             floatingLabelText="Password"
             type="password"
           />

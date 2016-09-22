@@ -80,7 +80,7 @@ export class HomePage extends React.Component {
     }
 
     return (
-      <article>
+      <article className={styles.homePage}>
         <Helmet
           title="Home Page"
           meta={[

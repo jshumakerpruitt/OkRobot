@@ -1,3 +1,7 @@
+.homePage {
+  min-height: 100%;
+}
+
 .textSection {
   margin: 3em auto;
 }
