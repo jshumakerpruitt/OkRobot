@@ -4,23 +4,18 @@ import { fromJS } from 'immutable';
 
 import {
   receiveLike,
+  receiveUsers,
+  requestUsers,
+  receiveError,
 } from '../actions';
-
-import {
-  RECEIVE_USERS,
-  RECEIVE_ERROR,
-  REQUEST_USERS,
-//  SUBMIT_LIKE,
-//  REQUEST_LIKE,
-//  RECEIVE_LIKE_ERROR,
-} from '../constants';
 
 describe('browsePageReducer', () => {
   let state = null;
 
   beforeEach(() => {
     state = fromJS({
-      users: [],
+      users: {},
+      ids: [],
       isFetching: false,
       error: false,
     });
@@ -35,10 +30,9 @@ describe('browsePageReducer', () => {
   });
 
   describe('REQUEST_USERS', () => {
-    const action = { type: REQUEST_USERS };
     let nextState = null;
     beforeEach(() => {
-      nextState = browsePageReducer(undefined, action);
+      nextState = browsePageReducer(undefined, requestUsers());
     });
 
     it('sets isFetching to true before fetching', () => {
@@ -53,9 +47,9 @@ describe('browsePageReducer', () => {
   });
 
   describe('RECEIVE_USERS', () => {
-    const initialUsers = [{
-      id: 0, username: 'foo',
-    }];
+    const initialUsers = {
+      0: { id: 0, username: 'foo' },
+    };
 
     const receivedUsers = [{
       id: 1,
@@ -67,12 +61,12 @@ describe('browsePageReducer', () => {
 
     const initialState = fromJS({
       users: initialUsers,
+      ids: [0],
       isFetching: true,
       error: false,
     });
 
-    const action = { type: RECEIVE_USERS, users: receivedUsers };
-    const nextState = browsePageReducer(initialState, action);
+    const nextState = browsePageReducer(initialState, receiveUsers(receivedUsers));
 
     // isFetching
     it('sets isFetching to false', () => {
@@ -88,10 +82,11 @@ describe('browsePageReducer', () => {
 
     // users
     it('adds new users to end of array', () => {
-      expect(nextState.get('users')).toEqual(fromJS([
+      expect(nextState.get('users')).toEqual(fromJS({
         ...initialUsers,
-        ...receivedUsers,
-      ]));
+        1: receivedUsers[0],
+        2: receivedUsers[1],
+      }));
     });
   });
 
@@ -106,12 +101,7 @@ describe('browsePageReducer', () => {
       error: false,
     });
 
-    const action = {
-      type: RECEIVE_ERROR,
-      users: 'error message',
-    };
-
-    const nextState = browsePageReducer(initialState, action);
+    const nextState = browsePageReducer(initialState, receiveError());
 
     // isFetching
     it('sets isFetching to false', () => {
@@ -140,10 +130,11 @@ describe('RECEIVE_LIKE', () => {
 
   beforeEach(() => {
     state = fromJS({
-      users: [
-        { id: 1, liked: false, username: 'foo' },
-        { id: 2, liked: true, username: 'bar' },
-      ],
+      users: {
+        1: { id: 1, liked: false, username: 'foo' },
+        2: { id: 2, liked: true, username: 'bar' },
+      },
+      ids: [1, 2],
       isFetching: false,
       error: false,
     });
@@ -155,10 +146,11 @@ describe('RECEIVE_LIKE', () => {
   it('likes a user', () => {
     const nextState = browsePageReducer(state, receiveLike(like1));
     const expectedState = fromJS({
-      users: [
-        { id: 1, liked: true, username: 'foo' },
-        { id: 2, liked: true, username: 'bar' },
-      ],
+      users: {
+        1: { id: 1, liked: true, username: 'foo' },
+        2: { id: 2, liked: true, username: 'bar' },
+      },
+      ids: [1, 2],
       isFetching: false,
       error: false,
     });
@@ -167,10 +159,11 @@ describe('RECEIVE_LIKE', () => {
 
   it('unlikes a user', () => {
     const expectedState = fromJS({
-      users: [
-        { id: 1, liked: false, username: 'foo' },
-        { id: 2, liked: false, username: 'bar' },
-      ],
+      users: {
+        1: { id: 1, liked: false, username: 'foo' },
+        2: { id: 2, liked: false, username: 'bar' },
+      },
+      ids: [1, 2],
       isFetching: false,
       error: false,
     });

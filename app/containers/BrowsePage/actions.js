@@ -4,6 +4,8 @@
  *
  */
 
+import { normalize } from 'normalizr';
+import * as schema from '../../utils/schema';
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
@@ -26,12 +28,14 @@ export function requestUsers() {
     type: REQUEST_USERS,
   };
 }
-export function receiveUsers(users) {
+export const receiveUsers = (users) => {
+  const resp = normalize(users, schema.arrayOfUsers);
   return {
     type: RECEIVE_USERS,
-    users,
+    users: resp.entities.users,
+    ids: resp.result,
   };
-}
+};
 
 export function receiveError(error) {
   return {

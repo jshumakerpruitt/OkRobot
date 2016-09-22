@@ -13,13 +13,14 @@ import {
 } from './constants';
 
 export const defaultState = fromJS({
-  users: [],
+  users: {},
+  ids: [],
   isFetching: false,
   error: false,
 });
 
 export const user = (
-  state = {},
+  state = fromJS({}),
   action,
 ) => {
   switch (action.type) {
@@ -32,12 +33,39 @@ export const user = (
   }
 };
 
-export const users = (state = fromJS([]), action) => {
+const byId = (
+  state = fromJS({}),
+  action
+) => {
+  switch (action.type) {
+    case RECEIVE_LIKE:
+      return (
+        state.set(String(action.like.id),
+                  user(state.get(String(action.like.id)), action))
+      );
+    default:
+      return state;
+  }
+};
+
+const allIds = (
+  state = fromJS([]),
+  action
+) => {
   switch (action.type) {
     case RECEIVE_USERS:
-      return state.concat(fromJS(action.users));
+      return state.concat(fromJS(action.ids));
+    default:
+      return state;
+  }
+};
+
+export const users = (state = fromJS({}), action) => {
+  switch (action.type) {
+    case RECEIVE_USERS:
+      return state.merge(fromJS(action.users));
     case RECEIVE_LIKE:
-      return state.map(u => user(u, action));
+      return byId(state, action);
     default:
       return state;
   }
@@ -50,6 +78,8 @@ function browsePageReducer(state = defaultState, action) {
         state.set('isFetching', false)
              .set('users',
                   users(state.get('users'), action))
+             .set('ids',
+                  allIds(state.get('ids'), action))
       );
     case RECEIVE_ERROR:
       return (

@@ -21,7 +21,13 @@ const selectBrowsePage = () => createSelector(
 
 const selectUsers = () => createSelector(
   selectBrowsePageDomain(),
-  (substate) => substate.get('users').toJS()
+  (substate) => {
+    const users = substate.get('users');
+    return substate
+      .get('ids')
+      .map(id => users.get(String(id)))
+      .toJS();
+  },
 );
 
 

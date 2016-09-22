@@ -31,17 +31,19 @@ describe('BrowsePage actions', () => {
 
   describe('receiveUsers', () => {
     it('has a type of RECEIVE_USERS', () => {
-      expect(receiveUsers().type).toEqual(RECEIVE_USERS);
+      expect(receiveUsers([]).type).toEqual(RECEIVE_USERS);
     });
 
     it('has a List of users', () => {
-      const users = [{
-        id: 1,
-        username: 'foo',
-      }, {
-        id: 2,
-        username: 'bar',
-      }];
+      const users = {
+        1: {
+          id: 1,
+          username: 'foo',
+        },
+        2: {
+          id: 2,
+          username: 'bar',
+        } };
       expect(receiveUsers(users).users).toEqual(users);
     });
   });
