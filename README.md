@@ -1,1 +1,1 @@
-Social web app build with react redux postcss
+Social web app built with react, redux, redux-saga, postcss
