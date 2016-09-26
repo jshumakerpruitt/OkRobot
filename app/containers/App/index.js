@@ -62,6 +62,8 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             title="HelloRobot"
             onOpenClick={this.props.openNav}
             showOpen={this.props.token.length > 0}
+            openHome={() => this.props.goToNow('/')}
+            titleStyle={{ cursor: 'pointer' }}
           />
         </div>
         <div className={styles.wrapper}>

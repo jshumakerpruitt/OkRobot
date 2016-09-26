@@ -6,121 +6,91 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 
-import messages from './messages';
+import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import ProfileGrid from 'components/ProfileGrid';
+
+import LoginBox from 'components/LoginBox';
+
 import { createStructuredSelector } from 'reselect';
 
-import {
-  selectRepos,
-  selectLoading,
-  selectError,
-} from 'containers/App/selectors';
+import * as actions from './actions';
 
 import {
-  selectUsername,
+  selectRandomUsers,
 } from './selectors';
-
-import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
-
-import { FormattedMessage } from 'react-intl';
-import RepoListItem from 'containers/RepoListItem';
-import Button from 'components/Button';
-import H2 from 'components/H2';
-import List from 'components/List';
-import ListItem from 'components/ListItem';
-import LoadingIndicator from 'components/LoadingIndicator';
 
 import styles from './styles.css';
 
 export class HomePage extends React.Component {
   /**
-   * when initial state username is not null, submit the form to load repos
-   */
-  componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
-    }
-  }
-  /**
    * Changes the route
-   *
    * @param  {string} route The route we want to go to
    */
+  componentDidMount() {
+    this.props.fetchRandomUsers();
+  }
+
+  openLogin = () => {
+    this.openRoute('/login');
+  }
+
   openRoute = (route) => {
     this.props.changeRoute(route);
   };
 
-  /**
-   * Changed route to '/features'
-   */
-  openFeaturesPage = () => {
-    this.openRoute('/features');
-  };
-
   render() {
-    let mainContent = null;
-
-    // Show a loading indicator when we're loading
-    if (this.props.loading) {
-      mainContent = (<List component={LoadingIndicator} />);
-
-    // Show an error if there is one
-    } else if (this.props.error !== false) {
-      const ErrorComponent = () => (
-        <ListItem item={'Something went wrong, please try again!'} />
-      );
-      mainContent = (<List component={ErrorComponent} />);
-
-    // If we're not loading, don't have an error and there are repos, show the repos
-    } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem} />);
-    }
-
     return (
       <article className={styles.homePage}>
         <Helmet
           title="Home Page"
           meta={[
-            { name: 'description', content: 'A React.js Boilerplate application homepage' },
+            { name: 'description', content: 'A Social App for Robots' },
           ]}
         />
         <div>
-          <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </section>
-          <section className={styles.textSection}>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <form className={styles.usernameForm} onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <span className={styles.atPrefix}>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </span>
-                <input
-                  id="username"
-                  className={styles.input}
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
+          <Paper
+            className={styles.paper}
+            zDepth={1}
+            style={{ width: '100%' }}
+          >
+            <div className={styles.logo}>
+              <h1>Hello Robot</h1>
+            </div>
+          </Paper>
+
+          <Paper
+            className={styles.paper}
+            zDepth={1}
+            style={{ width: '100%' }}
+          >
+            <div className={styles.form}>
+              <LoginBox />
+            </div>
+          </Paper>
+          <Paper
+            className={styles.paper}
+            zDepth={1}
+          >
+            <div className={styles.text}>
+              <h1>The Best Place to Meet Robots</h1>
+              <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut libero viverra, tempor libero eu, suscipit elit. Proin at suscipit mauris, in porta nibh. Nullam fringilla consectetur elit, ut tincidunt ligula vestibulum in. Nulla lorem purus, congue ut luctus id, congue vitae ante. Suspendisse ac sapien est.
+              </p>
+              <div className={styles.buttonWrapper}>
+                <RaisedButton
+                  className={styles.button}
+                  label="Join Now"
+                  primary
                 />
-              </label>
-            </form>
-            {mainContent}
-          </section>
-          <Button handleRoute={this.openFeaturesPage}>
-            <FormattedMessage {...messages.featuresButton} />
-          </Button>
+              </div>
+            </div>
+          </Paper>
+          <ProfileGrid
+            users={this.props.randomUsers}
+            submitLike={this.openLogin}
+          />
         </div>
       </article>
     );
@@ -129,39 +99,14 @@ export class HomePage extends React.Component {
 
 HomePage.propTypes = {
   changeRoute: React.PropTypes.func,
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool,
-  ]),
-  repos: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool,
-  ]),
   onSubmitForm: React.PropTypes.func,
-  username: React.PropTypes.string,
-  onChangeUsername: React.PropTypes.func,
+  fetchRandomUsers: React.PropTypes.func,
+  randomUsers: React.PropTypes.array,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
-    changeRoute: (url) => dispatch(push(url)),
-    onSubmitForm: (evt) => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
-
-    dispatch,
-  };
-}
-
 const mapStateToProps = createStructuredSelector({
-  repos: selectRepos(),
-  username: selectUsername(),
-  loading: selectLoading(),
-  error: selectError(),
+  randomUsers: selectRandomUsers(),
 });
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, actions)(HomePage);

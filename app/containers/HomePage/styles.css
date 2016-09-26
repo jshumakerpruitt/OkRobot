@@ -1,35 +1,54 @@
 .homePage {
-  min-height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
 }
 
-.textSection {
-  margin: 3em auto;
+.paper {
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.centered {
+.logo {
+  color: #00BCD4;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  font-size: 34px;
+}
+
+.form {
+  padding: 0 20px;
+}
+
+.text {
+  padding: 10px 20px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-p,
-label {
-  font-family: Georgia, Times, 'Times New Roman', serif;
-  line-height: 1.5em;
+h1 {
+  font-size: 30px;
 }
 
-.link {
-  text-decoration: none;
+.text h1 {
+  padding-bottom: 10px;
 }
 
-.usernameForm {
-  margin-bottom: 1em;
+.text p {
+  padding-bottom: 10px;
 }
 
-.input {
-  outline: none;
-  border-bottom: 1px dotted #999;
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
 }
 
-.atPrefix {
-  color: black;
-  margin-left: 0.4em;
+.button {
+  flex-basis: 100%;
+  max-width: 430px;
 }

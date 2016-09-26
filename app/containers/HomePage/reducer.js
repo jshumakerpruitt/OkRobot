@@ -11,25 +11,43 @@
  */
 
 import {
-  CHANGE_USERNAME,
+  RECEIVE_RANDOM_USERS,
 } from './constants';
+
 import { fromJS } from 'immutable';
 
 // The initial state of the App
 const initialState = fromJS({
-  username: '',
+  randomUsers: [],
 });
 
-function homeReducer(state = initialState, action) {
+const randomUsers = (
+  state = fromJS([]),
+  action,
+) => {
   switch (action.type) {
-    case CHANGE_USERNAME:
-
-      // Delete prefixed '@' from the github username
+    case RECEIVE_RANDOM_USERS:
       return state
-        .set('username', action.name.replace(/@/gi, ''));
+        .concat(fromJS(action.randomUsers));
     default:
       return state;
   }
-}
+};
+
+const homeReducer = (
+  state = initialState,
+  action
+) => {
+  switch (action.type) {
+    case RECEIVE_RANDOM_USERS:
+      return state
+        .set(
+          'randomUsers',
+          randomUsers(state.get('randomUsers'), action)
+        );
+    default:
+      return state;
+  }
+};
 
 export default homeReducer;

@@ -1,48 +1,58 @@
 /**
- * Gets the repositories of the user from Github
+ *  random user data from api
  */
 
-import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
+import { take, call, put, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { FETCH_RANDOM_USERS } from './constants';
+import { API_ENDPOINT } from 'containers/App/constants';
 
 import request from 'utils/request';
-import { selectUsername } from 'containers/HomePage/selectors';
+
+import {
+  receiveRandomUsers,
+  receiveError,
+} from './actions';
 
 /**
- * Github repos request/response handler
+ * make api request to non-secured route of api
  */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(selectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
+export function* fetchRandomUsers() {
+  const requestURL = `${API_ENDPOINT}/random.json`;
 
   // Call our request helper (see 'utils/request')
-  const repos = yield call(request, requestURL);
+  const randomUsers = yield call(request, requestURL,
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
 
-  if (!repos.err) {
-    yield put(reposLoaded(repos.data, username));
+    }
+  );
+
+  if (!randomUsers.err) {
+    yield put(receiveRandomUsers(randomUsers.data));
   } else {
-    yield put(repoLoadingError(repos.err));
+    yield put(receiveError(randomUsers.err));
   }
 }
 
 /**
- * Watches for LOAD_REPOS action and calls handler
+ * Watches for FETCH_RANDOM_USERS action and calls handler
  */
-export function* getReposWatcher() {
-  while (yield take(LOAD_REPOS)) {
-    yield call(getRepos);
+export function* fetchRandomUsersWatcher() {
+  while (yield take(FETCH_RANDOM_USERS)) {
+    yield call(fetchRandomUsers);
   }
 }
 
 /**
  * Root saga manages watcher lifecycle
  */
-export function* githubData() {
+export function* randomUserData() {
   // Fork watcher so we can continue execution
-  const watcher = yield fork(getReposWatcher);
+  const watcher = yield fork(fetchRandomUsersWatcher);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);
@@ -51,5 +61,5 @@ export function* githubData() {
 
 // Bootstrap sagas
 export default [
-  githubData,
+  randomUserData,
 ];

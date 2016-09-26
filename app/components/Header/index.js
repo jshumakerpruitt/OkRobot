@@ -14,17 +14,20 @@ import styles from './styles.css';
 
 const Header = ({
   onOpenClick,
+  openHome,
 }) =>
   <div className={styles.header}>
     <AppBar
-      title={messages.title}
+      title={<span style={{ cursor: 'pointer' }}>{messages.title}</span>}
       iconClassNameRight="muidocs-icon-navigation-expand-more"
       onLeftIconButtonTouchTap={onOpenClick}
+      onTitleTouchTap={openHome}
     />
   </div>;
 
 Header.propTypes = {
   onOpenClick: React.PropTypes.func.isRequired,
+  openHome: React.PropTypes.func.isRequired,
 };
 
 export default Header;

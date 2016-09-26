@@ -14,21 +14,41 @@
  *        return { type: YOUR_ACTION_CONSTANT, var: var }
  *    }
  */
+import { push } from 'react-router-redux';
 
 import {
-  CHANGE_USERNAME,
+  FETCH_RANDOM_USERS,
+  REQUEST_RANDOM_USERS,
+  RECEIVE_RANDOM_USERS,
+  RECEIVE_ERROR,
 } from './constants';
 
-/**
- * Changes the input field of the form
- *
- * @param  {name} name The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_USERNAME
- */
-export function changeUsername(name) {
+export function fetchRandomUsers() {
   return {
-    type: CHANGE_USERNAME,
-    name,
+    type: FETCH_RANDOM_USERS,
   };
+}
+
+export function requestRandomUsers() {
+  return {
+    type: REQUEST_RANDOM_USERS,
+  };
+}
+
+export function receiveRandomUsers(randomUsers) {
+  return {
+    type: RECEIVE_RANDOM_USERS,
+    randomUsers,
+  };
+}
+
+export function receiveError(error) {
+  return {
+    type: RECEIVE_ERROR,
+    error,
+  };
+}
+
+export function changeRoute(route) {
+  return push(route);
 }

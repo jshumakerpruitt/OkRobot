@@ -1,5 +1,4 @@
 import Header from '../index';
-import messages from '../messages';
 import AppBar from 'material-ui/AppBar';
 
 import expect from 'expect';
@@ -13,18 +12,16 @@ describe('<Header />', () => {
   beforeEach(() => {
     handler = expect.createSpy();
     renderedComponent = shallow(
-      <Header onOpenClick={handler} />
+      <Header
+        openHome={handler}
+        onOpenClick={handler}
+      />
     );
   });
 
   it('should have the app title', () => {
-    expect(renderedComponent.contains(
-      <AppBar
-        title={messages.title}
-        iconClassNameRight="muidocs-icon-navigation-expand-more"
-        onLeftIconButtonTouchTap={handler}
-      />
-    )).toEqual(true);
+    expect(renderedComponent.find('AppBar').length)
+      .toEqual(1);
   });
 
   it('should pass the click handler to the AppBar', () => {

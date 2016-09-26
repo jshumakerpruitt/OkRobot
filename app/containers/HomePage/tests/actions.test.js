@@ -1,23 +1,19 @@
 import expect from 'expect';
 
 import {
-  CHANGE_USERNAME,
+  FETCH_RANDOM_USERS,
 } from '../constants';
 
 import {
-  changeUsername,
+  fetchRandomUsers,
 } from '../actions';
 
 describe('Home Actions', () => {
-  describe('changeUsername', () => {
-    it('should return the correct type and the passed name', () => {
-      const fixture = 'Max';
-      const expectedResult = {
-        type: CHANGE_USERNAME,
-        name: fixture,
-      };
+  describe('fetchRandomUsers', () => {
+    it('should have the correct type', () => {
+      const expectedResult = FETCH_RANDOM_USERS;
 
-      expect(changeUsername(fixture)).toEqual(expectedResult);
+      expect(fetchRandomUsers().type).toEqual(expectedResult);
     });
   });
 });

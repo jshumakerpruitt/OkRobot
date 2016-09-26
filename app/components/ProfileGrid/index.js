@@ -7,6 +7,10 @@
 import React from 'react';
 import { GridTile } from 'material-ui/GridList';
 import ActionIcon from '../ActionIcon';
+import randomPic1 from './random1.png';
+import randomPic2 from './random2.png';
+import randomPic3 from './random3.png';
+import randomPic4 from './random4.png';
 
 import styles from './styles.css';
 
@@ -27,8 +31,13 @@ const ProfileGrid = ({
           />}
         >
           <img
-            style={{ width: '100%', height: 'auto', zIndex: -1 }}
-            src="http://placehold.it/300x300"
+            style={{ width: '100%', height: 'auto' }}
+            src={[
+              randomPic1,
+              randomPic2,
+              randomPic3,
+              randomPic4,
+            ][Math.floor(Math.random() * 4)]}
             alt="profile"
           />
         </GridTile>
