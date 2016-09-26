@@ -32,7 +32,7 @@ export function* postAuth(action) {
     const path = yield select(selectRedirectPath());
     yield put(receiveSuccess());
     yield put(receiveToken(response.data.jwt));
-    yield put(push(path || '/'));
+    yield put(push(path || '/browse'));
   }
 }
 
