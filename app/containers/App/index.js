@@ -43,10 +43,8 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
 
   render() {
     const links = [
-      { to: '/', text: 'home' },
-      { to: '/zen', text: 'zen' },
-      { to: '/browse', text: 'browse' },
-      { to: '/logout', text: 'logout' },
+      { to: '/', text: 'Home' },
+      { to: '/browse', text: 'Browse' },
     ];
     return (
       <div className={styles.dataRoot}>
@@ -63,7 +61,6 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             onOpenClick={this.props.openNav}
             showOpen={this.props.token.length > 0}
             openHome={() => this.props.goToNow('/')}
-            titleStyle={{ cursor: 'pointer' }}
           />
         </div>
         <div className={styles.wrapper}>
