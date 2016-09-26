@@ -47,7 +47,7 @@ const NavDrawer = ({
           </Link>)}
         <Link
           className={classNames(styles.navItem, 'logout')}
-          to="/login"
+          to="/"
           onClick={() => {
             onCloseClick();
             revokeToken();

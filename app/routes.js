@@ -47,26 +47,6 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
-      path: '/zen',
-      name: 'zenPage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/ZenPage/reducer'),
-          System.import('containers/ZenPage/sagas'),
-          System.import('containers/ZenPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('zenPage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
       path: '/browse',
       name: 'browsePage',
       getComponent(nextState, cb) {
@@ -80,26 +60,6 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('browsePage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
-      path: '/login',
-      name: 'login',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/Login/reducer'),
-          System.import('containers/Login/sagas'),
-          System.import('containers/Login'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('login', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

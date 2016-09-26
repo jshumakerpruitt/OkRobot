@@ -13,7 +13,7 @@ import {
   selectAuth,
   selectEmail,
   selectPassword,
-} from './selectors';
+} from 'containers/App/selectors';
 
 import styles from './styles.css';
 

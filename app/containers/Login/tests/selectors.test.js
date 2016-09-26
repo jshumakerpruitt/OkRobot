@@ -1,3 +1,4 @@
+/*
 import { fromJS } from 'immutable';
 import expect from 'expect';
 
@@ -105,3 +106,4 @@ describe('selectPassword', () => {
     expect(passwordSelector(mockedState)).toEqual(expectedState);
   });
 });
+*/

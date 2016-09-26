@@ -11,9 +11,12 @@
  */
 
 import {
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS,
-  LOAD_REPOS_ERROR,
+  SUBMIT_LOGIN,
+  RECEIVE_ERROR,
+  RECEIVE_SUCCESS,
+  UPDATE_EMAIL,
+  UPDATE_PASSWORD,
+  SET_REDIRECT,
   RECEIVE_TOKEN,
   REVOKE_TOKEN,
   OPEN_NAV,
@@ -23,15 +26,19 @@ import { fromJS } from 'immutable';
 import { REHYDRATE } from 'redux-persist/constants';
 
 // The initial state of the App
+
 const initialState = fromJS({
   isNavOpen: false,
   token: '',
   loading: false,
   error: false,
   currentUser: false,
-  userData: fromJS({
-    repositories: false,
+  auth: fromJS({
+    email: '',
+    password: '',
   }),
+  redirectPath: '',
+  isSubmitting: false,
 });
 
 function appReducer(state = initialState, action) {
@@ -50,20 +57,27 @@ function appReducer(state = initialState, action) {
     case CLOSE_NAV:
       return state
         .set('isNavOpen', false);
-    case LOAD_REPOS:
+    case SET_REDIRECT:
       return state
-        .set('loading', true)
+        .set('redirectPath', action.path);
+    case SUBMIT_LOGIN:
+      return state
+        .set('isSubmitting', true)
+        .set('error', false);
+    case RECEIVE_ERROR:
+      return state
+        .set('error', true)
+        .set('isSubmitting', false);
+    case RECEIVE_SUCCESS:
+      return state
         .set('error', false)
-        .setIn(['userData', 'repositories'], false);
-    case LOAD_REPOS_SUCCESS:
-      return state
-        .setIn(['userData', 'repositories'], action.repos)
-        .set('loading', false)
-        .set('currentUser', action.username);
-    case LOAD_REPOS_ERROR:
-      return state
-        .set('error', action.error)
-        .set('loading', false);
+        .set('isSubmitting', false);
+    case UPDATE_EMAIL:
+      return state.setIn(['auth', 'email'],
+                         action.email);
+    case UPDATE_PASSWORD:
+      return state.setIn(['auth', 'password'],
+                         action.password);
     default:
       return state;
   }

@@ -16,24 +16,34 @@ const selectIsNavOpen = () => createSelector(
   (globalState) => globalState.get('isNavOpen')
 );
 
-const selectCurrentUser = () => createSelector(
+const selectAuth = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('currentUser')
-);
-
-const selectLoading = () => createSelector(
-  selectGlobal(),
-  (globalState) => globalState.get('loading')
+  (substate) => substate.get('auth').toJS()
 );
 
 const selectError = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.get('error')
+  (substate) => substate.get('error').toJS()
 );
 
-const selectRepos = () => createSelector(
+const selectIsSubmitting = () => createSelector(
   selectGlobal(),
-  (globalState) => globalState.getIn(['userData', 'repositories'])
+  (substate) => substate.get('isSubmitting').toJS()
+);
+
+const selectRedirectPath = () => createSelector(
+  selectGlobal(),
+  (substate) => substate.get('redirectPath')
+);
+
+const selectEmail = () => createSelector(
+  selectAuth(),
+  (substate) => substate.email
+);
+
+const selectPassword = () => createSelector(
+  selectAuth(),
+  (substate) => substate.password
 );
 
 const selectLocationState = () => {
@@ -55,10 +65,12 @@ const selectLocationState = () => {
 export {
   selectToken,
   selectGlobal,
-  selectCurrentUser,
-  selectLoading,
-  selectError,
-  selectRepos,
   selectLocationState,
   selectIsNavOpen,
+  selectIsSubmitting,
+  selectError,
+  selectAuth,
+  selectEmail,
+  selectPassword,
+  selectRedirectPath,
 };

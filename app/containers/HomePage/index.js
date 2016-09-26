@@ -12,8 +12,8 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import ProfileGrid from 'components/ProfileGrid';
 
-import LoginBox from 'components/LoginBox';
-// import Login from 'containers/Login';
+// import LoginBox from 'components/LoginBox';
+import Login from 'containers/Login';
 
 import { createStructuredSelector } from 'reselect';
 
@@ -68,7 +68,7 @@ export class HomePage extends React.Component {
             style={{ width: '100%' }}
           >
             <div className={styles.form}>
-              <LoginBox />
+              <Login />
             </div>
           </Paper>
           <Paper

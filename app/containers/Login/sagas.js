@@ -4,9 +4,12 @@ import { push } from 'react-router-redux';
 import request from '../../utils/request';
 import { receiveError, receiveSuccess } from './actions';
 import { receiveToken } from '../App/actions';
-import { API_ENDPOINT } from '../App/constants';
-import { SUBMIT_LOGIN } from './constants';
-import { selectRedirectPath } from './selectors';
+
+import {
+  API_ENDPOINT,
+  SUBMIT_LOGIN,
+} from '../App/constants';
+import { selectRedirectPath } from 'containers/App/selectors';
 
 // Individual exports for testing
 export function* postAuth(action) {
