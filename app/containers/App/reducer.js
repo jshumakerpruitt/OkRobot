@@ -11,12 +11,6 @@
  */
 
 import {
-  SUBMIT_LOGIN,
-  RECEIVE_ERROR,
-  RECEIVE_SUCCESS,
-  UPDATE_EMAIL,
-  UPDATE_PASSWORD,
-  SET_REDIRECT,
   RECEIVE_TOKEN,
   REVOKE_TOKEN,
   OPEN_NAV,
@@ -30,15 +24,6 @@ import { REHYDRATE } from 'redux-persist/constants';
 const initialState = fromJS({
   isNavOpen: false,
   token: '',
-  loading: false,
-  error: false,
-  currentUser: false,
-  auth: fromJS({
-    email: '',
-    password: '',
-  }),
-  redirectPath: '',
-  isSubmitting: false,
 });
 
 function appReducer(state = initialState, action) {
@@ -57,27 +42,6 @@ function appReducer(state = initialState, action) {
     case CLOSE_NAV:
       return state
         .set('isNavOpen', false);
-    case SET_REDIRECT:
-      return state
-        .set('redirectPath', action.path);
-    case SUBMIT_LOGIN:
-      return state
-        .set('isSubmitting', true)
-        .set('error', false);
-    case RECEIVE_ERROR:
-      return state
-        .set('error', true)
-        .set('isSubmitting', false);
-    case RECEIVE_SUCCESS:
-      return state
-        .set('error', false)
-        .set('isSubmitting', false);
-    case UPDATE_EMAIL:
-      return state.setIn(['auth', 'email'],
-                         action.email);
-    case UPDATE_PASSWORD:
-      return state.setIn(['auth', 'password'],
-                         action.password);
     default:
       return state;
   }

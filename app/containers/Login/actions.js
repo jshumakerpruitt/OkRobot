@@ -10,7 +10,7 @@ import {
   UPDATE_EMAIL,
   UPDATE_PASSWORD,
   RECEIVE_SUCCESS,
-} from 'containers/App/constants';
+} from './constants';
 
 export function submitLogin(authHash, redirectPath) {
   return {

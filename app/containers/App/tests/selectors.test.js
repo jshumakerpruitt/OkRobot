@@ -5,10 +5,6 @@ import {
   selectIsNavOpen,
   selectToken,
   selectGlobal,
-  selectCurrentUser,
-  selectLoading,
-  selectError,
-  selectRepos,
   selectLocationState,
 } from '../selectors';
 
@@ -46,60 +42,6 @@ describe('selectIsNavOpen', () => {
       },
     });
     expect(navSelector(mockedState)).toEqual(isNavOpen);
-  });
-});
-
-describe('selectCurrentUser', () => {
-  const currentUserSelector = selectCurrentUser();
-  it('should select the current user', () => {
-    const username = 'mxstbr';
-    const mockedState = fromJS({
-      global: {
-        currentUser: username,
-      },
-    });
-    expect(currentUserSelector(mockedState)).toEqual(username);
-  });
-});
-
-describe('selectLoading', () => {
-  const loadingSelector = selectLoading();
-  it('should select the loading', () => {
-    const loading = false;
-    const mockedState = fromJS({
-      global: {
-        loading,
-      },
-    });
-    expect(loadingSelector(mockedState)).toEqual(loading);
-  });
-});
-
-describe('selectError', () => {
-  const errorSelector = selectError();
-  it('should select the error', () => {
-    const error = 404;
-    const mockedState = fromJS({
-      global: {
-        error,
-      },
-    });
-    expect(errorSelector(mockedState)).toEqual(error);
-  });
-});
-
-describe('selectRepos', () => {
-  const reposSelector = selectRepos();
-  it('should select the repos', () => {
-    const repositories = fromJS([]);
-    const mockedState = fromJS({
-      global: {
-        userData: {
-          repositories,
-        },
-      },
-    });
-    expect(reposSelector(mockedState)).toEqual(repositories);
   });
 });
 
