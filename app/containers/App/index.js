@@ -45,6 +45,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     const links = [
       { to: '/', text: 'Home' },
       { to: '/browse', text: 'Browse' },
+      { to: '/profile', text: 'Profile' },
     ];
     return (
       <div className={styles.dataRoot}>

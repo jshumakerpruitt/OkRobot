@@ -25,16 +25,10 @@ const NavDrawer = ({
   <div>
     <Drawer open={isOpen}>
       <div className={styles.navDrawer}>
-        <Link
-          className={styles.navItem}
-          to="/"
-          onClick={onCloseClick}
-        >
-          <AppBar
-            iconElementLeft={<IconButton><NavigationClose /></IconButton>}
-            title="HelloRobot"
-          />
-        </Link>
+        <AppBar
+          iconElementLeft={<IconButton onClick={onCloseClick}><NavigationClose /></IconButton>}
+          title="HelloRobot"
+        />
         {links.map(l =>
           <Link
             className={styles.navItem}
