@@ -16,13 +16,14 @@ import {
 
 import { fromJS } from 'immutable';
 
-// The initial state of the App
-const initialState = fromJS({
-  randomUsers: [],
-});
+import loginReducer from 'containers/Login/reducer';
+import { combineReducers } from 'redux-immutable';
+
+const usersInitialState = fromJS([
+]);
 
 const randomUsers = (
-  state = fromJS([]),
+  state = usersInitialState,
   action,
 ) => {
   switch (action.type) {
@@ -34,20 +35,7 @@ const randomUsers = (
   }
 };
 
-const homeReducer = (
-  state = initialState,
-  action
-) => {
-  switch (action.type) {
-    case RECEIVE_RANDOM_USERS:
-      return state
-        .set(
-          'randomUsers',
-          randomUsers(state.get('randomUsers'), action)
-        );
-    default:
-      return state;
-  }
-};
-
-export default homeReducer;
+export default combineReducers({
+  randomUsers,
+  login: loginReducer,
+});

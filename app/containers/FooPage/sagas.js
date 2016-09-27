@@ -6,6 +6,7 @@ export function* defaultSaga() {
 }
 
 import { watchPostAuth } from 'containers/Login/sagas';
+
 // All sagas to be loaded
 export default [
   watchPostAuth,

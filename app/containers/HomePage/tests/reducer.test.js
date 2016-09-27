@@ -10,6 +10,15 @@ describe('homeReducer', () => {
   beforeEach(() => {
     state = fromJS({
       randomUsers: [],
+      login: {
+        auth: {
+          email: '',
+          password: '',
+        },
+        redirectPath: '',
+        error: false,
+        isSubmitting: false,
+      },
     });
   });
 

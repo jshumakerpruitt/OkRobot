@@ -12,15 +12,15 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import ProfileGrid from 'components/ProfileGrid';
 
-// import LoginBox from 'components/LoginBox';
 import Login from 'containers/Login';
 
 import { createStructuredSelector } from 'reselect';
 
 import * as actions from './actions';
-
+import * as loginSelectors from 'containers/Login/selectors';
 import {
   selectRandomUsers,
+  selectHome,
 } from './selectors';
 
 import styles from './styles.css';
@@ -68,7 +68,11 @@ export class HomePage extends React.Component {
             style={{ width: '100%' }}
           >
             <div className={styles.form}>
-              <Login />
+              <Login
+                email={this.props.email}
+                password={this.props.password}
+                auth={this.props.auth}
+              />
             </div>
           </Paper>
           <Paper
@@ -103,11 +107,16 @@ HomePage.propTypes = {
   onSubmitForm: React.PropTypes.func,
   fetchRandomUsers: React.PropTypes.func,
   randomUsers: React.PropTypes.array,
+  auth: React.PropTypes.object,
+  email: React.PropTypes.string,
+  password: React.PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   randomUsers: selectRandomUsers(),
+  auth: loginSelectors.selectAuth(selectHome),
+  email: loginSelectors.selectEmail(selectHome),
+  password: loginSelectors.selectPassword(selectHome),
 });
-
 // Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, actions)(HomePage);
