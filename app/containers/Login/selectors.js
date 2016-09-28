@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 
-
 const selectLogin = (domainSelector) => createSelector(
   domainSelector(),
   (substate) => substate.get('login')
@@ -10,6 +9,7 @@ const selectAuth = (domainSelector) => createSelector(
   selectLogin(domainSelector),
   (substate) => substate.get('auth').toJS()
 );
+
 const selectError = (domainSelector) => createSelector(
   selectLogin(domainSelector),
   (substate) => substate.get('error').toJS()

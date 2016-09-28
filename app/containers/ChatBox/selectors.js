@@ -14,9 +14,9 @@ const selectChatBoxDomain = () => state => state.get('chatBox');
  * Default selector used by ChatBox
  */
 
-const selectChatBox = () => createSelector(
-  selectChatBoxDomain(),
-  (substate) => substate.toJS()
+const selectChatBox = (domainSelector) => createSelector(
+  domainSelector(),
+  (substate) => substate.get('chatBox')
 );
 
 export default selectChatBox;

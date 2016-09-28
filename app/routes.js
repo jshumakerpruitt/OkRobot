@@ -39,14 +39,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/features',
-      name: 'features',
-      getComponent(nextState, cb) {
-        System.import('containers/FeaturePage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    }, {
       path: '/browse',
       name: 'browsePage',
       getComponent(nextState, cb) {
@@ -67,26 +59,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/foo',
-      name: 'fooPage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/FooPage/reducer'),
-          System.import('containers/FooPage/sagas'),
-          System.import('containers/FooPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('fooPage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
       path: '/profile',
       name: 'profilePage',
       getComponent(nextState, cb) {
@@ -100,6 +72,26 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('profilePage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/test',
+      name: 'testPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/TestPage/reducer'),
+          System.import('containers/TestPage/sagas'),
+          System.import('containers/TestPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('testPage', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

@@ -32,8 +32,8 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     const token = this.props.token;
 
     if (token.length === 0 && !this.isPublic(path)) {
-      this.props.goToNow('/foo');
-      this.props.setRedirect(path);
+//      this.props.goToNow('/foo');
+//      this.props.setRedirect(path);
     }
   }
 

@@ -6,15 +6,25 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  SET_CHATROOM_ID,
+  RECEIVE_MESSAGE,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  chatroomId: null,
+  ids: [],
+  messages: {},
+});
 
 function chatBoxReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case SET_CHATROOM_ID:
+      return state
+        .set('chatroomId', action.chatroomId);
+    case RECEIVE_MESSAGE:
+      return state
+        .mergeIn(['messages', String(action.id)], action.message)
+        .set('ids', state.get('ids').concat(action.id));
     default:
       return state;
   }
