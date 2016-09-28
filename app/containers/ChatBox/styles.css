@@ -74,14 +74,3 @@ input {
   justify-content: center;
   width: 100%;
 }
-
-.hiddenWrapper {
-  overflow: hidden;
-  position: relative;
-}
-
-.hidden {
-  position: absolute;
-  bottom: -50px;
-  right: -50px;
-}

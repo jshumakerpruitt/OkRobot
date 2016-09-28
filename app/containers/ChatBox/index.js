@@ -30,8 +30,8 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
   }
 
   componentDidUpdate() {
-    this._hidden.focus();
-    this._input.focus();
+    const messageBox = this._messages;
+    messageBox.scrollTop = messageBox.scrollHeight;
   }
 
   componentWillUnmount() {
@@ -51,24 +51,22 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
   render() {
     return (
       <div className={styles.chatBox}>
-        <div className={styles.messageWrapper}>
-          <div className={styles.messages}>
-                {this.props.ids.map(
-                  (id, i) =>
-                    <div
-                      key={i}
-                      className={`${styles.message} ${i % 2 === 0 ? styles.myMessage : styles.theirMessage}`}
-                    >
-                      { this.props.messages[id].body}
-                    </div>
-                )}
-            <div className={styles.hiddenWrapper}>
-              <input
-                ref={(c) => { this._hidden = c; }}
-                className={styles.hidden}
-              >
-              </input>
-            </div>
+        <div
+          ref={(c) => { this._messages = c; }}
+          className={styles.messageWrapper}
+        >
+          <div
+            className={styles.messages}
+          >
+            {this.props.ids.map(
+               (id, i) =>
+                 <div
+                   key={i}
+                   className={`${styles.message} ${i % 2 === 0 ? styles.myMessage : styles.theirMessage}`}
+                 >
+                   { this.props.messages[id].body}
+                 </div>
+             )}
           </div>
         </div>
         <div className={styles.input}>
