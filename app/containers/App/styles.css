@@ -2,16 +2,15 @@ html,
 body,
 #app {
   height: 100%;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
 }
 
 .dataRoot {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
   background: #0CEBC7;
 }
 
@@ -24,11 +23,18 @@ body,
   z-index: 10;
 }
 
+.stretchX {
+  margin-top: 64px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 128px);
+}
+
 .wrapper {
+  flex: 1;
   padding-top: 64px;
   max-width: calc(768px + 16px * 2);
-  min-width: 66vw;
-  min-height: calc(100vh - 128px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,5 +45,4 @@ body,
 .footer {
   height: 64px;
   background-color: #00BCD4;
-  width: 100%;
 }

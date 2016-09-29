@@ -28,8 +28,7 @@ const randomUsers = (
 ) => {
   switch (action.type) {
     case RECEIVE_RANDOM_USERS:
-      return state
-        .concat(fromJS(action.randomUsers));
+      return fromJS(action.randomUsers);
     default:
       return state;
   }

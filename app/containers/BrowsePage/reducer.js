@@ -54,7 +54,7 @@ const allIds = (
 ) => {
   switch (action.type) {
     case RECEIVE_USERS:
-      return state.concat(fromJS(action.ids));
+      return fromJS(action.ids);
     default:
       return state;
   }

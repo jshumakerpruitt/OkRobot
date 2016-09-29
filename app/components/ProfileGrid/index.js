@@ -37,7 +37,7 @@ const ProfileGrid = ({
               randomPic2,
               randomPic3,
               randomPic4,
-            ][Math.floor(Math.random() * 4)]}
+            ][user.id % 4]}
             alt="profile"
           />
         </GridTile>

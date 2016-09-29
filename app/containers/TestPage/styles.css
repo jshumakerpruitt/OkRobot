@@ -4,5 +4,5 @@
   flex-direction: column;
   justify-content: flex-end;
   flex-basis: 100%;
-  width: 100%;
+  padding: 0 5px;
 }

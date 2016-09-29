@@ -45,6 +45,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     const links = [
       { to: '/', text: 'Home' },
       { to: '/browse', text: 'Browse' },
+      { to: '/test', text: 'Chat' },
       { to: '/profile', text: 'Profile' },
     ];
     return (
@@ -64,8 +65,10 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             openHome={() => this.props.goToNow('/')}
           />
         </div>
-        <div className={styles.wrapper}>
-          {React.Children.toArray(this.props.children)}
+        <div className={styles.stretchX}>
+          <div className={styles.wrapper}>
+            {React.Children.toArray(this.props.children)}
+          </div>
           <NavDrawer
             isOpen={this.props.isNavOpen}
             currentPage={this.props.location.pathname}
