@@ -29,7 +29,7 @@ import styles from './styles.css';
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentWillMount() {
     const path = this.props.location.pathname;
-    const token = this.props.token;
+    const token = this.props.token || '';
 
     if (token.length === 0 && !this.isPublic(path)) {
 //      this.props.goToNow('/foo');
@@ -42,10 +42,12 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   render() {
+    const token = this.props.token || '';
     const links = [
       { to: '/', text: 'Home' },
       { to: '/browse', text: 'Browse' },
       { to: '/test', text: 'Chat' },
+      { to: '/signup', text: 'Sign Up' },
       { to: '/profile', text: 'Profile' },
     ];
     return (
@@ -61,7 +63,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           <Header
             title="HelloRobot"
             onOpenClick={this.props.openNav}
-            showOpen={this.props.token.length > 0}
+            showOpen={token.length > 0}
             openHome={() => this.props.goToNow('/')}
           />
         </div>

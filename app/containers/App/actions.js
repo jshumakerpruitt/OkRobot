@@ -31,7 +31,11 @@ import { push } from 'react-router-redux';
  * @return {object} An action object with a type of
    RECEIVE_TOKEN and a token
  */
-export function receiveToken(token) {
+
+// important to have a default value here
+// if token is ever set to null the app becomes
+// unusable until local storage is deleted
+export function receiveToken(token = '') {
   return {
     type: RECEIVE_TOKEN,
     token,

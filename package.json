@@ -206,6 +206,7 @@
     "react-scroll": "1.4.0",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "3.5.2",
+    "redux-form": "6.0.5",
     "redux-immutable": "3.0.7",
     "redux-persist-immutable": "^4.0.0-alpha6",
     "redux-saga": "0.11.0",
