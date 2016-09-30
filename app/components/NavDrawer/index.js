@@ -27,7 +27,7 @@ const NavDrawer = ({
       <div className={styles.navDrawer}>
         <AppBar
           iconElementLeft={<IconButton onClick={onCloseClick}><NavigationClose /></IconButton>}
-          title="HelloRobot"
+          title="OkRobot"
         />
         {links.map(l =>
           <Link

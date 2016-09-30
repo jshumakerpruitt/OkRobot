@@ -47,7 +47,7 @@ class SignupPage extends React.Component { // eslint-disable-line react/prefer-s
 
 SignupPage.propTypes = {
   submitForm: React.PropTypes.func.isRequired,
-  signupSuccess: React.PropTypes.bool,
+  signupSuccess: React.PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

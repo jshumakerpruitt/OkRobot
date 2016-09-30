@@ -58,7 +58,7 @@ export class HomePage extends React.Component {
             style={{ width: '100%' }}
           >
             <div className={styles.logo}>
-              <h1>Hello Robot</h1>
+              <h1>OK Robot</h1>
             </div>
           </Paper>
 

@@ -10,5 +10,5 @@ export default defineMessages({
     id: 'app.components.Header.header',
     defaultMessage: 'This is the Header component !',
   },
-  title: 'HelloRobot',
+  title: 'OkRobot',
 });

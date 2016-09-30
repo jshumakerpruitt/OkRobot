@@ -11,14 +11,14 @@
 
 export const API_ENDPOINT = 'http://localhost:4000';
 // export const API_ENDPOINT = 'https://ok-robot.herokuapp.com';
-export const RECEIVE_TOKEN = 'hellorobot/App/RECEIVE_TOKEN';
-export const REVOKE_TOKEN = 'hellorobot/App/REVOKE_TOKEN';
-export const OPEN_NAV = 'hellorobot/App/OPEN_NAV';
-export const CLOSE_NAV = 'hellorobot/App/CLOSE_NAV';
-export const SET_REDIRECT = 'hellorobot/App/SET_REDIRECT';
+export const RECEIVE_TOKEN = 'okrobot/App/RECEIVE_TOKEN';
+export const REVOKE_TOKEN = 'okrobot/App/REVOKE_TOKEN';
+export const OPEN_NAV = 'okrobot/App/OPEN_NAV';
+export const CLOSE_NAV = 'okrobot/App/CLOSE_NAV';
+export const SET_REDIRECT = 'okrobot/App/SET_REDIRECT';
 export const PUBLIC_ROUTES = ['/', '/login'];
-export const SUBMIT_LOGIN = 'hellorobot/App/SUBMIT_LOGIN';
-export const RECEIVE_ERROR = 'hellorobot/App/RECEIVE_ERROR';
-export const RECEIVE_SUCCESS = 'hellorobot/App/RECEIVE_SUCCESS';
-export const UPDATE_EMAIL = 'hellorobot/App/UPDATE_EMAIL';
-export const UPDATE_PASSWORD = 'hellorobot/App/UPDATE_PASSWORD';
+export const SUBMIT_LOGIN = 'okrobot/App/SUBMIT_LOGIN';
+export const RECEIVE_ERROR = 'okrobot/App/RECEIVE_ERROR';
+export const RECEIVE_SUCCESS = 'okrobot/App/RECEIVE_SUCCESS';
+export const UPDATE_EMAIL = 'okrobot/App/UPDATE_EMAIL';
+export const UPDATE_PASSWORD = 'okrobot/App/UPDATE_PASSWORD';

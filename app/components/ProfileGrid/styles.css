@@ -7,7 +7,8 @@
 }
 
 .gridTile {
-  max-width: 40.5%;
-  margin: 10px;
+  box-sizing: border-box;
+  margin: 5px;
+  max-width: 32%;
   background-color: #400CD4;
 }

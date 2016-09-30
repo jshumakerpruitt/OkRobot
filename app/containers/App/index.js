@@ -53,15 +53,15 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     return (
       <div className={styles.dataRoot}>
         <Helmet
-          titleTemplate="%s - HelloRobot"
-          defaultTitle="HelloRobot - Social App for Robots"
+          titleTemplate="%s - OK robot"
+          defaultTitle="OK Robot - Social App for Robots"
           meta={[
             { name: 'description', content: 'Social App for Robots' },
           ]}
         />
         <div className={styles.header} >
           <Header
-            title="HelloRobot"
+            title="OK Robot"
             onOpenClick={this.props.openNav}
             showOpen={token.length > 0}
             openHome={() => this.props.goToNow('/')}
