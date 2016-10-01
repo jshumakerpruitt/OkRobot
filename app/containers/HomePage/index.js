@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
@@ -58,7 +59,7 @@ export class HomePage extends React.Component {
             style={{ width: '100%' }}
           >
             <div className={styles.logo}>
-              <h1>OK Robot</h1>
+              <h1>OkRobot</h1>
             </div>
           </Paper>
 
@@ -68,11 +69,7 @@ export class HomePage extends React.Component {
             style={{ width: '100%' }}
           >
             <div className={styles.form}>
-              <Login
-                email={this.props.email}
-                password={this.props.password}
-                auth={this.props.auth}
-              />
+              <Login />
             </div>
           </Paper>
           <Paper
@@ -84,11 +81,13 @@ export class HomePage extends React.Component {
               <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut libero viverra, tempor libero eu, suscipit elit. Proin at suscipit mauris, in porta nibh. Nullam fringilla consectetur elit, ut tincidunt ligula vestibulum in. Nulla lorem purus, congue ut luctus id, congue vitae ante. Suspendisse ac sapien est.
               </p>
               <div className={styles.buttonWrapper}>
-                <RaisedButton
-                  className={styles.button}
-                  label="Join Now"
-                  primary
-                />
+                <Link to="/signup">
+                  <RaisedButton
+                    className={styles.button}
+                    label="Join Now"
+                    primary
+                  />
+                </Link>
               </div>
             </div>
           </Paper>

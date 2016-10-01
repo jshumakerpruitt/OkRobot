@@ -6,12 +6,12 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
-import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import styles from 'components/LoginBox/styles.css';
 import ownStyles from './styles.css';
 
+import TextField from 'material-ui/TextField';
 const textField = (hintText, type = 'text') => (field) => (
   <TextField
     type={type}

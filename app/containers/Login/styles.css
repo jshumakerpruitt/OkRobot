@@ -1,35 +1,11 @@
-.login {
-  flex: 1;
+.loginBox {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  justify-content: center;
-  padding: 10px;
-}
-
-.paper {
-  padding-top: 64px;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.logo {
-  color: #00BCD4;
-  display: flex;
-  justify-content: center;
-  padding: 15px 0;
-  font-size: 34px;
+  padding-top: 20px;
 }
 
 .form {
-  padding: 0 20px;
-}
-
-.paper {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.loginBox {
   display: flex;
   justify-content: center;
 }
@@ -47,6 +23,30 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.logo {
+  color: #00BCD4;
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  font-size: 34px;
+}
+
+.button {
+  margin-top: 20px;
+}
+
+.link {
+  padding: 20px 0;
+}
+
+.link:first-child {
+  padding-right: 10px;
+}
+
+.link:last-child {
+  padding-left: 10px;
 }
 
 .button {

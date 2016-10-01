@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import { reduxForm } from 'redux-form/immutable';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
@@ -55,6 +54,4 @@ const mapStateToProps = createStructuredSelector({
 });
 
 // Decorate the form component
-export default reduxForm({ form: 'signup' })(
-  connect(mapStateToProps, actions)(SignupPage)
-);
+export default connect(mapStateToProps, actions)(SignupPage);
