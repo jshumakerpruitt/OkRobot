@@ -16,11 +16,13 @@ import {
   OPEN_NAV,
   CLOSE_NAV,
 } from './constants';
+
+import { LOCATION_CHANGE } from 'react-router-redux';
+
 import { fromJS } from 'immutable';
 import { REHYDRATE } from 'redux-persist/constants';
 
 // The initial state of the App
-
 const initialState = fromJS({
   isNavOpen: false,
   token: '',
@@ -28,8 +30,14 @@ const initialState = fromJS({
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
+    case LOCATION_CHANGE:
+      return state.set('isNavOpen', false);
     case REHYDRATE:
-      return action.payload.global || state;
+      //  TODO: clean this up with localstorage whitelist
+      return (action.payload.global &&
+             action.payload.global.token &&
+             state.set('token', action.payload.global.token)) ||
+             state;
     case RECEIVE_TOKEN:
       return state
         .set('token', action.token);

@@ -34,7 +34,6 @@ const NavDrawer = ({
             className={styles.navItem}
             to={l.to}
             key={l.text}
-            onClick={onCloseClick}
           >
             {l.text}
             <br />
@@ -43,7 +42,6 @@ const NavDrawer = ({
           className={classNames(styles.navItem, 'logout')}
           to="/"
           onClick={() => {
-            onCloseClick();
             revokeToken();
           }}
         >
