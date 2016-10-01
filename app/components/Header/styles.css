@@ -4,3 +4,8 @@
   height: 64px;
   z-index: 1000;
 }
+
+.title {
+  text-decoration: none;
+  color: #FFFFFF;
+}

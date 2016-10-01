@@ -14,8 +14,6 @@
  *        return { type: YOUR_ACTION_CONSTANT, var: var }
  *    }
  */
-import { push } from 'react-router-redux';
-
 import {
   FETCH_RANDOM_USERS,
   REQUEST_RANDOM_USERS,
@@ -47,8 +45,4 @@ export function receiveError(error) {
     type: RECEIVE_ERROR,
     error,
   };
-}
-
-export function changeRoute(route) {
-  return push(route);
 }

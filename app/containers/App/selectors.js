@@ -16,6 +16,11 @@ const selectIsNavOpen = () => createSelector(
   (globalState) => globalState.get('isNavOpen')
 );
 
+const selectNextPath = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('nextPath')
+);
+
 const selectAuth = () => createSelector(
   selectGlobal(),
   (substate) => substate.get('auth').toJS()
@@ -73,4 +78,5 @@ export {
   selectEmail,
   selectPassword,
   selectRedirectPath,
+  selectNextPath,
 };

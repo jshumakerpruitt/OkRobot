@@ -7,14 +7,11 @@ import {
   REVOKE_TOKEN,
 } from '../constants';
 
-import { CALL_HISTORY_METHOD } from 'react-router-redux';
-
 import {
   openNav,
   closeNav,
   receiveToken,
   revokeToken,
-  goToNow,
 } from '../actions';
 
 describe('App Actions', () => {
@@ -54,18 +51,6 @@ describe('App Actions', () => {
       };
 
       expect(revokeToken()).toEqual(expectedResult);
-    });
-  });
-
-  describe('goToNow', () => {
-    it('should return the correct type', () => {
-      expect(goToNow().type).toEqual(CALL_HISTORY_METHOD);
-    });
-
-    it('should return the correct args', () => {
-      const path = '/login';
-      const args = goToNow(path).payload.args;
-      expect(args).toEqual(['/login']);
     });
   });
 });

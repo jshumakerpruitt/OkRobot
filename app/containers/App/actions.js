@@ -19,11 +19,10 @@ import {
   OPEN_NAV,
   CLOSE_NAV,
   RECEIVE_TOKEN,
+  STORE_TOKEN,
   REVOKE_TOKEN,
-  SET_REDIRECT,
+  SET_NEXT_PATH,
 } from './constants';
-
-import { push } from 'react-router-redux';
 
 /**
  * store the received  token
@@ -42,6 +41,14 @@ export function receiveToken(token = '') {
   };
 }
 
+export function storeToken(token = '') {
+  return {
+    type: STORE_TOKEN,
+    token,
+  };
+}
+
+
 /**
  * set the existing token to empty string
  *
@@ -54,12 +61,9 @@ export function revokeToken() {
   };
 }
 
-export const goToNow = (path) =>
-  push(path);
-
-export const setRedirect = (path) => ({
-  type: SET_REDIRECT,
-  path,
+export const setNextPath = (nextPath) => ({
+  type: SET_NEXT_PATH,
+  nextPath,
 });
 
 export const openNav = () => ({

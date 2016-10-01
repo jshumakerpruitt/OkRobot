@@ -6,15 +6,22 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+//  REQUEST_USER,
+  RECEIVE_USER,
+//  RECEIVE_USER_ERROR,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  user: {
+    username: '',
+    age: '',
+  },
+});
 
 function profilePageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case RECEIVE_USER:
+      return state.set('user', action.user);
     default:
       return state;
   }

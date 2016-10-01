@@ -15,7 +15,6 @@ import {
   selectIsNavOpen,
 } from './selectors';
 import * as actions from './actions';
-import { PUBLIC_ROUTES } from './constants';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 // import 'sanitize.css/sanitize.css';
@@ -27,20 +26,6 @@ import NavDrawer from 'components/NavDrawer';
 import styles from './styles.css';
 
 export class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentWillMount() {
-    const path = this.props.location.pathname;
-    const token = this.props.token || '';
-
-    if (token.length === 0 && !this.isPublic(path)) {
-      this.props.goToNow('/signup');
-      this.props.setRedirect(path);
-    }
-  }
-
-  isPublic(path) {
-    return PUBLIC_ROUTES.find((p) => p === path);
-  }
-
   render() {
     const token = this.props.token || '';
     const links = [
@@ -64,7 +49,6 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
             title="OK Robot"
             onOpenClick={this.props.openNav}
             showOpen={token.length > 0}
-            openHome={() => this.props.goToNow('/')}
           />
         </div>
         <div className={styles.stretchX}>
@@ -92,8 +76,6 @@ App.propTypes = {
   children: React.PropTypes.node,
   location: React.PropTypes.object.isRequired,
   token: React.PropTypes.string.isRequired,
-  goToNow: React.PropTypes.func.isRequired,
-  setRedirect: React.PropTypes.func.isRequired,
   isNavOpen: React.PropTypes.bool.isRequired,
   openNav: React.PropTypes.func.isRequired,
   closeNav: React.PropTypes.func.isRequired,

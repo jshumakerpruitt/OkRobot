@@ -12,6 +12,7 @@
 export const API_ENDPOINT = 'http://localhost:4000';
 // export const API_ENDPOINT = 'https://ok-robot.herokuapp.com';
 export const RECEIVE_TOKEN = 'okrobot/App/RECEIVE_TOKEN';
+export const STORE_TOKEN = 'okrobot/App/STORE_TOKEN';
 export const REVOKE_TOKEN = 'okrobot/App/REVOKE_TOKEN';
 export const OPEN_NAV = 'okrobot/App/OPEN_NAV';
 export const CLOSE_NAV = 'okrobot/App/CLOSE_NAV';
@@ -22,3 +23,4 @@ export const RECEIVE_ERROR = 'okrobot/App/RECEIVE_ERROR';
 export const RECEIVE_SUCCESS = 'okrobot/App/RECEIVE_SUCCESS';
 export const UPDATE_EMAIL = 'okrobot/App/UPDATE_EMAIL';
 export const UPDATE_PASSWORD = 'okrobot/App/UPDATE_PASSWORD';
+export const SET_NEXT_PATH = 'okrobot/App/SET_NEXT_PATH';

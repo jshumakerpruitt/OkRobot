@@ -12,11 +12,10 @@ import {
   RECEIVE_SUCCESS,
 } from './constants';
 
-export function submitLogin(authHash, redirectPath) {
+export function submitLogin(authHash) {
   return {
     type: SUBMIT_LOGIN,
     auth: { auth: authHash },
-    redirectPath,
   };
 }
 

@@ -35,14 +35,6 @@ export class HomePage extends React.Component {
     this.props.fetchRandomUsers();
   }
 
-  openLogin = () => {
-    this.openRoute('/login');
-  }
-
-  openRoute = (route) => {
-    this.props.changeRoute(route);
-  };
-
   render() {
     return (
       <article className={styles.homePage}>
@@ -102,8 +94,6 @@ export class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  changeRoute: React.PropTypes.func,
-  onSubmitForm: React.PropTypes.func,
   fetchRandomUsers: React.PropTypes.func,
   randomUsers: React.PropTypes.array,
   auth: React.PropTypes.object,

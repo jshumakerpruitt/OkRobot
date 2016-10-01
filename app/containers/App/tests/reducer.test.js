@@ -1,7 +1,7 @@
 import expect from 'expect';
 import appReducer from '../reducer';
 import {
-  receiveToken,
+  storeToken,
   revokeToken,
   openNav,
   closeNav,
@@ -14,6 +14,7 @@ describe('appReducer', () => {
     state = fromJS({
       isNavOpen: false,
       token: '',
+      nextPath: '',
     });
   });
 
@@ -44,11 +45,11 @@ describe('appReducer', () => {
       .toEqual(expectedState);
   });
 
-  it('should set the token on receiveToken', () => {
+  it('should set the token on storeToken', () => {
     const token = 'receivetoken';
     const expectedState = state.set('token', token);
 
-    expect(appReducer(state, receiveToken(token)))
+    expect(appReducer(state, storeToken(token)))
     .toEqual(expectedState);
   });
 });

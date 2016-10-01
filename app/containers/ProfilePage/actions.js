@@ -5,11 +5,28 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  REQUEST_USER,
+  RECEIVE_USER,
+  RECEIVE_USER_ERROR,
 } from './constants';
 
-export function defaultAction() {
+export function requestUser(id) {
   return {
-    type: DEFAULT_ACTION,
+    type: REQUEST_USER,
+    id,
+  };
+}
+
+export function receiveUser(id) {
+  return {
+    type: RECEIVE_USER,
+    id,
+  };
+}
+
+export function receiveUserError(id) {
+  return {
+    type: RECEIVE_USER_ERROR,
+    id,
   };
 }

@@ -1,7 +1,7 @@
 /**
  * Create the store with asynchronously loaded reducers
  */
-
+import watchReceiveToken from './containers/App/sagas';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist-immutable';
 // import { fromJS } from 'immutable';
@@ -36,6 +36,7 @@ export default function configureStore(initialState = {}, history) {
   persistStore(store, { whitelist: 'global' });
 
   // Extensions
+  sagaMiddleware.run(watchReceiveToken);
   store.runSaga = sagaMiddleware.run;
   store.asyncReducers = {}; // Async reducer registry
 
