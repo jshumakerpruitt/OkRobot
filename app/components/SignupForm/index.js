@@ -8,8 +8,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import styles from 'components/LoginBox/styles.css';
-import ownStyles from './styles.css';
+import styles from './styles.css';
 
 import TextField from 'material-ui/TextField';
 const textField = (hintText, type = 'text') => (field) => (
@@ -36,7 +35,7 @@ const SignupForm = ({
 }) =>
   <div className={styles.loginBox}>
     <form
-      className={ownStyles.form}
+      className={styles.form}
       onSubmit={handleSubmit(data => { submitForm(data.toJS()); })}
     >
       <div className={styles.loginColumn}>
