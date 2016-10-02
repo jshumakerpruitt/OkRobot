@@ -1,8 +1,12 @@
 .testPage {
-  flex: 1;
+  flex-grow: 1;
   display: flex;
-  flex-direction: column;
   justify-content: flex-end;
-  flex-basis: 100%;
   padding: 0 5px;
+  flex-direction: column;
+}
+
+.testWrapper {
+  flex-grow: 1;
+  display: flex;
 }

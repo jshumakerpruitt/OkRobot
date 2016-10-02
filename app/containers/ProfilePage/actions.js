@@ -8,6 +8,7 @@ import {
   REQUEST_USER,
   RECEIVE_USER,
   RECEIVE_USER_ERROR,
+  FETCH_USER,
 } from './constants';
 
 export function requestUser(id) {
@@ -17,10 +18,16 @@ export function requestUser(id) {
   };
 }
 
-export function receiveUser(id) {
+export function fetchUser(id) {
+  return {
+    type: FETCH_USER,
+    id,
+  };
+}
+export function receiveUser(data) {
   return {
     type: RECEIVE_USER,
-    id,
+    user: data.user,
   };
 }
 

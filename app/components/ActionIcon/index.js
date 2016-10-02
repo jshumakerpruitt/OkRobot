@@ -7,7 +7,7 @@
 import React from 'react';
 
 import IconButton from 'material-ui/IconButton';
-import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import Star from 'material-ui/svg-icons/toggle/star';
 
 // import styles from './styles.css';
 
@@ -18,7 +18,7 @@ const ActionIcon = ({
   defaultColor,
 }) =>
   <IconButton onClick={onIconClick} >
-    <StarBorder
+    <Star
       color={isActive ? activeColor : defaultColor}
     />
   </IconButton>;

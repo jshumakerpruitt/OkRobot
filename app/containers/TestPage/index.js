@@ -19,11 +19,13 @@ import {
 export class TestPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div className={styles.testPage}>
-        <ChatBox
-          messages={this.props.messages}
-          ids={this.props.ids}
-        />
+      <div className={styles.testWrapper}>
+        <div className={styles.testPage}>
+          <ChatBox
+            messages={this.props.messages}
+            ids={this.props.ids}
+          />
+        </div>
       </div>
     );
   }

@@ -12,3 +12,9 @@
   max-width: 32%;
   background-color: #400CD4;
 }
+
+.link {
+  z-index: 100;
+  color: #FFFFFF;
+  text-decoration: none;
+}

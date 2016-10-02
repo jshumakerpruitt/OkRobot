@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import { Link } from 'react-router';
 import { GridTile } from 'material-ui/GridList';
 import ActionIcon from '../ActionIcon';
 import randomPic1 from './random1.png';
@@ -22,7 +23,7 @@ const ProfileGrid = ({
     {users.map((user, i) => (
       <div key={i} className={styles.gridTile}>
         <GridTile
-          title={user.username}
+          title={<Link className={styles.link} to={`profile/${user.id}`}>{user.username}</Link>}
           actionIcon={<ActionIcon
             onIconClick={() => { submitLike(user.id, !user.liked); }}
             isActive={user.liked}
@@ -30,16 +31,18 @@ const ProfileGrid = ({
             defaultColor="white"
           />}
         >
-          <img
-            style={{ width: '100%', height: 'auto' }}
-            src={[
-              randomPic1,
-              randomPic2,
-              randomPic3,
-              randomPic4,
-            ][user.id % 4]}
-            alt="profile"
-          />
+          <Link className={styles.link} to={`profile/${user.id}`}>
+            <img
+              style={{ width: '100%', height: 'auto' }}
+              src={[
+                randomPic1,
+                randomPic2,
+                randomPic3,
+                randomPic4,
+              ][user.id % 4]}
+              alt="profile"
+            />
+          </Link>
         </GridTile>
       </div>
     ))}

@@ -19,7 +19,13 @@ const selectProfilePage = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const selectUser = () => createSelector(
+  selectProfilePageDomain(),
+  (substate) => substate.get('user')
+);
+
 export default selectProfilePage;
 export {
   selectProfilePageDomain,
+  selectUser,
 };

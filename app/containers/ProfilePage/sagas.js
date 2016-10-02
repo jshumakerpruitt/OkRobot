@@ -1,9 +1,10 @@
-import { call, put } from 'redux-saga/effects';
+import { select, call, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-
+import { selectToken } from '../App/selectors';
 import request from 'utils/request';
 
 import { FETCH_USER } from './constants';
+import { API_ENDPOINT } from 'containers/App/constants';
 
 import {
   requestUser,
@@ -12,12 +13,22 @@ import {
 } from './actions';
 
 // Individual exports for testing
-export function* fetchUser(id) {
+export function* fetchUser(action) {
+  const id = action.id;
   yield put(requestUser(id));
+
+  const token = yield select(selectToken());
 
   const resp = yield call(
     request,
-    `API_ENDPOINT/users/${id}.json`
+    `${API_ENDPOINT}/users/${id}.json`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
   );
 
   if (resp.err) {

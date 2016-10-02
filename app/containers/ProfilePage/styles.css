@@ -1,3 +1,158 @@
-.profilePage { /* stylelint-disable */
+* {
+  box-sizing: border-box;
+}
 
+.profilePage {
+  min-width: 100vw;
+  background: #FFF;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profilePage * {
+  box-sizing: border-box;
+}
+
+.bannerWrapper {
+  z-index: 1;
+  left: 0;
+  background: #00BCD4;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  min-height: 200px;
+  flex: 1;
+  min-width: 100vw;
+}
+
+.banner {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 64px;
+  max-width: 900px;
+  color: #FFF;
+  flex: 1;
+  z-index: 1;
+  display: flex;
+  min-height: 200px;
+  flex-wrap: wrap;
+}
+
+.details {
+  flex: 14;
+  display: flex;
+}
+
+.avatarWrapper {
+  position: relative;
+  max-width: 160px;
+  flex: 1;
+}
+
+.avatar {
+  border-radius: 50%;
+  background: #0C97EB;
+  max-width: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  overflow: clip;
+}
+
+.detailsText {
+  flex: 1;
+  width: calc(50% + 30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 26px;
+  padding-bottom: 5px;
+}
+
+.detailRow span {
+  padding-right: 10px;
+}
+
+.detailRow {
+  width: 100%;
+  display: flex;
+  padding-left: 10px;
+}
+
+.detailRow:first-child {
+  height: calc(50% + 30px);
+  align-items: flex-end;
+}
+
+.detailRow:last-child {
+  height: calc(50% - 30px);
+}
+
+.actions {
+  flex: 9;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.actionRow {
+  height: calc(100% - 60px);
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  border-radius: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.bannerIcon {
+  color: #FFF;
+}
+
+.stretchY {
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainBody {
+  max-width: 800px;
+  min-width: 665px;
+  padding-top: 30px;
+  flex: 1;
+  display: flex;
+}
+
+.columnLeft {
+  flex: 14;
+}
+
+.columnRight {
+  flex: 9;
+}
+
+.profileSummary {
+  flex: 1;
+  padding: 20px;
+  line-height: 1.3em;
+}
+
+.subheading {
+  font-weight: 500;
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+
+.summarySection {
+  padding-bottom: 30px;
 }

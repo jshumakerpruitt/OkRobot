@@ -12,10 +12,11 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  user: {
+  user: fromJS({
     username: '',
     age: '',
-  },
+    id: '',
+  }),
 });
 
 function profilePageReducer(state = initialState, action) {

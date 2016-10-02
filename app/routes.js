@@ -74,7 +74,7 @@ export default function createRoutes(store) {
       },
     }, {
       onEnter: checkToken(store),
-      path: '/profile',
+      path: '/profile/:id',
       name: 'profilePage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
