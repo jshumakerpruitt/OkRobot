@@ -8,6 +8,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { selectChatroomId } from 'containers/TestPage/selectors';
 import styles from './styles.css';
 import ActionCable from 'actioncable';
 import * as actions from './actions';
@@ -15,15 +16,19 @@ import * as actions from './actions';
 export class ChatBox extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.original = this.props.chatroomId;
+    this.props.setChatroom(this.props.partnerId);
     this.submitMsg = this.submitMsg.bind(this);
+    this.cable = ActionCable.createConsumer(
+      `ws://localhost:4000/cable?token=${this.props.token}`
+    );
+  }
+
+  componentWillMount() {
     this.subscribe();
   }
-  componentWillUpdate(nextProps) {
-    if (this.props.original !== nextProps.chatroomId) {
-      this.unsubscribe();
-      this.subscribe();
-    }
+
+  componentWillUpdate() {
+    this.subscribe();
   }
 
   componentDidUpdate() {
@@ -36,23 +41,20 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
   }
 
   subscribe() {
-    this.cable = ActionCable.createConsumer(
-      `ws://localhost:4000/cable?token=${this.props.token}`
-    );
-
-    this.subscription = this.cable.subscriptions.create(
-      'ChatroomsChannel', {
-        received: (data) => {
-          this.props.receiveMessage(data.message);
-        },
-      }
-    );
+    if (!this.subscription && this.props.chatroomId) {
+      this.subscription = this.cable.subscriptions.create(
+        'ChatroomsChannel', {
+          received: (data) => {
+            this.props.receiveMessage(data.message);
+          },
+        }
+      );
+    }
   }
 
   unsubscribe() {
     this.cable.subscriptions.remove(this.subscription);
   }
-
 
   submitMsg(e) {
     if (e.keyCode === 13) {
@@ -101,12 +103,15 @@ ChatBox.propTypes = {
   messages: React.PropTypes.object,
   ids: React.PropTypes.array,
   receiveMessage: React.PropTypes.func.isRequired,
+  setChatroom: React.PropTypes.func.isRequired,
   token: React.PropTypes.string.isRequired,
   original: React.PropTypes.number,
   chatroomId: React.PropTypes.number,
+  partnerId: React.PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
+  chatroomId: selectChatroomId(),
 });
 
 export default connect(mapStateToProps, actions)(ChatBox);

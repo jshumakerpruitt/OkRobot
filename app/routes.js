@@ -3,7 +3,7 @@
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
 import { getAsyncInjectors } from './utils/asyncInjectors';
-import { setNextPath } from 'containers/App/actions';
+// import { setNextPath } from 'containers/App/actions';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -13,6 +13,7 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
+/*
 const checkToken = (store) => (nextState, replace) => {
   const token = store.getState().get('global').toJS().token;
   const prevPath = store
@@ -24,6 +25,7 @@ const checkToken = (store) => (nextState, replace) => {
     replace('/');
   }
 };
+*/
 
 export default function createRoutes(store) {
   // create reusable async injectors using getAsyncInjectors factory
@@ -52,7 +54,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      onEnter: checkToken(store),
+//      onEnter: checkToken(store),
       path: '/browse',
       name: 'browsePage',
       getComponent(nextState, cb) {
@@ -73,7 +75,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      onEnter: checkToken(store),
+//      onEnter: checkToken(store),
       path: '/profile/:id',
       name: 'profilePage',
       getComponent(nextState, cb) {
@@ -94,7 +96,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      onEnter: checkToken(store),
       path: '/test/:id',
       name: 'testPage',
       getComponent(nextState, cb) {

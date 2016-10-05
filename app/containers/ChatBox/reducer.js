@@ -11,7 +11,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  chatroomId: 1000,
+  chatroomId: null,
   ids: [],
   messages: {},
 });
