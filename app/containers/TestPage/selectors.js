@@ -29,9 +29,15 @@ const selectIds = () => createSelector(
   (substate) => substate.get('ids').toJS()
 );
 
+const selectChatroomId = () => createSelector(
+  selectTestPageDomain(),
+  (substate) => substate.get('chatroomId')
+);
+
 export default selectTestPage;
 export {
   selectTestPageDomain,
   selectMessages,
   selectIds,
+  selectChatroomId,
 };

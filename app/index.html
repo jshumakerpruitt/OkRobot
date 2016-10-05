@@ -15,10 +15,70 @@
     </style>
     <meta name="mobile-web-app-capable" content="yes">
     <title>React.js Boilerplate</title>
+    <style>
+      .pre {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+     .body {
+       flex: 1;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+
+     .spinner {
+       animation: rotator 1.4s linear infinite;
+     }
+
+     @keyframes rotator {
+       0% { transform: rotate(0deg); }
+       100% { transform: rotate(270deg); }
+     }
+
+     .path {
+       stroke-dasharray: 187;
+       stroke-dashoffset: 0;
+       transform-origin: center;
+       animation:
+       dash 1.4s ease-in-out infinite, 
+       colors 5.6s ease-in-out infinite;
+     }
+
+     @keyframes colors {
+       0% { stroke: #4285F4; }
+       25% { stroke: #DE3E35; }
+       50% { stroke: #F7C223; }
+       75% { stroke: #1B9A59; }
+       100% { stroke: #4285F4; }
+     }
+
+     @keyframes dash {
+       0% { stroke-dashoffset: 187; }
+       50% {
+         stroke-dashoffset: 48.75;
+         transform:rotate(135deg);
+       }
+       100% {
+         stroke-dashoffset: 187;
+         transform:rotate(450deg);
+       }
+     }
+    </style>
   </head>
   <body style="font-family: 'Open Sans', sans-serif;" >
     <!-- The app hooks into this div -->
-    <div id="app" style="height: 100%;"}></div>
+    <div id="app" style="height: 100%;"}>
+       <div class="pre">
+        <div class='body'>
+          <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
     <!-- Open Sans Font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <!-- A lot of magic happens in this file. HtmlWebpackPlugin automatically includes all assets (e.g. bundle.js, main.css) with the correct HTML tags, which is why they are missing in this HTML file. Don't add any assets here! (Check out webpackconfig.js if you want to know more) -->

@@ -15,11 +15,31 @@ import * as actions from './actions';
 export class ChatBox extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
+    this.original = this.props.chatroomId;
     this.submitMsg = this.submitMsg.bind(this);
+    this.subscribe();
+  }
+  componentWillUpdate(nextProps) {
+    if (this.props.original !== nextProps.chatroomId) {
+      this.unsubscribe();
+      this.subscribe();
+    }
   }
 
-  componentDidMount() {
-    this.cable = ActionCable.createConsumer('ws://localhost:4000/cable');
+  componentDidUpdate() {
+    const messageBox = this._messages;
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  subscribe() {
+    this.cable = ActionCable.createConsumer(
+      `ws://localhost:4000/cable?token=${this.props.token}`
+    );
+
     this.subscription = this.cable.subscriptions.create(
       'ChatroomsChannel', {
         received: (data) => {
@@ -29,19 +49,15 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
     );
   }
 
-  componentDidUpdate() {
-    const messageBox = this._messages;
-    messageBox.scrollTop = messageBox.scrollHeight;
-  }
-
-  componentWillUnmount() {
+  unsubscribe() {
     this.cable.subscriptions.remove(this.subscription);
   }
+
 
   submitMsg(e) {
     if (e.keyCode === 13) {
       this.subscription.send({
-        chatroom_id: 1,
+        chatroom_id: this.props.chatroomId,
         body: this._input.value,
       });
       this._input.value = '';
@@ -85,6 +101,9 @@ ChatBox.propTypes = {
   messages: React.PropTypes.object,
   ids: React.PropTypes.array,
   receiveMessage: React.PropTypes.func.isRequired,
+  token: React.PropTypes.string.isRequired,
+  original: React.PropTypes.number,
+  chatroomId: React.PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({

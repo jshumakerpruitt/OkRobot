@@ -95,7 +95,7 @@ export default function createRoutes(store) {
       },
     }, {
       onEnter: checkToken(store),
-      path: '/test',
+      path: '/test/:id',
       name: 'testPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
@@ -115,7 +115,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      onEnter: checkToken(store),
       path: '/signup',
       name: 'signupPage',
       getComponent(nextState, cb) {

@@ -9,8 +9,8 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-// export const API_ENDPOINT = 'http://localhost:4000';
-export const API_ENDPOINT = 'https://ok-robot.herokuapp.com';
+export const API_ENDPOINT = 'http://localhost:4000';
+// export const API_ENDPOINT = 'https://ok-robot.herokuapp.com';
 export const RECEIVE_TOKEN = 'okrobot/App/RECEIVE_TOKEN';
 export const STORE_TOKEN = 'okrobot/App/STORE_TOKEN';
 export const REVOKE_TOKEN = 'okrobot/App/REVOKE_TOKEN';
