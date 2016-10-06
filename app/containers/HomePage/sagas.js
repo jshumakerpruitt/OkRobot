@@ -9,7 +9,7 @@ import {
   API_ROOT,
 } from 'containers/App/constants';
 
-import request from '../../utils/request';
+import request, { getOptions } from '../../utils/request';
 
 import {
   receiveRandomUsers,
@@ -25,14 +25,10 @@ export function* fetchRandomUsers() {
   const requestURL = `${API_ROOT}/random.json`;
 
   // Call our request helper (see 'utils/request')
-  const randomUsers = yield call(request, requestURL,
-    {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-
-    }
+  const randomUsers = yield call(
+    request,
+    requestURL,
+    getOptions(),
   );
 
   if (!randomUsers.err) {

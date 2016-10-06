@@ -32,15 +32,11 @@ export function* submitChatroomRequest(action) {
   const token = yield select(selectToken());
   const response = yield request(
     `${API_ROOT}/chatroom_memberships.json`,
-    {
+    getOptions({
+      token,
+      body: { partner_id: action.partnerId },
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ partner_id: action.partnerId }),
-    }
+    })
   );
 
   if (response.err) {
@@ -83,7 +79,7 @@ export function* cableData() {
 export function* fetchMessages(action) {
   const url = `${API_ROOT}/chatrooms/${action.chatroomId}.json`;
   const token = yield select(selectToken());
-  const response = yield call(request, url, ...getOptions({ token }));
+  const response = yield call(request, url, getOptions({ token }));
 
   if (response.err) {
     yield put({ type: 'FETCH_MESSAGES_ERROR', error: response.err });

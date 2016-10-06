@@ -1,6 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import request from '../../utils/request';
+import request, { getOptions } from '../../utils/request';
 import { receiveError, receiveSuccess } from './actions';
 import {
   receiveToken,
@@ -26,16 +26,10 @@ export function* postAuth(action) {
   const auth = action.auth;
 
   // POST auth data to api
-  const response = yield request(
+  const response = yield call(
+    request,
     `${API_ROOT}/user_token.json`,
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(auth),
-    }
+    getOptions({ method: 'POST', body: auth }),
   );
 
   if (response.err) {
@@ -52,18 +46,12 @@ export function* fetchCurrentUser() {
 
   const response = yield request(
     `${API_ROOT}/current_user.json`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
+    getOptions({ token }),
   );
 
   if (response.err) {
     // TODO: provide specific error action
-    yield put(receiveError(response.err));
+    yield put({ type: 'CURRENT_USER_ERROR', error: response.err });
   } else {
     yield put(storeCurrentUser(response.data.user));
   }

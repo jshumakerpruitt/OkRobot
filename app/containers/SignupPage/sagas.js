@@ -1,7 +1,7 @@
 // import { take, call, put, select } from 'redux-saga/effects';
 import { put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import request from '../../utils/request';
+import request, { getOptions } from '../../utils/request';
 import { receiveSignupError, receiveSignupSuccess } from './actions';
 
 import {
@@ -17,14 +17,7 @@ export function* postAuth(action) {
   // POST user data to api
   const response = yield request(
     `${API_ROOT}/users.json`,
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user: action.user }),
-    }
+    getOptions({ method: 'POST', body: { user: action.user } })
   );
 
   if (response.err) {

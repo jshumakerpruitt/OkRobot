@@ -38,7 +38,6 @@ function checkStatus(response) {
  */
 
 export const getOptions = (params = {}) => {
-  const result = [];
   const options = {
     headers: {
       Accept: 'application/json',
@@ -54,13 +53,11 @@ export const getOptions = (params = {}) => {
     options.method = params.method;
   }
 
-  result.push(options);
-
   if (params.body) {
-    result.push(JSON.stringify(params.body));
+    options.body = JSON.stringify(params.body);
   }
 
-  return result;
+  return options;
 };
 
 export default function request(url, options) {

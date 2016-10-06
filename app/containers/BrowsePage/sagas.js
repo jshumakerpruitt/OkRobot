@@ -7,7 +7,7 @@ import {
   FETCH_USERS,
   SUBMIT_LIKE,
 } from './constants';
-import request from '../../utils/request';
+import request, { getOptions } from '../../utils/request';
 import {
   requestUsers,
   receiveUsers,
@@ -21,15 +21,10 @@ export function* fetchUsersSaga() {
 
   const token = yield select(selectToken());
 
-  const users = yield request(
+  const users = yield call(
+    request,
     `${API_ROOT}/users`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
+    getOptions({ token }),
   );
 
   if (users.err) {
@@ -68,15 +63,7 @@ export function* submitLikeSaga(action) {
   const response = yield call(
     request,
     `${API_ROOT}/user_likes.json`,
-    {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(action.like),
-    }
+    getOptions({ token, body: action.like, method: 'POST' }),
   );
 
   // if api call failed, reverse change made to UI
