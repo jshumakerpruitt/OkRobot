@@ -13,7 +13,7 @@ const selectTestPageDomain = () => state => state.get('testPage');
 /**
  * Default selector used by TestPage
  */
-
+// TODO: move almost all of this to ChatBox
 const selectTestPage = () => createSelector(
   selectTestPageDomain(),
   (substate) => substate.toJS()

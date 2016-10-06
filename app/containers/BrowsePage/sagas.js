@@ -1,6 +1,6 @@
 import { cancel, take, fork, select, call, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { API_ENDPOINT } from '../App/constants';
+import { API_ROOT } from '../App/constants';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { selectToken } from '../App/selectors';
 import {
@@ -22,7 +22,7 @@ export function* fetchUsersSaga() {
   const token = yield select(selectToken());
 
   const users = yield request(
-    `${API_ENDPOINT}/users`,
+    `${API_ROOT}/users`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ export function* submitLikeSaga(action) {
   // POST like data to api
   const response = yield call(
     request,
-    `${API_ENDPOINT}/user_likes.json`,
+    `${API_ROOT}/user_likes.json`,
     {
       method: 'POST',
       headers: {

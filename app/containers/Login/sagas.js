@@ -13,7 +13,7 @@ import {
 
 import {
   REQUEST_CURRENT_USER,
-  API_ENDPOINT,
+  API_ROOT,
 } from 'containers/App/constants';
 
 import {
@@ -27,7 +27,7 @@ export function* postAuth(action) {
 
   // POST auth data to api
   const response = yield request(
-    `${API_ENDPOINT}/user_token.json`,
+    `${API_ROOT}/user_token.json`,
     {
       method: 'POST',
       headers: {
@@ -51,7 +51,7 @@ export function* fetchCurrentUser() {
   const token = yield select(selectToken());
 
   const response = yield request(
-    `${API_ENDPOINT}/current_user.json`,
+    `${API_ROOT}/current_user.json`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

@@ -4,6 +4,7 @@ import { fromJS } from 'immutable';
 
 import {
   receiveMessage,
+  receiveMessages,
   setChatroomId,
 } from '../actions';
 
@@ -43,6 +44,28 @@ describe('chatBoxReducer', () => {
       .set('chatroomId', chatroomId);
 
     expect(chatBoxReducer(initialState, receiveMessage(message)))
+      .toEqual(expectedState);
+  });
+
+  it('should load messages', () => {
+    const id1 = 1;
+    const id2 = 2;
+    const chatroomId = 1;
+    const msg1 =
+      { id: id1, chatroomId, body: 'message body1' };
+    const msg2 =
+      { id: id2, chatroomId, body: 'message body2' };
+    const messages = [msg1, msg2];
+
+    const initialState = state.set('chatroomId', chatroomId);
+
+    const expectedState = state
+      .set('chatroomId', chatroomId)
+      .mergeIn(['messages', String(id1)], msg1)
+      .mergeIn(['messages', String(id2)], msg2)
+      .set('ids', state.get('ids').concat([id1, id2]));
+
+    expect(chatBoxReducer(initialState, receiveMessages(messages)))
       .toEqual(expectedState);
   });
 });

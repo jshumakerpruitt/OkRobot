@@ -6,7 +6,7 @@ import { take, call, put, fork, cancel } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { FETCH_RANDOM_USERS } from './constants';
 import {
-  API_ENDPOINT,
+  API_ROOT,
 } from 'containers/App/constants';
 
 import request from '../../utils/request';
@@ -22,7 +22,7 @@ import { watchPostAuth } from 'containers/Login/sagas';
  * make api request to non-secured route of api
  */
 export function* fetchRandomUsers() {
-  const requestURL = `${API_ENDPOINT}/random.json`;
+  const requestURL = `${API_ROOT}/random.json`;
 
   // Call our request helper (see 'utils/request')
   const randomUsers = yield call(request, requestURL,

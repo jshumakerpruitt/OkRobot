@@ -8,6 +8,7 @@ import { fromJS } from 'immutable';
 import {
   SET_CHATROOM_ID,
   RECEIVE_MESSAGE,
+  RECEIVE_MESSAGES,
   RECEIVE_CABLE,
   RECEIVE_SUBSCRIPTION,
 } from './constants';
@@ -26,6 +27,8 @@ const messages = (
   switch (action.type) {
     case RECEIVE_MESSAGE:
       return state.set(String(action.id), fromJS(action.message));
+    case RECEIVE_MESSAGES:
+      return state.merge(fromJS(action.messages));
     default:
       return state;
   }
@@ -38,10 +41,13 @@ const ids = (
   switch (action.type) {
     case RECEIVE_MESSAGE:
       return state.concat(action.id);
+    case RECEIVE_MESSAGES:
+      return state.concat(action.ids);
     default:
       return state;
   }
 };
+
 
 function chatBoxReducer(state = initialState, action) {
   switch (action.type) {
@@ -50,10 +56,13 @@ function chatBoxReducer(state = initialState, action) {
         .set('chatroomId', action.chatroomId);
     case RECEIVE_MESSAGE:
       return state.get('chatroomId') === action.message.chatroomId ?
-             state
-               .set('messages', messages(state.get('messages'), action))
-               .set('ids', ids(state.get('ids'), action)) :
+             state.set('messages', messages(state.get('messages'), action))
+                  .set('ids', ids(state.get('ids'), action)) :
              state;
+    case RECEIVE_MESSAGES:
+      return state
+        .set('messages', messages(state.get('messages'), action))
+        .set('ids', ids(state.get('ids'), action));
     case RECEIVE_CABLE:
       return state
         .set('cable', action.cable);

@@ -4,7 +4,7 @@ import { selectToken } from '../App/selectors';
 import request from 'utils/request';
 
 import { FETCH_USER } from './constants';
-import { API_ENDPOINT } from 'containers/App/constants';
+import { API_ROOT } from 'containers/App/constants';
 
 import {
   requestUser,
@@ -21,7 +21,7 @@ export function* fetchUser(action) {
 
   const resp = yield call(
     request,
-    `${API_ENDPOINT}/users/${id}.json`,
+    `${API_ROOT}/users/${id}.json`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

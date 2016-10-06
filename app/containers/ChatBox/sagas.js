@@ -1,31 +1,29 @@
-import { fork, take, cancel, put, select } from 'redux-saga/effects';
+import { call, fork, take, cancel, put, select } from 'redux-saga/effects';
 import { takeLatest, takeEvery } from 'redux-saga';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import ActionCable from 'actioncable';
 
-import request from '../../utils/request';
+import request, { getOptions } from '../../utils/request';
 import {
   selectToken,
 } from '../App/selectors';
 import {
-  selectCable,
-} from 'containers/TestPage/selectors';
-import {
+  requestMessages,
+  receiveMessages,
   setChatroomError,
   setChatroomSuccess,
   receiveCable,
-  receiveSubscription,
  } from './actions';
 
 import {
-  API_ENDPOINT,
+  API_ROOT,
 } from 'containers/App/constants';
 
 import {
   SET_CHATROOM,
+  REQUEST_MESSAGES,
   REQUEST_CABLE,
-  REQUEST_SUBSCRIPTION,
 } from './constants';
 
 // Individual exports for testing
@@ -33,7 +31,7 @@ export function* submitChatroomRequest(action) {
   // POST user data to api
   const token = yield select(selectToken());
   const response = yield request(
-    `${API_ENDPOINT}/chatroom_memberships.json`,
+    `${API_ROOT}/chatroom_memberships.json`,
     {
       method: 'POST',
       headers: {
@@ -48,7 +46,8 @@ export function* submitChatroomRequest(action) {
   if (response.err) {
     yield put(setChatroomError(response.err));
   } else {
-    yield put(setChatroomSuccess(response.data.chatroom_id));
+    yield put(requestMessages(response.data.chatroomId));
+    yield put(setChatroomSuccess(response.data.chatroomId));
   }
 }
 
@@ -81,35 +80,32 @@ export function* cableData() {
   yield cancel(watcher);
 }
 
-export function* createSubscription(action) {
-  const cable = yield select(selectCable());
+export function* fetchMessages(action) {
+  const url = `${API_ROOT}/chatrooms/${action.chatroomId}.json`;
+  const token = yield select(selectToken());
+  const response = yield call(request, url, ...getOptions({ token }));
 
-  const subscription = cable.subscriptions.create(
-    'ChatroomsChannel', {
-      received: (data) => {
-        action.receiveMessage(data.message);
-      },
-    }
-  );
-
-  yield put(receiveSubscription(subscription));
+  if (response.err) {
+    yield put({ type: 'FETCH_MESSAGES_ERROR', error: response.err });
+  } else {
+    yield put(receiveMessages(response.data.messages));
+  }
 }
 
-export function* watchRequestSubscription() {
-  yield* takeLatest(REQUEST_SUBSCRIPTION, createSubscription);
+export function* watchFetchMessages() {
+  yield* takeLatest(REQUEST_MESSAGES, fetchMessages);
 }
 
-export function* subscriptionData() {
-  const watcher = yield fork(watchRequestSubscription);
+export function* messagesData() {
+  const watcher = yield fork(watchFetchMessages);
 
   yield take(LOCATION_CHANGE);
   yield cancel(watcher);
 }
 
-
 // All sagas to be loaded
 export default [
   chatroomData,
   cableData,
-  subscriptionData,
+  messagesData,
 ];

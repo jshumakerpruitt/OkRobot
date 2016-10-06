@@ -4,13 +4,18 @@
  *
  */
 
+import { normalize } from 'normalizr';
+import * as schema from 'utils/schema';
+
 import {
   SET_CHATROOM_ID,
   REQUEST_CABLE,
   RECEIVE_CABLE,
   REQUEST_SUBSCRIPTION,
   RECEIVE_SUBSCRIPTION,
+  REQUEST_MESSAGES,
   RECEIVE_MESSAGE,
+  RECEIVE_MESSAGES,
   SET_CHATROOM,
   SET_CHATROOM_ERROR,
   SET_SUBSCRIPTION,
@@ -78,10 +83,25 @@ export function setSubscription(subscription) {
   };
 }
 
+export const requestMessages = (chatroomId) => ({
+  type: REQUEST_MESSAGES,
+  chatroomId,
+});
+
 export function receiveMessage(message) {
   return {
     type: RECEIVE_MESSAGE,
     message,
     id: message.id,
+  };
+}
+
+export function receiveMessages(messages) {
+  const normalized = normalize(messages, schema.arrayOfMessages);
+
+  return {
+    type: RECEIVE_MESSAGES,
+    messages: normalized.entities.messages,
+    ids: normalized.result,
   };
 }

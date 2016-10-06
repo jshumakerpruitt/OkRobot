@@ -5,7 +5,7 @@ import request from '../../utils/request';
 import { receiveSignupError, receiveSignupSuccess } from './actions';
 
 import {
-  API_ENDPOINT,
+  API_ROOT,
 } from 'containers/App/constants';
 
 import {
@@ -16,7 +16,7 @@ import {
 export function* postAuth(action) {
   // POST user data to api
   const response = yield request(
-    `${API_ENDPOINT}/users.json`,
+    `${API_ROOT}/users.json`,
     {
       method: 'POST',
       headers: {

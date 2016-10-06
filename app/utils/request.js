@@ -36,6 +36,33 @@ function checkStatus(response) {
  *
  * @return {object}           An object containing either "data" or "err"
  */
+
+export const getOptions = (params = {}) => {
+  const result = [];
+  const options = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  if (params.token && params.token.length > 0) {
+    options.headers.Authorization = `Bearer ${params.token}`;
+  }
+
+  if (params.method) {
+    options.method = params.method;
+  }
+
+  result.push(options);
+
+  if (params.body) {
+    result.push(JSON.stringify(params.body));
+  }
+
+  return result;
+};
+
 export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
