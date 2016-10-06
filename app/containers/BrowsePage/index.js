@@ -15,7 +15,9 @@ import styles from './styles.css';
 
 export class BrowsePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
-    this.props.fetchUsers();
+    if (this.props.users.length === 0) {
+      this.props.fetchUsers();
+    }
   }
   render() {
     return (

@@ -1,3 +1,4 @@
+import { likeData } from 'containers/BrowsePage/sagas';
 import { select, call, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { selectToken } from '../App/selectors';
@@ -8,9 +9,11 @@ import { API_ROOT } from 'containers/App/constants';
 
 import {
   requestUser,
-  receiveUser,
   receiveUserError,
+  receiveUser,
 } from './actions';
+// import {
+// } from 'containers/BrowsePage/actions'
 
 // Individual exports for testing
 export function* fetchUser(action) {
@@ -42,4 +45,5 @@ export function* userData() {
 // All sagas to be loaded
 export default [
   watchFetchUser,
+  likeData,
 ];

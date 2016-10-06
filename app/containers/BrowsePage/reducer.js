@@ -4,9 +4,11 @@
  *
  */
 
+import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import {
   RECEIVE_USERS,
+  RECEIVE_USER,
   RECEIVE_ERROR,
   REQUEST_USERS,
   RECEIVE_LIKE,
@@ -48,13 +50,15 @@ const byId = (
   }
 };
 
-const allIds = (
+export const ids = (
   state = fromJS([]),
   action
 ) => {
   switch (action.type) {
     case RECEIVE_USERS:
-      return fromJS(action.ids);
+      return state.concat(action.ids);
+    case RECEIVE_USER:
+      return state.concat(action.user.id);
     default:
       return state;
   }
@@ -64,6 +68,11 @@ export const users = (state = fromJS({}), action) => {
   switch (action.type) {
     case RECEIVE_USERS:
       return state.merge(fromJS(action.users));
+    case RECEIVE_USER:
+      return state.set(
+        String(action.user.id),
+        fromJS(action.user)
+      );
     case RECEIVE_LIKE:
       return byId(state, action);
     default:
@@ -71,34 +80,43 @@ export const users = (state = fromJS({}), action) => {
   }
 };
 
-function browsePageReducer(state = defaultState, action) {
+export const error = (
+  state = false,
+  action
+) => {
   switch (action.type) {
-    case RECEIVE_USERS:
-      return (
-        state.set('isFetching', false)
-             .set('users',
-                  users(state.get('users'), action))
-             .set('ids',
-                  allIds(state.get('ids'), action))
-      );
     case RECEIVE_ERROR:
-      return (
-        state.set('error', true)
-             .set('isFetching', false)
-      );
+      return true;
     case REQUEST_USERS:
-      return (
-        state.set('isFetching', true)
-             .set('error', false)
-      );
-    case RECEIVE_LIKE:
-      return (
-        state.set('users',
-                  users(state.get('users'), action))
-      );
+      return false;
+    case RECEIVE_USERS:
+      return false;
     default:
       return state;
   }
-}
+};
+
+export const isFetching = (
+  state = false,
+  action
+) => {
+  switch (action.type) {
+    case RECEIVE_ERROR:
+      return false;
+    case REQUEST_USERS:
+      return true;
+    case RECEIVE_USERS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const browsePageReducer = combineReducers({
+  users,
+  ids,
+  isFetching,
+  error,
+});
 
 export default browsePageReducer;

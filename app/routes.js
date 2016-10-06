@@ -116,7 +116,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/chat',
+      path: '/chat/:id',
       name: 'chatPage',
       getComponent(nextState, cb) {
         const importModules = Promise.all([

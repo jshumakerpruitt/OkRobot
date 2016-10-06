@@ -4,12 +4,19 @@
  *
  */
 
+
 import {
   REQUEST_USER,
-  RECEIVE_USER,
   RECEIVE_USER_ERROR,
   FETCH_USER,
 } from './constants';
+import {
+  RECEIVE_USER,
+  } from 'containers/BrowsePage/constants';
+
+import * as browsePageActions from 'containers/BrowsePage/actions';
+export const submitLike = browsePageActions.submitLike;
+export const receiveLike = browsePageActions.receiveLike;
 
 export function requestUser(id) {
   return {
@@ -37,3 +44,4 @@ export function receiveUserError(id) {
     id,
   };
 }
+

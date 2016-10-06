@@ -31,8 +31,6 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     const links = [
       { to: '/', text: 'Home' },
       { to: '/browse', text: 'Browse' },
-      { to: '/test', text: 'Chat' },
-      { to: '/signup', text: 'Sign Up' },
       { to: '/profile', text: 'Profile' },
     ];
     return (

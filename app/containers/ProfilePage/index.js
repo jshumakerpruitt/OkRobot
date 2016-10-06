@@ -6,8 +6,17 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { createStructuredSelector } from 'reselect';
-import { selectUser } from './selectors';
+import Helmet from 'react-helmet';
+import {
+  selectUser,
+  selectUsers,
+  selectProfilePage,
+} from './selectors';
+import styles from './styles.css';
+import * as actions from './actions';
+
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton/IconButton';
 import MenuItem from 'material-ui/MenuItem';
@@ -15,10 +24,6 @@ import FlatButton from 'material-ui/FlatButton';
 import IconMoreVert from 'material-ui/svg-icons/navigation/more-vert';
 import IconStar from 'material-ui/svg-icons/toggle/star';
 import IconMessage from 'material-ui/svg-icons/communication/message';
-import Helmet from 'react-helmet';
-import styles from './styles.css';
-import * as actions from './actions';
-
 import { List, ListItem } from 'material-ui/List';
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import ActionGrade from 'material-ui/svg-icons/action/grade';
@@ -28,10 +33,16 @@ import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 export class ProfilePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     const id = this.props.params.id;
-    this.props.fetchUser(id);
+    if (!this.props.users[id]) {
+      this.props.fetchUser(id);
+    }
   }
   render() {
-    const { user } = this.props;
+    const id = this.props.params.id;
+    this.user = this.props.users[id];
+    const user = this.user || {};
+    const likeColor = user.liked ? 'yellow' : '#FFFFFF';
+
     return (
       <div className={styles.profilePage}>
         <Helmet
@@ -75,19 +86,24 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
                   <MenuItem primaryText="Sign out" />
                 </IconMenu>
                 <FlatButton
-                  style={{ marginRight: '5px', color: '#FFFFFF' }}
+                  style={{ marginRight: '5px', color: likeColor }}
                   backgroundColor="#0c97eb"
                   hoverColor="#0B58E1"
-                  label="Like"
+                  label=""
                   secondary
-                  icon={<IconStar style={{ color: '#FFFFFF' }} />}
+                  icon={<IconStar style={{ color: 'yellow' }} />}
+                  onClick={() => {
+                    this.props.submitLike(user.id, !user.liked);
+                  }}
                 />
-                <FlatButton
-                  style={{ marginRight: '2px', color: '#FFFFFF', border: '1px solid #FFFFFF' }}
-                  label="Message"
-                  secondary
-                  icon={<IconMessage style={{ color: '#FFFFFF' }} />}
-                />
+                <Link to={`/chat/${user.id}`}>
+                  <FlatButton
+                    style={{ marginRight: '2px', color: '#FFFFFF', border: '1px solid #FFFFFF' }}
+                    label="Message"
+                    secondary
+                    icon={<IconMessage style={{ color: '#FFFFFF' }} />}
+                  />
+                </Link>
               </div>
             </div>
           </div>
@@ -134,12 +150,16 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
 
 ProfilePage.propTypes = {
   user: React.PropTypes.object.isRequired,
+  users: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   fetchUser: React.PropTypes.func.isRequired,
+  submitLike: React.PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   user: selectUser(),
+  users: selectUsers(),
+  all: selectProfilePage(),
 });
 
 export default connect(mapStateToProps, actions)(ProfilePage);
