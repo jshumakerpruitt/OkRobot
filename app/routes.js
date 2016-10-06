@@ -96,26 +96,6 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
-      path: '/test/:id',
-      name: 'testPage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/TestPage/reducer'),
-          System.import('containers/TestPage/sagas'),
-          System.import('containers/TestPage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('testPage', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
       path: '/signup',
       name: 'signupPage',
       getComponent(nextState, cb) {
@@ -129,6 +109,26 @@ export default function createRoutes(store) {
 
         importModules.then(([reducer, sagas, component]) => {
           injectReducer('signupPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/chat',
+      name: 'chatPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/ChatPage/reducer'),
+          System.import('containers/ChatPage/sagas'),
+          System.import('containers/ChatPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('chatPage', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

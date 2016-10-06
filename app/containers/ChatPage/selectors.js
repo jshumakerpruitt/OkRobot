@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
 /**
- * Direct selector to the testPage state domain
+ * Direct selector to the chatPage state domain
  */
-const selectTestPageDomain = () => state => state.get('testPage');
+const selectChatPageDomain = () => state => state.get('chatPage');
 
 /**
  * Other specific selectors
@@ -11,43 +11,43 @@ const selectTestPageDomain = () => state => state.get('testPage');
 
 
 /**
- * Default selector used by TestPage
+ * Default selector used by ChatPage
  */
 // TODO: move almost all of this to ChatBox
-const selectTestPage = () => createSelector(
-  selectTestPageDomain(),
+const selectChatPage = () => createSelector(
+  selectChatPageDomain(),
   (substate) => substate.toJS()
 );
 
 const selectMessages = () => createSelector(
-  selectTestPageDomain(),
+  selectChatPageDomain(),
   (substate) => substate.get('messages').toJS()
 );
 
 const selectIds = () => createSelector(
-  selectTestPageDomain(),
+  selectChatPageDomain(),
   (substate) => substate.get('ids').toJS()
 );
 
 const selectChatroomId = () => createSelector(
-  selectTestPageDomain(),
+  selectChatPageDomain(),
   (substate) => substate.get('chatroomId')
 );
 
 const selectCable = () => createSelector(
-  selectTestPageDomain(),
+  selectChatPageDomain(),
   (substate) => substate.get('cable')
 );
 
 const selectSubscription = () => createSelector(
-  selectTestPageDomain(),
+  selectChatPageDomain(),
   (substate) => substate.get('subscription')
 );
 
-export default selectTestPage;
+export default selectChatPage;
 export {
   selectSubscription,
-  selectTestPageDomain,
+  selectChatPageDomain,
   selectMessages,
   selectIds,
   selectChatroomId,

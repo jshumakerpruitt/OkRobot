@@ -1,6 +1,0 @@
-/*
- *
- * TestPage actions
- *
- */
-

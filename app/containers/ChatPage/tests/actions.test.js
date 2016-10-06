@@ -7,7 +7,7 @@ import {
   DEFAULT_ACTION,
 } from '../constants';
 
-describe('TestPage actions', () => {
+describe('ChatPage actions', () => {
   describe('Default Action', () => {
     it('has a type of DEFAULT_ACTION', () => {
       const expected = {

@@ -1,4 +1,4 @@
-.testPage {
+.chatPage {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-.testWrapper {
+.chatWrapper {
   flex-grow: 1;
   display: flex;
 }

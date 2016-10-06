@@ -13,8 +13,8 @@ describe('<Header />', () => {
     handler = expect.createSpy();
     renderedComponent = shallow(
       <Header
-        openHome={handler}
         onOpenClick={handler}
+        isLoggedIn
       />
     );
   });

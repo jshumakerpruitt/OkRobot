@@ -64,7 +64,7 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
             <div className={styles.actions}>
               <div className={styles.actionRow}>
                 <IconMenu
-                  iconButtonElement={<IconButton><IconMoreVert /></IconButton>}
+                  iconButtonElement={<IconButton><IconMoreVert color="#FFF" /></IconButton>}
                   anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
                   targetOrigin={{ horizontal: 'right', vertical: 'top' }}
                 >

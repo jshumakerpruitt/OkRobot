@@ -1,13 +1,14 @@
 /*
-// import { selectTestPageDomain } from '../selectors';
+// import { selectChatPageDomain } from '../selectors';
 // import { fromJS } from 'immutable';
 import expect from 'expect';
 
-// const selector = selectTestPageDomain();
+// const selector = selectChatPageDomain();
 
-describe('selectTestPageDomain', () => {
+describe('selectChatPageDomain', () => {
   it('Expect to have unit tests specified', () => {
     expect('Test case').toEqual(false);
   });
 });
+
 */

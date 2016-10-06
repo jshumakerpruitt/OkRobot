@@ -1,6 +1,6 @@
 /*
  *
- * TestPage
+ * ChatPage
  *
  */
 
@@ -19,12 +19,12 @@ import {
 
 import { selectToken } from 'containers/App/selectors';
 
-export class TestPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class ChatPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     return (
-      <div className={styles.testWrapper}>
-        <div className={styles.testPage}>
+      <div className={styles.chatWrapper}>
+        <div className={styles.chatPage}>
           <ChatBox
             token={this.props.token}
             partnerId={Number(this.props.params.id)}
@@ -37,7 +37,7 @@ export class TestPage extends React.Component { // eslint-disable-line react/pre
   }
 }
 
-TestPage.propTypes = {
+ChatPage.propTypes = {
   ids: React.PropTypes.array,
   messages: React.PropTypes.object,
   token: React.PropTypes.string,
@@ -52,4 +52,4 @@ const mapStateToProps = createStructuredSelector({
   chatroomId: selectChatroomId(),
 });
 
-export default connect(mapStateToProps, actions)(TestPage);
+export default connect(mapStateToProps, actions)(ChatPage);

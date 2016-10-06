@@ -1,5 +1,6 @@
 import { call, put, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
+import { push } from 'react-router-redux';
 import request, { getOptions } from '../../utils/request';
 import { receiveError, receiveSuccess } from './actions';
 import {
@@ -38,6 +39,7 @@ export function* postAuth(action) {
     yield put(receiveSuccess());
     yield put(receiveToken(response.data.jwt));
     yield call(fetchCurrentUser);
+    yield put(push('/browse'));
   }
 }
 

@@ -9,7 +9,7 @@
 .gridTile {
   box-sizing: border-box;
   margin: 5px;
-  max-width: 32%;
+  max-width: calc((800px / 3) - 30px);
   background-color: #400CD4;
 }
 

@@ -22,11 +22,17 @@ const NavDrawer = ({
   revokeToken,
   links,
 }) =>
-  <div>
-    <Drawer open={isOpen}>
+  <div className={styles.outer}>
+    <Drawer
+      open={isOpen}
+      style={{ maxWidth: '98%' }}
+    >
       <div className={styles.navDrawer}>
         <AppBar
-          iconElementLeft={<IconButton onClick={onCloseClick}><NavigationClose /></IconButton>}
+          iconElementLeft={
+            <IconButton onClick={onCloseClick}>
+              <NavigationClose />
+            </IconButton>}
           title="OkRobot"
         />
         {links.map(l =>

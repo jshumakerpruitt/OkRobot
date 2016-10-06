@@ -1,4 +1,9 @@
-.navDrawer { /* stylelint-disable */
+.outer {
+  max-width: 90vw;
+}
+
+.navDrawer {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -11,11 +16,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #00bcd4;
-  color: #ffffff;
+  background: #00BCD4;
+  color: #FFF;
   height: 64px;
   justify-content: center;
   border-top: 1px solid;
   text-decoration: none;
 }
-

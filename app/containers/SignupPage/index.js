@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
 import { selectSignupSuccess } from './selectors';
@@ -32,6 +33,9 @@ class SignupPage extends React.Component { // eslint-disable-line react/prefer-s
             {this.props.signupSuccess ?
               <div className={styles.message}>
                {`Success! Confirmation email sent to ${this.props.signupSuccess}`}
+                <div className={styles.back}>
+                  <Link to="/">Back</Link>
+                </div>
               </div> :
               <div className={styles.form}>
                 <SignupForm

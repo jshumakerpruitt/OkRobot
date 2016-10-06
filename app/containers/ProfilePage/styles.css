@@ -19,12 +19,13 @@
   z-index: 1;
   left: 0;
   background: #00BCD4;
-  height: 200px;
+  min-height: 200px;
   display: flex;
   justify-content: center;
   min-height: 200px;
   flex: 1;
   min-width: 100vw;
+  padding-bottom: 30px;
 }
 
 .banner {
@@ -43,12 +44,14 @@
 .details {
   flex: 14;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .avatarWrapper {
   position: relative;
   max-width: 160px;
   flex: 1;
+  flex-basis: 200px;
 }
 
 .avatar {
@@ -67,6 +70,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  flex-basis: 200px;
 }
 
 h2 {
@@ -102,6 +106,7 @@ h2 {
 }
 
 .actionRow {
+  flex-basis: 400px;
   height: calc(100% - 60px);
   flex: 1;
   display: flex;
@@ -127,14 +132,14 @@ h2 {
 
 .mainBody {
   max-width: 800px;
-  min-width: 665px;
-  padding-top: 30px;
   flex: 1;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .columnLeft {
   flex: 14;
+  flex-basis: 400px;
 }
 
 .columnRight {

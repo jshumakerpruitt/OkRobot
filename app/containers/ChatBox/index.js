@@ -12,7 +12,7 @@ import {
   selectCable,
   selectChatroomId,
   selectSubscription,
-} from 'containers/TestPage/selectors';
+} from 'containers/ChatPage/selectors';
 import {
   selectCurrentUser,
 } from 'containers/App/selectors';

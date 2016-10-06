@@ -3,6 +3,7 @@
  *
  * This is the first thing users see of our App, at the '/' route
  */
+// TODO: redirect to signup when user clicks on user
 
 import React from 'react';
 import { Link } from 'react-router';

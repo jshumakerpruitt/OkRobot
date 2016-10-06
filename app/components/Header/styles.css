@@ -9,3 +9,19 @@
   text-decoration: none;
   color: #FFFFFF;
 }
+
+.hidden {
+  display: none;
+  cursor: default;
+}
+
+.join {
+  margin-top: -8px;
+  display: flex;
+  height: 64px;
+  align-items: center;
+}
+
+.headerButton {
+  color: #FFF;
+}

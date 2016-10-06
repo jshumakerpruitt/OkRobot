@@ -48,7 +48,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
           <Header
             title="OK Robot"
             onOpenClick={this.props.openNav}
-            showOpen={token.length > 0}
+            isLoggedIn={token.length > 0}
           />
         </div>
         <div className={styles.stretchX}>
