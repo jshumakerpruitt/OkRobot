@@ -36,9 +36,8 @@ export function* fetchUsersSaga() {
 
 
 export function* watchFetchUsers() {
-  yield takeEvery(FETCH_USERS, fetchUsersSaga);
+  yield* takeEvery(FETCH_USERS, fetchUsersSaga);
 }
-
 
 export function* userData() {
   // Fork watcher so we can continue execution
@@ -49,6 +48,10 @@ export function* userData() {
   yield cancel(watcher);
 }
 
+/**
+* User Likes
+*
+*/
 export function* submitLikeSaga(action) {
   // optimistically update the UI
   // action shape: {
@@ -76,7 +79,7 @@ export function* submitLikeSaga(action) {
 }
 
 export function* watchSubmitLike() {
-  yield takeEvery(SUBMIT_LIKE, submitLikeSaga);
+  yield* takeEvery(SUBMIT_LIKE, submitLikeSaga);
 }
 
 export function* likeData() {
