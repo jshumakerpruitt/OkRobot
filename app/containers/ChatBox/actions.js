@@ -6,6 +6,10 @@
 
 import {
   SET_CHATROOM_ID,
+  REQUEST_CABLE,
+  RECEIVE_CABLE,
+  REQUEST_SUBSCRIPTION,
+  RECEIVE_SUBSCRIPTION,
   RECEIVE_MESSAGE,
   SET_CHATROOM,
   SET_CHATROOM_ERROR,
@@ -25,6 +29,35 @@ export function setChatroomSuccess(chatroomId) {
     chatroomId,
   };
 }
+
+export function requestCable(token) {
+  return {
+    type: REQUEST_CABLE,
+    token,
+  };
+}
+
+export function receiveCable(cable) {
+  return {
+    type: RECEIVE_CABLE,
+    cable,
+  };
+}
+
+export function requestSubscription(cb) {
+  return {
+    type: REQUEST_SUBSCRIPTION,
+    receiveMessage: cb,
+  };
+}
+
+export function receiveSubscription(subscription) {
+  return {
+    type: RECEIVE_SUBSCRIPTION,
+    subscription,
+  };
+}
+
 
 export function setChatroomError() {
   return {

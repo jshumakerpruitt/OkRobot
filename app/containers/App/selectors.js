@@ -10,6 +10,11 @@ const selectToken = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.get('token')
 );
+const selectCurrentUser = () => createSelector(
+  selectGlobal(),
+  (globalState) => globalState.get('currentUser')
+);
+
 
 const selectIsNavOpen = () => createSelector(
   selectGlobal(),
@@ -79,4 +84,5 @@ export {
   selectPassword,
   selectRedirectPath,
   selectNextPath,
+  selectCurrentUser,
 };

@@ -36,7 +36,7 @@ export default function configureStore(initialState = {}, history) {
   persistStore(store, { whitelist: 'global' });
 
   // Extensions
-  sagaMiddleware.run(watchReceiveToken);
+  sagaMiddleware.run(watchReceiveToken, store.dispatch);
   store.runSaga = sagaMiddleware.run;
   store.asyncReducers = {}; // Async reducer registry
 

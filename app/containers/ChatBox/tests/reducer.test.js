@@ -14,6 +14,7 @@ describe('chatBoxReducer', () => {
       chatroomId: null,
       ids: [],
       messages: {},
+      cable: null,
     });
   });
 
@@ -30,14 +31,18 @@ describe('chatBoxReducer', () => {
 
   it('should add a message to the messages hash', () => {
     const id = 1;
+    const chatroomId = 1;
     const message =
-      { id, body: 'message body' };
+      { id, chatroomId, body: 'message body' };
+
+    const initialState = state.set('chatroomId', chatroomId);
 
     const expectedState = state
       .mergeIn(['messages', String(id)], message)
-      .set('ids', state.get('ids').concat(id));
+      .set('ids', state.get('ids').concat(id))
+      .set('chatroomId', chatroomId);
 
-    expect(chatBoxReducer(state, receiveMessage(message)))
+    expect(chatBoxReducer(initialState, receiveMessage(message)))
       .toEqual(expectedState);
   });
 });

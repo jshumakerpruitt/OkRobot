@@ -15,6 +15,7 @@ describe('appReducer', () => {
       isNavOpen: false,
       token: '',
       nextPath: '',
+      currentUser: null,
     });
   });
 

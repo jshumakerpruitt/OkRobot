@@ -22,6 +22,7 @@ import {
   STORE_TOKEN,
   REVOKE_TOKEN,
   SET_NEXT_PATH,
+  STORE_CURRENT_USER,
 } from './constants';
 
 /**
@@ -48,7 +49,12 @@ export function storeToken(token = '') {
   };
 }
 
-
+export function storeCurrentUser(currentUser) {
+  return {
+    type: STORE_CURRENT_USER,
+    currentUser,
+  };
+}
 /**
  * set the existing token to empty string
  *

@@ -1,10 +1,18 @@
-import { put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import request from '../../utils/request';
 import { receiveError, receiveSuccess } from './actions';
-import { receiveToken } from '../App/actions';
+import {
+  receiveToken,
+  storeCurrentUser,
+} from '../App/actions';
 
 import {
+  selectToken,
+} from '../App/selectors';
+
+import {
+  REQUEST_CURRENT_USER,
   API_ENDPOINT,
 } from 'containers/App/constants';
 
@@ -35,6 +43,29 @@ export function* postAuth(action) {
   } else {
     yield put(receiveSuccess());
     yield put(receiveToken(response.data.jwt));
+    yield call(fetchCurrentUser);
+  }
+}
+
+export function* fetchCurrentUser() {
+  const token = yield select(selectToken());
+
+  const response = yield request(
+    `${API_ENDPOINT}/current_user.json`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  if (response.err) {
+    // TODO: provide specific error action
+    yield put(receiveError(response.err));
+  } else {
+    yield put(storeCurrentUser(response.data.user));
   }
 }
 
@@ -43,7 +74,12 @@ export function* watchPostAuth() {
 }
 
 
+export function* watchFetchCurrentUser() {
+  yield* takeEvery(REQUEST_CURRENT_USER, fetchCurrentUser);
+}
+
 // All sagas to be loaded
 export default [
   watchPostAuth,
+  watchFetchCurrentUser,
 ];

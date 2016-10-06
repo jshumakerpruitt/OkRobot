@@ -8,22 +8,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectChatroomId } from 'containers/TestPage/selectors';
+import {
+  selectCable,
+  selectChatroomId,
+  selectSubscription,
+} from 'containers/TestPage/selectors';
+import {
+  selectCurrentUser,
+} from 'containers/App/selectors';
 import styles from './styles.css';
-import ActionCable from 'actioncable';
 import * as actions from './actions';
 
 export class ChatBox extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.props.setChatroom(this.props.partnerId);
     this.submitMsg = this.submitMsg.bind(this);
-    this.cable = ActionCable.createConsumer(
-      `ws://localhost:4000/cable?token=${this.props.token}`
-    );
   }
 
   componentWillMount() {
+    this.props.setChatroom(this.props.partnerId);
+    this.props.requestCable(this.props.token);
     this.subscribe();
   }
 
@@ -41,8 +45,10 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
   }
 
   subscribe() {
-    if (!this.subscription && this.props.chatroomId) {
-      this.subscription = this.cable.subscriptions.create(
+    if (!this.subscription &&
+        this.props.chatroomId &&
+        this.props.cable) {
+      this.subscription = this.props.cable.subscriptions.create(
         'ChatroomsChannel', {
           received: (data) => {
             this.props.receiveMessage(data.message);
@@ -53,7 +59,7 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
   }
 
   unsubscribe() {
-    this.cable.subscriptions.remove(this.subscription);
+    this.props.cable.subscriptions.remove(this.subscription);
   }
 
   submitMsg(e) {
@@ -67,6 +73,8 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
   }
 
   render() {
+    const { messages, currentUser } = this.props;
+
     return (
       <div className={styles.chatBox}>
         <div
@@ -77,13 +85,18 @@ export class ChatBox extends React.Component { // eslint-disable-line react/pref
             className={styles.messages}
           >
             {this.props.ids.map(
-               (id, i) =>
-                 <div
-                   key={i}
-                   className={`${styles.message} ${i % 2 === 0 ? styles.myMessage : styles.theirMessage}`}
-                 >
-                   { this.props.messages[id].body}
-                 </div>
+               (id, i) => {
+                 const css = messages[id].userId === currentUser ?
+                             styles.myMessage : styles.theirMessage;
+                 return (
+                   <div
+                     key={i}
+                     className={`${styles.message} ${css}`}
+                   >
+                    { this.props.messages[id].body}
+                   </div>
+                 );
+               }
              )}
           </div>
         </div>
@@ -104,14 +117,20 @@ ChatBox.propTypes = {
   ids: React.PropTypes.array,
   receiveMessage: React.PropTypes.func.isRequired,
   setChatroom: React.PropTypes.func.isRequired,
+  requestCable: React.PropTypes.func.isRequired,
   token: React.PropTypes.string.isRequired,
   original: React.PropTypes.number,
   chatroomId: React.PropTypes.number,
   partnerId: React.PropTypes.number,
+  currentUser: React.PropTypes.number,
+  cable: React.PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   chatroomId: selectChatroomId(),
+  cable: selectCable(),
+  subscription: selectSubscription(),
+  currentUser: selectCurrentUser(),
 });
 
 export default connect(mapStateToProps, actions)(ChatBox);

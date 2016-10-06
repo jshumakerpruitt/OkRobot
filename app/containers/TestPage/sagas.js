@@ -1,5 +1,4 @@
-import { watchSetChatroom } from 'containers/ChatBox/sagas';
+import chatSagas from 'containers/ChatBox/sagas';
+
 // All sagas to be loaded
-export default [
-  watchSetChatroom,
-];
+export default chatSagas;

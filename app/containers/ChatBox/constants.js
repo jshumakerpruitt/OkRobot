@@ -11,3 +11,7 @@ export const SET_CHATROOM = 'app/ChatBox/SET_CHATROOM';
 export const SET_CHATROOM_ERROR = 'app/ChatBox/SET_CHATROOM_ERROR';
 export const SET_CHATROOM_SUCCESS = 'app/ChatBox/SET_CHATROOM_SUCCESS';
 export const SET_SUBSCRIPTION = 'app/ChatBox/SET_SUBSCRIPTION';
+export const REQUEST_CABLE = 'app/ChatBox/REQUEST_CABLE';
+export const RECEIVE_CABLE = 'app/ChatBox/RECEIVE_CABLE';
+export const REQUEST_SUBSCRIPTION = 'app/ChatBox/REQUEST_SUBSCRIPTION';
+export const RECEIVE_SUBSCRIPTION = 'app/ChatBox/RECEIVE_SUBSCRIPTION';

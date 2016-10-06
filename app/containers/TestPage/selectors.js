@@ -34,10 +34,22 @@ const selectChatroomId = () => createSelector(
   (substate) => substate.get('chatroomId')
 );
 
+const selectCable = () => createSelector(
+  selectTestPageDomain(),
+  (substate) => substate.get('cable')
+);
+
+const selectSubscription = () => createSelector(
+  selectTestPageDomain(),
+  (substate) => substate.get('subscription')
+);
+
 export default selectTestPage;
 export {
+  selectSubscription,
   selectTestPageDomain,
   selectMessages,
   selectIds,
   selectChatroomId,
+  selectCable,
 };

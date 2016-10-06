@@ -12,6 +12,7 @@
 
 import {
   STORE_TOKEN,
+  STORE_CURRENT_USER,
   REVOKE_TOKEN,
   OPEN_NAV,
   CLOSE_NAV,
@@ -27,6 +28,7 @@ const initialState = fromJS({
   isNavOpen: false,
   token: '',
   nextPath: '',
+  currentUser: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -38,6 +40,9 @@ function appReducer(state = initialState, action) {
     case STORE_TOKEN:
       return state
         .set('token', action.token);
+    case STORE_CURRENT_USER:
+      return state
+      .set('currentUser', action.currentUser);
     case REVOKE_TOKEN:
       return state
         .set('token', '');

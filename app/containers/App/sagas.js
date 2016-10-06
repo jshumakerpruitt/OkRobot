@@ -9,28 +9,36 @@ import {
 import {
   receiveToken,
   storeToken,
+  storeCurrentUser,
 } from './actions';
+
+export function retrieveFromPayload(key, action) {
+  return (action.payload.global &&
+          action.payload.global.toJS()[key]);
+}
 
 // Individual exports for testing
 export function* rehydrate(action) {
-  const token = (action.payload.global &&
-                action.payload.global.toJS().token) ||
-                '';
-  if (token.length > 0) {
+  const token = retrieveFromPayload('token', action);
+  const currentUser = retrieveFromPayload('currentUser', action);
+
+  if (token) {
     yield put(receiveToken(token));
+  }
+
+  if (currentUser) {
+    yield put(storeCurrentUser(currentUser));
   }
 }
 
 export function* processToken(action) {
   const token = action.token || '';
-
 /*
   let nextPath = yield select(selectNextPath()) || '';
   if (nextPath.length === 0) {
     nextPath = '/browse';
   }
 */
-
   if (token.length > 0) {
     yield put(storeToken(token));
     // yield put(push(nextPath));
