@@ -47,8 +47,8 @@
     "test:ie": "npm run test -- --browsers IE",
     "coveralls": "cat ./coverage/lcov/lcov.info | coveralls",
     "surge": "surge ./build/ okrobot.surge.sh",
-    "predeploy": "cp ./build/index.html ./build/200.html",
-    "deploy": "npm run build && npm run predeploy && npm run surge"
+    "presurge": "cp ./build/index.html ./build/200.html",
+    "deploy": "npm run build && npm run surge"
   },
   "lint-staged": {
     "*.js": "lint:eslint",
@@ -208,6 +208,7 @@
     "react-router-scroll": "0.2.1",
     "react-scroll": "1.4.0",
     "react-tap-event-plugin": "^1.0.0",
+    "rebass": "0.3.3",
     "redux": "3.5.2",
     "redux-form": "6.0.5",
     "redux-immutable": "3.0.7",

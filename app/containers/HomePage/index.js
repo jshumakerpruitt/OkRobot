@@ -49,7 +49,6 @@ export class HomePage extends React.Component {
           <Paper
             className={styles.paper}
             zDepth={1}
-            style={{ width: '100%' }}
           >
             <div className={styles.logo}>
               <h1>OkRobot</h1>
@@ -59,13 +58,13 @@ export class HomePage extends React.Component {
           <Paper
             className={styles.paper}
             zDepth={1}
-            style={{ width: '100%' }}
           >
             <div className={styles.form}>
               <Login />
             </div>
           </Paper>
           <Paper
+            style={{ marginBottom: '5px' }}
             className={styles.paper}
             zDepth={1}
           >

@@ -7,10 +7,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form/immutable';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 import styles from './styles.css';
 
-import TextField from 'material-ui/TextField';
 const textField = (hintText, type = 'text') => (field) => (
   <TextField
     type={type}

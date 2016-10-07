@@ -8,7 +8,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
-import ProfileGrid from '../../components/ProfileGrid';
+import Paper from 'material-ui/Paper';
+import ProfileGrid from 'components/ProfileGrid';
+import UserFilter from 'components/UserFilter';
 import * as actions from './actions';
 import { selectUsers } from './selectors';
 import styles from './styles.css';
@@ -28,6 +30,17 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
             { name: 'description', content: 'Description of BrowsePage' },
           ]}
         />
+        <div className={styles.formWrapper}>
+          <Paper
+            className={styles.paper}
+            zDepth={1}
+            style={{ maxWidth: '100%' }}
+          >
+            <div className={styles.form}>
+              <UserFilter />
+            </div>
+          </Paper>
+        </div>
         <ProfileGrid
           users={this.props.users}
           submitLike={this.props.submitLike}
