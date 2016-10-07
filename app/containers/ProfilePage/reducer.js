@@ -10,10 +10,10 @@ import { users, ids } from 'containers/BrowsePage/reducer';
 import {
 //  REQUEST_USER,
 //  RECEIVE_USER,
-  RECEIVE_LIKE,
 //  RECEIVE_USER_ERROR,
 } from './constants';
 import {
+  RECEIVE_LIKE,
   RECEIVE_USER,
   } from 'containers/BrowsePage/constants';
 

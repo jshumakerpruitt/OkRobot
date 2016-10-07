@@ -18,6 +18,7 @@ import {
 
 import {
   API_ROOT,
+  SOCKET_URL,
 } from 'containers/App/constants';
 
 import {
@@ -60,7 +61,7 @@ export function* chatroomData() {
 
 export function* createCable(action) {
   const cable = ActionCable.createConsumer(
-    `ws://localhost:4000/cable?token=${action.token}`
+    `${SOCKET_URL}?token=${action.token}`
   );
   yield put(receiveCable(cable));
 }

@@ -46,7 +46,9 @@
     "test:safari": "npm run test -- --browsers Safari",
     "test:ie": "npm run test -- --browsers IE",
     "coveralls": "cat ./coverage/lcov/lcov.info | coveralls",
-    "surge": "surge ./build/ okrobot.surge.sh"
+    "surge": "surge ./build/ okrobot.surge.sh",
+    "predeploy": "cp ./build/index.html ./build/200.html",
+    "deploy": "npm run build && npm run predeploy && npm run surge"
   },
   "lint-staged": {
     "*.js": "lint:eslint",
