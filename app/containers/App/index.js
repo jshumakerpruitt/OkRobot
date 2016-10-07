@@ -30,7 +30,7 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
     const token = this.props.token || '';
     const links = [
       { to: '/', text: 'Home' },
-      { to: '/browse', text: 'Browse' },
+      { to: '/', text: 'Browse' },
       { to: '/profile', text: 'Profile' },
     ];
     return (

@@ -1,14 +1,15 @@
 import { call, put, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-import { push } from 'react-router-redux';
 import request, { getOptions } from '../../utils/request';
 import { receiveError, receiveSuccess } from './actions';
 import {
   receiveToken,
   storeCurrentUser,
+  setNextPath,
 } from '../App/actions';
 
 import {
+  selectNextPath,
   selectToken,
 } from '../App/selectors';
 
@@ -36,10 +37,13 @@ export function* postAuth(action) {
   if (response.err) {
     yield put(receiveError(response.err));
   } else {
+    let nextPath = yield select(selectNextPath()) || '';
+    nextPath = nextPath.length > 0 ? nextPath : '/';
+
+    yield put(setNextPath(nextPath));
     yield put(receiveSuccess());
     yield put(receiveToken(response.data.jwt));
     yield call(fetchCurrentUser);
-    yield put(push('/browse'));
   }
 }
 

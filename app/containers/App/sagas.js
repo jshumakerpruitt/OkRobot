@@ -1,8 +1,8 @@
-import { fork, put } from 'redux-saga/effects';
+import { select, fork, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
-// import { push } from 'react-router-redux';
+import { push } from 'react-router-redux';
 import { REHYDRATE } from 'redux-persist/constants';
-// import { selectNextPath } from './selectors';
+import { selectNextPath } from './selectors';
 import {
   RECEIVE_TOKEN,
 } from './constants';
@@ -10,6 +10,7 @@ import {
   receiveToken,
   storeToken,
   storeCurrentUser,
+  setNextPath,
 } from './actions';
 
 export function retrieveFromPayload(key, action) {
@@ -33,15 +34,14 @@ export function* rehydrate(action) {
 
 export function* processToken(action) {
   const token = action.token || '';
-/*
-  let nextPath = yield select(selectNextPath()) || '';
-  if (nextPath.length === 0) {
-    nextPath = '/browse';
-  }
-*/
+  const nextPath = yield select(selectNextPath());
+
   if (token.length > 0) {
     yield put(storeToken(token));
-    // yield put(push(nextPath));
+    if (nextPath.length > 0) {
+      yield put(push(nextPath));
+      yield put(setNextPath(''));
+    }
   }
 }
 
