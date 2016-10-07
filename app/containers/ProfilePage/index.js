@@ -10,12 +10,19 @@ import { Link } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import Helmet from 'react-helmet';
 import {
-  selectUser,
   selectUsers,
   selectProfilePage,
 } from './selectors';
-import styles from './styles.css';
 import * as actions from './actions';
+
+import styles from './styles.css';
+
+import randomPic1 from 'random1.png';
+import randomPic2 from 'random2.png';
+import randomPic3 from 'random3.png';
+import randomPic4 from 'random4.png';
+
+const pics = [randomPic1, randomPic2, randomPic3, randomPic4];
 
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton/IconButton';
@@ -57,7 +64,7 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
               <div className={styles.avatarWrapper}>
                 <img
                   className={styles.avatar}
-                  src={user.avatar}
+                  src={pics[user.id % 4]}
                   alt="profile"
                 />
               </div>
@@ -149,7 +156,6 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
 }
 
 ProfilePage.propTypes = {
-  user: React.PropTypes.object.isRequired,
   users: React.PropTypes.object.isRequired,
   params: React.PropTypes.object.isRequired,
   fetchUser: React.PropTypes.func.isRequired,
@@ -157,7 +163,6 @@ ProfilePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: selectUser(),
   users: selectUsers(),
   all: selectProfilePage(),
 });

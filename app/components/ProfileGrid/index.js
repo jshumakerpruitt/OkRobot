@@ -8,11 +8,12 @@ import React from 'react';
 import { Link } from 'react-router';
 import { GridTile } from 'material-ui/GridList';
 import ActionIcon from '../ActionIcon';
-import randomPic1 from './random1.png';
-import randomPic2 from './random2.png';
-import randomPic3 from './random3.png';
-import randomPic4 from './random4.png';
+import randomPic1 from 'random1.png';
+import randomPic2 from 'random2.png';
+import randomPic3 from 'random3.png';
+import randomPic4 from 'random4.png';
 
+const pics = [randomPic1, randomPic2, randomPic3, randomPic4];
 import styles from './styles.css';
 
 const ProfileGrid = ({
@@ -34,12 +35,7 @@ const ProfileGrid = ({
           <Link className={styles.link} to={`profile/${user.id}`}>
             <img
               style={{ width: '100%', height: 'auto' }}
-              src={[
-                randomPic1,
-                randomPic2,
-                randomPic3,
-                randomPic4,
-              ][user.id % 4]}
+              src={pics[user.id % 4]}
               alt="profile"
             />
           </Link>
