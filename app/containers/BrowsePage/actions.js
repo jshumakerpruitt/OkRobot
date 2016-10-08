@@ -5,7 +5,7 @@
  */
 
 import { normalize } from 'normalizr';
-import * as schema from '../../utils/schema';
+import * as schema from 'utils/schema';
 import {
   REQUEST_USERS,
   RECEIVE_USERS,
@@ -16,10 +16,10 @@ import {
   RECEIVE_LIKE_ERROR,
 } from './constants';
 
-export function fetchUsers(token) {
+export function fetchUsers(params) {
   return {
     type: FETCH_USERS,
-    token,
+    params,
   };
 }
 
@@ -32,7 +32,7 @@ export const receiveUsers = (users) => {
   const resp = normalize(users, schema.arrayOfUsers);
   return {
     type: RECEIVE_USERS,
-    users: resp.entities.users,
+    users: resp.entities.users || {},
     ids: resp.result,
   };
 };

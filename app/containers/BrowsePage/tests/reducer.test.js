@@ -81,9 +81,8 @@ describe('browsePageReducer', () => {
     });
 
     // users
-    it('adds new users to end of array', () => {
+    it('adds new users', () => {
       expect(nextState.get('users')).toEqual(fromJS({
-        ...initialUsers,
         1: receivedUsers[0],
         2: receivedUsers[1],
       }));

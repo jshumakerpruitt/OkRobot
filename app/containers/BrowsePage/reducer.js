@@ -56,7 +56,7 @@ export const ids = (
 ) => {
   switch (action.type) {
     case RECEIVE_USERS:
-      return state.concat(action.ids);
+      return fromJS(action.ids);
     case RECEIVE_USER:
       return state.concat(action.user.id);
     default:
@@ -67,7 +67,7 @@ export const ids = (
 export const users = (state = fromJS({}), action) => {
   switch (action.type) {
     case RECEIVE_USERS:
-      return state.merge(fromJS(action.users));
+      return fromJS(action.users);
     case RECEIVE_USER:
       return state.set(
         String(action.user.id),

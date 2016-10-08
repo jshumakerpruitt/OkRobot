@@ -18,7 +18,7 @@ import styles from './styles.css';
 export class BrowsePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
     if (this.props.users.length === 0) {
-      this.props.fetchUsers();
+      // this.props.fetchUsers();
     }
   }
   render() {
@@ -37,7 +37,7 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
             style={{ maxWidth: '100%' }}
           >
             <div className={styles.form}>
-              <UserFilter />
+              <UserFilter fetchUsers={this.props.fetchUsers} />
             </div>
           </Paper>
         </div>

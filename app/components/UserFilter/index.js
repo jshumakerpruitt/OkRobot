@@ -34,33 +34,38 @@ const selectField = (label, items) => (field) =>
     {items}
   </SelectField>;
 
-function UserFilter() {
-  return (
-    <div className={styles.userFilter}>
-      <form className={styles.filterForm}>
-        <Field
-          name="Gender"
-          component={selectField('Gender', genders)}
-        />
-        <Field
-          name="minAge"
-          component={selectField('Min Age', ages)}
-        />
-        <Field
-          name="maxAge"
-          component={selectField('Max Age', ages)}
-        />
-        <RaisedButton
-          type="submit"
-          className={styles.button}
-          primary
-          label="Search"
-          style={{ width: '100%' }}
-        />
-      </form>
-    </div>
-  );
-}
+const UserFilter = ({ handleSubmit, fetchUsers }) =>
+  <div className={styles.userFilter}>
+    <form
+      onSubmit={handleSubmit(data => fetchUsers(data.toJS()))}
+      className={styles.filterForm}
+    >
+      <Field
+        name="gender"
+        component={selectField('Gender', genders)}
+      />
+      <Field
+        name="minAge"
+        component={selectField('Min Age', ages)}
+      />
+      <Field
+        name="maxAge"
+        component={selectField('Max Age', ages)}
+      />
+      <RaisedButton
+        type="submit"
+        className={styles.button}
+        primary
+        label="Search"
+        style={{ width: '100%' }}
+      />
+    </form>
+  </div>;
+
+UserFilter.propTypes = {
+  handleSubmit: React.PropTypes.func.isRequired,
+  fetchUsers: React.PropTypes.func.isRequired,
+};
 
 export default reduxForm({
   form: 'userFilter',

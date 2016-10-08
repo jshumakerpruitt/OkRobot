@@ -15,15 +15,32 @@ import {
   receiveLike,
 } from './actions';
 
+const buildQstring = (params = {}) => {
+  let result = '?';
+  if (params.gender) {
+    result += `gender=${params.gender}&`;
+  }
+
+  if (params.minAge) {
+    result += `minAge=${params.minAge}&`;
+  }
+
+  if (params.maxAge) {
+    result += `maxAge=${params.maxAge}&`;
+  }
+  return result.length > 1 ? result : '';
+};
+
 // Individual exports for testing
-export function* fetchUsersSaga() {
+export function* fetchUsersSaga(action) {
   yield put(requestUsers());
 
   const token = yield select(selectToken());
+  const qString = buildQstring(action.params);
 
   const users = yield call(
     request,
-    `${API_ROOT}/users`,
+    `${API_ROOT}/users${qString}`,
     getOptions({ token }),
   );
 
