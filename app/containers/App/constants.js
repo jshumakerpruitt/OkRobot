@@ -9,10 +9,10 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const API_ROOT = 'http://localhost:4000';
+// export const API_ROOT = 'http://localhost:4000';
 // export const SOCKET_URL = 'ws://localhost:4000/cable'
-// export const API_ROOT = 'https://ok-robot.herokuapp.com';
-export const SOCKET_URL = 'wss://ok-robot.herokuapp.com/cable';
+export const API_ROOT = 'https://okrobot.herokuapp.com';
+export const SOCKET_URL = 'wss://okrobot.herokuapp.com/cable';
 export const RECEIVE_TOKEN = 'okrobot/App/RECEIVE_TOKEN';
 export const STORE_TOKEN = 'okrobot/App/STORE_TOKEN';
 export const STORE_CURRENT_USER = 'okrobot/App/STORE_CURRENT_USER';
@@ -21,7 +21,6 @@ export const REVOKE_TOKEN = 'okrobot/App/REVOKE_TOKEN';
 export const OPEN_NAV = 'okrobot/App/OPEN_NAV';
 export const CLOSE_NAV = 'okrobot/App/CLOSE_NAV';
 export const SET_REDIRECT = 'okrobot/App/SET_REDIRECT';
-export const PUBLIC_ROUTES = ['/', '/login', '/signup'];
 export const SUBMIT_LOGIN = 'okrobot/App/SUBMIT_LOGIN';
 export const RECEIVE_ERROR = 'okrobot/App/RECEIVE_ERROR';
 export const RECEIVE_SUCCESS = 'okrobot/App/RECEIVE_SUCCESS';

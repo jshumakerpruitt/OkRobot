@@ -135,6 +135,46 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/verify',
+      name: 'verifyPage',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/VerifyPage/reducer'),
+          System.import('containers/VerifyPage/sagas'),
+          System.import('containers/VerifyPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('verifyPage', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/profile',
+      name: 'userProfile',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          System.import('containers/UserProfile/reducer'),
+          System.import('containers/UserProfile/sagas'),
+          System.import('containers/UserProfile'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('userProfile', reducer.default);
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {
