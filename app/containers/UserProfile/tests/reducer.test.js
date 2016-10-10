@@ -1,4 +1,3 @@
-/* eslint-disable */
 /*
 import expect from 'expect';
 import userProfileReducer from '../reducer';

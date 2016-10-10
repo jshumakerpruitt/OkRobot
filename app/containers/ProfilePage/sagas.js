@@ -1,4 +1,4 @@
-import { likeData } from 'containers/BrowsePage/sagas';
+import { likeData } from 'containers/HomePage/sagas';
 import { select, call, put } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { selectToken } from '../App/selectors';
@@ -12,8 +12,6 @@ import {
   receiveUserError,
   receiveUser,
 } from './actions';
-// import {
-// } from 'containers/BrowsePage/actions'
 
 // Individual exports for testing
 export function* fetchUser(action) {

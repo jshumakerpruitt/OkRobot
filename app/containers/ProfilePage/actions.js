@@ -12,11 +12,11 @@ import {
 } from './constants';
 import {
   RECEIVE_USER,
-  } from 'containers/BrowsePage/constants';
+  } from 'containers/HomePage/constants';
 
-import * as browsePageActions from 'containers/BrowsePage/actions';
-export const submitLike = browsePageActions.submitLike;
-export const receiveLike = browsePageActions.receiveLike;
+import * as homePageActions from 'containers/HomePage/actions';
+export const submitLike = homePageActions.submitLike;
+export const receiveLike = homePageActions.receiveLike;
 
 export function requestUser(id) {
   return {

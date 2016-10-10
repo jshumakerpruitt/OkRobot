@@ -21,9 +21,21 @@ const selectLogin = () => createSelector(
   (homeState) => homeState.get('login').toJS()
 );
 
+const selectUsers = () => createSelector(
+  selectHome(),
+  (substate) => {
+    const users = substate.get('users');
+    return substate
+      .get('ids')
+      .map(id => users.get(String(id)))
+      .toJS();
+  },
+);
+
 export {
   selectLogin,
   selectHome,
   selectHomeDomain,
   selectRandomUsers,
+  selectUsers,
 };

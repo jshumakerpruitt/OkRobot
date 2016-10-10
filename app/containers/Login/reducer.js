@@ -18,9 +18,6 @@ const initialState = fromJS({
     email: '',
     password: '',
   }),
-  redirectPath: '',
-  error: false,
-  isSubmitting: false,
 });
 
 function loginReducer(state = initialState, action) {

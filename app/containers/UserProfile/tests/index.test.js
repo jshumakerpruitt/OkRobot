@@ -1,4 +1,3 @@
-/* eslint-disable */
 // import UserProfile from '../index';
 /*
 import expect from 'expect';

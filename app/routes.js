@@ -31,7 +31,7 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/login',
+      path: '/',
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
@@ -46,27 +46,6 @@ export default function createRoutes(store) {
           injectReducer('home', reducer.default);
           injectSagas(sagas.default);
 
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
-      onEnter: checkToken(store),
-      path: '/',
-      name: 'browsePage',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/BrowsePage/reducer'),
-          System.import('containers/BrowsePage/sagas'),
-          System.import('containers/BrowsePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('browsePage', reducer.default);
-          injectSagas(sagas.default);
           renderRoute(component);
         });
 
