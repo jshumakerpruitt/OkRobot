@@ -4,20 +4,24 @@
  *
  */
 
-import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+// import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  RECEIVE_CURRENT_USER_PROFILE,
 } from './constants';
 
-const initialState = fromJS({});
-
-function userProfileReducer(state = initialState, action) {
+const currentUserProfile = (
+  state = {},
+  action
+) => {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case RECEIVE_CURRENT_USER_PROFILE:
+      return action.currentUserProfile;
     default:
       return state;
   }
-}
+};
 
-export default userProfileReducer;
+export default combineReducers({
+  currentUserProfile,
+});

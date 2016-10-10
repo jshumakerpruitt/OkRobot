@@ -30,6 +30,14 @@ export class BrowsePage extends React.Component { // eslint-disable-line react/p
             { name: 'description', content: 'Description of BrowsePage' },
           ]}
         />
+        <Paper
+          className={styles.title}
+          zDepth={1}
+        >
+          <div className={styles.logo}>
+            <h1 style={{ minWidth: '100%' }}>OkRobot</h1>
+          </div>
+        </Paper>
         <div className={styles.formWrapper}>
           <Paper
             className={styles.paper}

@@ -5,11 +5,27 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  DELETE_USER,
+  REQUEST_CURRENT_USER,
+  RECEIVE_CURRENT_USER_PROFILE,
 } from './constants';
 
-export function defaultAction() {
+export function deleteUser(token) {
   return {
-    type: DEFAULT_ACTION,
+    type: DELETE_USER,
+    token,
+  };
+}
+
+export function requestCurrentUser() {
+  return {
+    type: REQUEST_CURRENT_USER,
+  };
+}
+
+export function receiveCurrentUserProfile(currentUserProfile) {
+  return {
+    type: RECEIVE_CURRENT_USER_PROFILE,
+    currentUserProfile,
   };
 }

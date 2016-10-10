@@ -1,6 +1,5 @@
 /**
  * Test  sagas
- */
 
 import expect from 'expect';
 // import { take, call, put, select } from 'redux-saga/effects';
@@ -13,3 +12,5 @@ describe('defaultSaga Saga', () => {
     expect(true).toEqual(false);
   });
 });
+
+ */

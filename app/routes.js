@@ -155,6 +155,7 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      onEnter: checkToken(store),
       path: '/profile',
       name: 'userProfile',
       getComponent(nextState, cb) {

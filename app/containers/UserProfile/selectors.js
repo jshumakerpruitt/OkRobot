@@ -19,7 +19,14 @@ const selectUserProfile = () => createSelector(
   (substate) => substate.toJS()
 );
 
+const selectCurrentUserProfile = () => createSelector(
+  selectUserProfileDomain(),
+  (substate) => substate.get('currentUserProfile') // .toJS()
+);
+
+
 export default selectUserProfile;
 export {
   selectUserProfileDomain,
+  selectCurrentUserProfile,
 };

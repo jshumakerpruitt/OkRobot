@@ -96,7 +96,7 @@ export class ProfilePage extends React.Component { // eslint-disable-line react/
                   style={{ marginRight: '5px', color: likeColor }}
                   backgroundColor="#0c97eb"
                   hoverColor="#0B58E1"
-                  label=""
+                  label="Like"
                   secondary
                   icon={<IconStar style={{ color: 'yellow' }} />}
                   onClick={() => {

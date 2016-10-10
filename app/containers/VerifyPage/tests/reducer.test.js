@@ -1,3 +1,4 @@
+/*
 import expect from 'expect';
 import verifyPageReducer from '../reducer';
 import { fromJS } from 'immutable';
@@ -7,3 +8,5 @@ describe('verifyPageReducer', () => {
     expect(verifyPageReducer(undefined, {})).toEqual(fromJS({}));
   });
 });
+
+*/

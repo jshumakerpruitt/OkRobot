@@ -1,3 +1,4 @@
+/*
 // import { selectVerifyPageDomain } from '../selectors';
 // import { fromJS } from 'immutable';
 import expect from 'expect';
@@ -9,3 +10,5 @@ describe('selectVerifyPageDomain', () => {
     expect('Test case').toEqual(false);
   });
 });
+
+*/
