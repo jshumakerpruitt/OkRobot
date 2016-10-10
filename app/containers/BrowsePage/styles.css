@@ -36,7 +36,7 @@
   display: flex;
   flex: 1;
   min-width: calc(100% - 10px);
-  margin: 5px;
+  margin: 59px 5px 5px;
 }
 
 h1 {
@@ -46,7 +46,7 @@ h1 {
 
 .logo {
   width: 100%;
-  color: #00BCD4;
+  color: #303F9F;
   display: flex;
   justify-content: center;
   padding: 15px 0;

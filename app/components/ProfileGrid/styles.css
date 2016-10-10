@@ -10,7 +10,7 @@
   box-sizing: border-box;
   margin: 5px;
   max-width: calc((810px / 3) - 10px);
-  background-color: #400CD4;
+  background: #303F9F;
 }
 
 .link {

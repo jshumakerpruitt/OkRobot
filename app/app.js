@@ -27,6 +27,42 @@ import configureStore from './store';
 
 // Import material-ui
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    textColor: '#212121',
+    primary1Color: '#303F9E',
+    primary2Color: '#3F51B5',
+    primary3Color: '#C5CAE9',
+    accent1Color: '#03A9F4',
+    accent2Color: '#BDBDBD',
+    accent3Color: '#757575',
+    secondaryTextColor: '#757575',
+    alternateTextColor: '#FFF',
+    canvasColor: '#FFF',
+    borderColor: '#BDBDBD',
+    // pickerHeaderColor: cyan500,
+    shadowColor: '#000',
+  },
+  Paper: {
+    palette: {
+      textColor: '#212121',
+      primary1Color: '#303F9F',
+      primary2Color: '#3F51B5',
+      primary3Color: '#C5CAE9',
+      accent1Color: '#03A9F4',
+      accent2Color: '#BDBDBD',
+      accent3Color: '#757575',
+      secondaryTextColor: '#757575',
+      alternateTextColor: '#FFF',
+      canvasColor: '#FFF',
+      borderColor: '#BDBDBD',
+      // pickerHeaderColor: cyan500,
+      shadowColor: '#000',
+    },
+  },
+});
 
 
 // Import Language Provider
@@ -90,7 +126,7 @@ const render = (translatedMessages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={translatedMessages}>
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={muiTheme}>
           <Router
             history={history}
             routes={rootRoute}
@@ -98,7 +134,7 @@ const render = (translatedMessages) => {
               // Scroll to top when going to a new page, imitating default browser
               // behaviour
               applyRouterMiddleware(useScroll())
-                   }
+                    }
           />
         </MuiThemeProvider>
       </LanguageProvider>

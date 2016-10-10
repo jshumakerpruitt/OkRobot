@@ -46,47 +46,49 @@ export class HomePage extends React.Component {
           ]}
         />
         <div>
-          <Paper
-            className={styles.paper}
-            zDepth={1}
-          >
-            <div className={styles.logo}>
-              <h1>OkRobot</h1>
-            </div>
-          </Paper>
-
-          <Paper
-            className={styles.paper}
-            zDepth={1}
-          >
-            <div className={styles.form}>
-              <Login />
-            </div>
-          </Paper>
-          <Paper
-            style={{ marginBottom: '5px' }}
-            className={styles.paper}
-            zDepth={1}
-          >
-            <div className={styles.text}>
-              <h1>The Best Place to Meet Robots</h1>
-              <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut libero viverra, tempor libero eu, suscipit elit. Proin at suscipit mauris, in porta nibh. Nullam fringilla consectetur elit, ut tincidunt ligula vestibulum in. Nulla lorem purus, congue ut luctus id, congue vitae ante. Suspendisse ac sapien est.
-              </p>
-              <div className={styles.buttonWrapper}>
-                <Link to="/signup">
-                  <RaisedButton
-                    className={styles.button}
-                    label="Join Now"
-                    primary
-                  />
-                </Link>
+          <div className={styles.bannerWrapper}>
+            <div className={styles.banner}>
+              <div className={styles.logo}>
+                <div className={styles.logoInner}>
+                  <h1>OkRobot</h1>
+                </div>
               </div>
             </div>
-          </Paper>
-          <ProfileGrid
-            users={this.props.randomUsers}
-            submitLike={this.openLogin}
-          />
+          </div>
+          <div className={styles.homePageInner}>
+            <Paper
+              className={styles.paper}
+              zDepth={1}
+            >
+              <div className={styles.form}>
+                <Login />
+              </div>
+            </Paper>
+            <Paper
+              style={{ marginBottom: '5px' }}
+              className={styles.paper}
+              zDepth={1}
+            >
+              <div className={styles.text}>
+                <h1>The Best Place to Meet Robots</h1>
+                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut libero viverra, tempor libero eu, suscipit elit. Proin at suscipit mauris, in porta nibh. Nullam fringilla consectetur elit, ut tincidunt ligula vestibulum in. Nulla lorem purus, congue ut luctus id, congue vitae ante. Suspendisse ac sapien est.
+                </p>
+                <div className={styles.buttonWrapper}>
+                  <Link to="/signup">
+                    <RaisedButton
+                      className={styles.button}
+                      label="Join Now"
+                      primary
+                    />
+                  </Link>
+                </div>
+              </div>
+            </Paper>
+            <ProfileGrid
+              users={this.props.randomUsers}
+              submitLike={this.openLogin}
+            />
+          </div>
         </div>
       </article>
     );
