@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { take, call, put, select } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import { takeEvery } from 'redux-saga';
 import { push } from 'react-router-redux';
 import request, { getOptions } from 'utils/request';
@@ -36,10 +35,7 @@ export function* requestDelete() {
     })
   );
 
-  if (response.err) {
-    console.log(response.err);
-  } else {
-    console.log(response.data);
+  if (!response.err) {
     yield put(revokeToken());
     yield put(push('/login'));
   }
@@ -58,19 +54,16 @@ export function* fetchCurrentUser() {
   const response = yield call(
     request,
     `${API_ROOT}/users/${id}`,
-    getOptions({token,})
-  )
+    getOptions({ token })
+  );
 
-  if (response.err) {
-    console.log(response.err)
-  } else {
-    console.log(response.data.user)
-    yield put(receiveCurrentUserProfile(response.data.user))
+  if (!response.err) {
+    yield put(receiveCurrentUserProfile(response.data.user));
   }
 }
 
 export function* watchRequestCurrentUser() {
-  yield* takeEvery(REQUEST_CURRENT_USER, fetchCurrentUser)
+  yield* takeEvery(REQUEST_CURRENT_USER, fetchCurrentUser);
 }
 
 // All sagas to be loaded

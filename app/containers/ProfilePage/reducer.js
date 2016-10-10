@@ -6,7 +6,7 @@
 
 // import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
-import { users, ids } from 'containers/BrowsePage/reducer';
+import { users, ids } from 'containers/HomePage/reducer';
 
 const profilePageReducer = combineReducers({
   users,

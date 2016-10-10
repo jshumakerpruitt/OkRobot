@@ -30,7 +30,7 @@ describe('Home Actions', () => {
   });
 });
 
-describe('BrowsePage actions', () => {
+describe('HomePage actions', () => {
   describe('requestUsers', () => {
     it('has a type of REQUEST_USERS', () => {
       expect(requestUsers().type).toEqual(REQUEST_USERS);

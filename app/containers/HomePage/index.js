@@ -34,6 +34,8 @@ export class HomePage extends React.Component {
   componentDidMount() {
     if (!this.isLoggedIn()) {
       this.props.fetchRandomUsers();
+    } else if (this.props.users.length === 0) {
+      this.props.fetchUsers();
     }
   }
 
