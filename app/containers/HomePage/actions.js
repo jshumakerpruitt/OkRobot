@@ -14,12 +14,60 @@
  *        return { type: YOUR_ACTION_CONSTANT, var: var }
  *    }
  */
+import { normalize } from 'normalizr';
+import * as schema from 'utils/schema';
 import {
-  FETCH_RANDOM_USERS,
+  REQUEST_USERS,
   REQUEST_RANDOM_USERS,
-  RECEIVE_RANDOM_USERS,
+  RECEIVE_USERS,
   RECEIVE_ERROR,
+  FETCH_USERS,
+  FETCH_RANDOM_USERS,
+  SUBMIT_LIKE,
+  RECEIVE_LIKE,
+  RECEIVE_LIKE_ERROR,
 } from './constants';
+
+export function fetchUsers(params) {
+  return {
+    type: FETCH_USERS,
+    params,
+  };
+}
+
+export function requestUsers() {
+  return {
+    type: REQUEST_USERS,
+  };
+}
+export const receiveUsers = (users) => {
+  const resp = normalize(users, schema.arrayOfUsers);
+  return {
+    type: RECEIVE_USERS,
+    users: resp.entities.users || {},
+    ids: resp.result,
+  };
+};
+
+export function submitLike(id, liked) {
+  return {
+    type: SUBMIT_LIKE,
+    like: { id, liked },
+  };
+}
+export function receiveLike(like) {
+  return {
+    type: RECEIVE_LIKE,
+    like,
+  };
+}
+
+export function receiveLikeError(error) {
+  return {
+    type: RECEIVE_LIKE_ERROR,
+    error,
+  };
+}
 
 export function fetchRandomUsers() {
   return {
@@ -30,13 +78,6 @@ export function fetchRandomUsers() {
 export function requestRandomUsers() {
   return {
     type: REQUEST_RANDOM_USERS,
-  };
-}
-
-export function receiveRandomUsers(randomUsers) {
-  return {
-    type: RECEIVE_RANDOM_USERS,
-    randomUsers,
   };
 }
 

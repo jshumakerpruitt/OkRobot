@@ -12,8 +12,9 @@ import Helmet from 'react-helmet';
 
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import ProfileGrid from 'components/ProfileGrid';
 
+import UserFilter from 'components/UserFilter';
+import ProfileGrid from 'components/ProfileGrid';
 import Login from 'containers/Login';
 
 import { createStructuredSelector } from 'reselect';
@@ -21,19 +22,24 @@ import { createStructuredSelector } from 'reselect';
 import * as actions from './actions';
 import * as loginSelectors from 'containers/Login/selectors';
 import {
-  selectRandomUsers,
+  selectUsers,
   selectHome,
 } from './selectors';
+
+import { selectToken } from 'containers/App/selectors';
 
 import styles from './styles.css';
 
 export class HomePage extends React.Component {
-  /**
-   * Changes the route
-   * @param  {string} route The route we want to go to
-   */
   componentDidMount() {
-    this.props.fetchRandomUsers();
+    if (!this.isLoggedIn()) {
+      this.props.fetchRandomUsers();
+    }
+  }
+
+  isLoggedIn() {
+    const token = this.props.token || '';
+    return token.length > 0;
   }
 
   render() {
@@ -55,37 +61,41 @@ export class HomePage extends React.Component {
               </div>
             </div>
           </div>
+
           <div className={styles.homePageInner}>
             <Paper
               className={styles.paper}
               zDepth={1}
             >
               <div className={styles.form}>
-                <Login />
+                {this.isLoggedIn() ? <UserFilter fetchUsers={this.props.fetchUsers} /> : <Login />}
               </div>
             </Paper>
-            <Paper
-              style={{ marginBottom: '5px' }}
-              className={styles.paper}
-              zDepth={1}
-            >
-              <div className={styles.text}>
-                <h1>The Best Place to Meet Robots</h1>
-                <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut libero viverra, tempor libero eu, suscipit elit. Proin at suscipit mauris, in porta nibh. Nullam fringilla consectetur elit, ut tincidunt ligula vestibulum in. Nulla lorem purus, congue ut luctus id, congue vitae ante. Suspendisse ac sapien est.
-                </p>
-                <div className={styles.buttonWrapper}>
-                  <Link to="/signup">
-                    <RaisedButton
-                      className={styles.button}
-                      label="Join Now"
-                      primary
-                    />
-                  </Link>
+            {this.isLoggedIn() ?
+            '' :
+              <Paper
+                style={{ marginBottom: '5px' }}
+                className={styles.paper}
+                zDepth={1}
+              >
+                <div className={styles.text}>
+                  <h1>The Best Place to Meet Robots</h1>
+                  <p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut libero viverra, tempor libero eu, suscipit elit. Proin at suscipit mauris, in porta nibh. Nullam fringilla consectetur elit, ut tincidunt ligula vestibulum in. Nulla lorem purus, congue ut luctus id, congue vitae ante. Suspendisse ac sapien est.
+                  </p>
+                  <div className={styles.buttonWrapper}>
+                    <Link to="/signup">
+                      <RaisedButton
+                        className={styles.button}
+                        label="Join Now"
+                        primary
+                      />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </Paper>
+              </Paper>
+            }
             <ProfileGrid
-              users={this.props.randomUsers}
+              users={this.props.users}
               submitLike={this.openLogin}
             />
           </div>
@@ -96,18 +106,21 @@ export class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
+  fetchUsers: React.PropTypes.func,
   fetchRandomUsers: React.PropTypes.func,
-  randomUsers: React.PropTypes.array,
+  users: React.PropTypes.array,
+  token: React.PropTypes.string,
   auth: React.PropTypes.object,
   email: React.PropTypes.string,
   password: React.PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
-  randomUsers: selectRandomUsers(),
+  users: selectUsers(),
   auth: loginSelectors.selectAuth(selectHome),
   email: loginSelectors.selectEmail(selectHome),
   password: loginSelectors.selectPassword(selectHome),
+  token: selectToken(),
 });
 // Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, actions)(HomePage);
