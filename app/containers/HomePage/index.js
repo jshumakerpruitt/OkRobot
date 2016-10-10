@@ -98,7 +98,8 @@ export class HomePage extends React.Component {
             }
             <ProfileGrid
               users={this.props.users}
-              submitLike={this.openLogin}
+              submitLike={this.props.submitLike}
+              isLoggedIn={this.isLoggedIn()}
             />
           </div>
         </div>
@@ -115,6 +116,7 @@ HomePage.propTypes = {
   auth: React.PropTypes.object,
   email: React.PropTypes.string,
   password: React.PropTypes.string,
+  submitLike: React.PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

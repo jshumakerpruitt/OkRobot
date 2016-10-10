@@ -1,6 +1,5 @@
 /**
  * Testing the NotFoundPage
- */
 
 import expect from 'expect';
 import { shallow, mount } from 'enzyme';
@@ -51,3 +50,5 @@ describe('<NotFound />', () => {
     expect(changeRouteSpy).toHaveBeenCalled();
   });
 });
+
+ */

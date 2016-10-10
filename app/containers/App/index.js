@@ -29,9 +29,9 @@ export class App extends React.Component { // eslint-disable-line react/prefer-s
   render() {
     const token = this.props.token || '';
     const links = [
-      { to: '/', text: 'Home' },
       { to: '/', text: 'Browse' },
-      { to: '/profile', text: 'Profile' },
+      { to: '/chat', text: 'Chat' },
+      { to: '/profile', text: 'My Profile' },
     ];
     return (
       <div className={styles.dataRoot}>

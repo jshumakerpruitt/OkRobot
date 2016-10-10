@@ -20,12 +20,12 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: bold;
   font-size: 16px;
-  color: #FFF;
-  border: 2px solid #41ADDD;
-  color: #41ADDD;
+  border: 2px solid #303F9E;
+  color: #303F9E;
+  background: #FFF;
 }
 
-.button:active {
-  background: #41ADDD;
+.button:hover {
+  background: #303F9E;
   color: #FFF;
 }

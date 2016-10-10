@@ -21,7 +21,7 @@ const checkToken = (store) => (nextState, replace) => {
     .toJS().pathname;
   store.dispatch(setNextPath(prevPath));
   if (token.length === 0) {
-    replace('/login');
+    replace('/auth');
   }
 };
 

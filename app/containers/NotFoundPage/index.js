@@ -13,11 +13,18 @@ import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import H1 from 'components/H1';
 
+import styles from './style.css';
+
 export function NotFound(props) {
+  const path = props.location.pathname;
+  const message = path === '/auth' ?
+                  'You are not logged in' :
+                  'Page not found';
+
   return (
-    <article>
+    <article className={styles.notFoundPage}>
       <H1>
-        <FormattedMessage {...messages.header} />
+        {message}
       </H1>
       <Button
         handleRoute={function redirect() {

@@ -19,18 +19,21 @@ import styles from './styles.css';
 const ProfileGrid = ({
   users,
   submitLike,
+  isLoggedIn,
 }) =>
   <div className={styles.profileGrid}>
     {users.map((user, i) => (
       <div key={i} className={styles.gridTile}>
         <GridTile
           title={<Link className={styles.link} to={`profile/${user.id}`}>{user.username}</Link>}
-          actionIcon={<ActionIcon
+          actionIcon={isLoggedIn ? <ActionIcon
             onIconClick={() => { submitLike(user.id, !user.liked); }}
             isActive={user.liked}
             activeColor="yellow"
             defaultColor="white"
-          />}
+          /> :
+            <div></div>
+                     }
         >
           <Link className={styles.link} to={`profile/${user.id}`}>
             <img
@@ -47,6 +50,7 @@ const ProfileGrid = ({
 ProfileGrid.propTypes = {
   users: React.PropTypes.array,
   submitLike: React.PropTypes.func,
+  isLoggedIn: React.PropTypes.func,
 };
 
 export default ProfileGrid;
