@@ -8,8 +8,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import messages from './messages';
-import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import H1 from 'components/H1';
 
@@ -19,7 +17,7 @@ export function NotFound(props) {
   const path = props.location.pathname;
   const message = path === '/auth' ?
                   'You are not logged in' :
-                  'Page not found';
+                  'Page not found.';
 
   return (
     <article className={styles.notFoundPage}>
@@ -31,7 +29,7 @@ export function NotFound(props) {
           props.changeRoute('/');
         }}
       >
-        <FormattedMessage {...messages.homeButton} />
+    Home
       </Button>
     </article>
   );
